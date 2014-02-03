@@ -1,0 +1,288 @@
+/* ============== Layout Admin ========= */
+#admin_wrapper {
+	width: 1020px;
+	margin: 0px auto;
+	box-shadow: 2px 2px 6px #000;
+	
+}
+#admin_head_parent {
+	
+	background: #2C2C2C url('../images/head.png') repeat-x;
+	border-bottom: solid 10px #31A1FF;
+}
+
+#admin_head_center {
+	width: 1000px;
+	margin: 0px auto;
+	padding: 25px 0px 10px;
+	position: relative;
+}
+
+#admin_head_center #logo_ {
+	width: 200px; height: auto;
+}
+
+#admin_menu {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+#admin_footer{
+	min-height: 32px; padding: 5px; background: #333333; text-align: center; color: #fff;
+	clear: both;
+}
+
+.button_admin {
+	border: none;
+	padding: 3px 10px 3px;
+	background:#374451;
+	color: #fff;
+	cursor: pointer;
+	transition: all 0.25s;
+}
+.button_admin:hover {background:#00A6EE;}
+
+.button_admin:active {
+	position: relative;
+	top: 1px;
+	left: 1px;
+}
+
+/*adik*/
+#admin_content_left_in {
+	background:#F1F6FA;
+	width:96%;
+	float: left;
+	padding: 10px;
+	box-shadow: 0px 2px 2px #888888;
+}
+#admin_sidebar_nav{
+	background:#F1F6FA;
+	list-style:none;
+	padding:10px;
+	margin-top:0px;
+	box-shadow: 0px 2px 2px #888888;
+}
+.admin_sidebar_nav_head{
+	background: #004A87;
+	color:white;
+	font-size:15pt;
+	margin-top:10px;
+	font-weight:bold;
+	padding:5px;
+	box-shadow: 0px 2px 2px #888888;
+}
+.admin_sidebar_nav_unit{
+	
+	width:210px;
+	margin-bottom:5px;
+	padding:4px;
+}
+.admin_sidebar_nav_unit:hover{
+	border-bottom:#31A1FF solid 1px;
+	width:210px;
+	margin-bottom:5px;
+	padding:4px;
+}
+.tombol_aksi{
+	background:#1FBFEF;
+	width:100px;
+	padding:3px;
+	margin:5px;
+	float:left;
+	text-align:center;
+	box-shadow: 
+  0 1px 2px #fff, /*bottom external highlight*/
+  0 -1px 1px #666, /*top external shadow*/ 
+  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
+  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
+}
+.tombol_aksi:hover{
+	background:#4861EA;
+	width:100px;
+	padding:3px;
+	margin:5px;
+	float:left;
+	text-align:center;
+	box-shadow: 
+  0 1px 2px #fff, /*bottom external highlight*/
+  0 -1px 1px #666, /*top external shadow*/ 
+  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
+  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
+}
+#action_box_butt li{
+	list-style:none;
+}
+#pagging{
+	width:600px;
+	margin:5px auto;
+}
+#pagging li{
+	float:left;
+	padding:5px 10px 5px 10px;
+	list-style:none;
+	border:#979EA3 solid 2px;
+	margin-left:2px;
+}
+.label_form_slider{
+	clear:both;
+	width:100px;
+	float:left;
+	padding:5px;
+	margin:5px;
+}
+.input_form_slider,.textarea_slider{
+	width:300px;
+	float:left;
+	padding:5px;
+	margin:5px;
+}
+.select_efek_slider{
+	float:left;
+	margin:5px;
+	padding:5px;
+}
+.priview_slider{
+	height:90px;
+	width:150px;
+}
+/* Alerts and pop-ups */
+.success, .warning, .errormsgbox, .validation {
+	border: 1px solid;
+	margin: 0 5px 10px;
+	padding:5px 5px 5px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+    font-weight:bold;
+    width:auto;
+}
+
+.success {
+   
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image:url('../images/success.png');
+}
+.warning {
+
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('../images/warning.png');
+}
+.errormsgbox {
+ 
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-color: rgba(255, 186, 186, 0.5);
+	background-image: url('../images/error.png');
+	
+}
+.validation {
+ 
+	color: #D63301;
+	background-color: #FFCCBA;
+	background-image: url('../images/error.png');
+}
+.readmore:before {
+	content: 'Readmore area:';
+	display: block;
+	font-size: 8pt;
+	padding: 2px;
+	background-color: #82C4FF;
+}
+.readmore {
+	background-color: #DBEEFF;
+	background-color: rgba(219, 238, 255, 0.5);
+	border: solid 1px #82C4FF;
+	padding: 2px;
+}
+#admin_content {min-height: 500px;}
+#admin_content_left {
+	float: left;
+	width: 750px;
+	padding: 10px;
+}
+#admin_content_right {
+	float: right;
+	width: 250px;
+}
+/* ============== Login ========= */
+#login									{margin:65px auto; max-width: 500px; width: 100%;border-radius:0px 0px 10px 10px;-webkit-box-shadow: 0 3px 6px #000;box-shadow: 0 3px 6px #000}
+#upbox									{width:100%;height:auto;background:#2C2C2C; padding: 10px 0 10px; text-align: center; border-bottom: solid 5px #31A1FF; /*background-color:#31A1FF;*/}
+#login_box .right						{width:40%;float:right;border-radius:5px;margin:15px 15px;padding:10px;background:#2C2C2C;}
+#login_box .right label					{height:auto;height:20px;color:#F2F7FB}
+#login_box .txt_input					{width:195px;height:auto;margin:4px 0px;padding:3px;border:none;border-radius:5px;background:#DFDFDF;font-size:16px;color:#555555;font-family:"Trebuchet MS", Arial, Helvetica, sans-serif}
+/* #login_box .right input.submit				{width:25%;cursor:pointer;float:right;margin-top:10px;background:#31A1FF;-moz-box-shadow: 0 3px 6px #000;-webkit-box-shadow: 0 3px 6px #000;box-shadow: 0 3px 6px #000} */
+#login_box .left							{width:40%;float:left;margin-left: 16px;}
+#login_box .left h1						{font-family:Arial, sans-serif;font-size:24px;color:#2C2C2C;font-weight:bold;letter-spacing:0.1}
+#alert									{clear:both;padding:10px;color:red}
+
+/* ================ event calendar ======= */
+.currentmonth{  
+	color: blue;  
+	text-align: center;
+}
+#ev_calendar td.currentday{  
+	border: 2px solid red;  
+	background-color: #FFB5B5;
+}
+
+#ev_calendar_box {
+	width: 430px;
+	margin: 0px auto;
+}
+#ev_cal_nav_prev {float: left;}
+#ev_cal_nav_next {float: right;}
+#ev_cal_nav_ctr {
+	width: 250px; float: left; padding-left: 10px; text-align: center;
+}
+#ev_calendar > table{
+	border-spacing: 1px;
+	border-collapse: separate;
+	margin: 0px auto;
+}
+#ev_calendar th {background-color: #BFE2FF; color: #004D8C; padding: 5px; border: solid 1px #777777;}
+#ev_calendar .row_day td{
+	background: #31A1FF; padding: 5px; text-align: center; color: #fff;
+}
+#ev_calendar td {
+	border: solid 1px #777; margin: 3px; width: 48px; padding: 0px;
+	height: 24px;
+	background: #fff;
+}
+#ev_calendar td.postm {
+	padding: 5px;
+}
+#ev_calendar td > a{
+	display: block;
+	text-decoration: none;
+	padding: 5px;
+	text-align: center;
+}
+#ev_calendar td>a:hover {
+	background-color: #D1EAFF;
+	border-color: #31A1FF;
+}
+
+#ev_calendar .selectedDay {
+	background-color: #D1EAFF;
+	border-color: #31A1FF;
+}
+
+#ev_date {font-size: 18pt; text-shadow: 1px 1px 1px #111;}
+
+#media_uploadprogress {
+	border: solid 1px #333; padding: 10px; display:none;
+}
+
+#media_progresstxt {padding-bottom: 10px;}
+#media_progressbox {
+	width: 100%; height: 8px; border: solid 1px #005CA8; background: #eee
+}
+#media_progressbar {height: 8px; background: #31A1FF;}
+#media_result {padding: 10px; display:none;}
+
+#menuEditorWorkspace option {padding: 3px;}
+#txtMenuLabel, #txtMenuURL {width: 250px;padding: 3px;}
+#menuControl {padding: 5px;}
+#menuEditForm {float: right; width: 350px; display:none;}

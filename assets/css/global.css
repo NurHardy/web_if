@@ -1,0 +1,258 @@
+body {
+	font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+}
+a {text-decoration: none; color: #004A87;}
+
+.divclear {clear: both;}
+
+#site_wrapper {
+	width: 1000px;
+	margin: 0px auto;
+}
+
+#site_header {
+	width: 100%;
+	height: 145px;
+	min-height: 100px;
+}
+#site_header_logoimg {width: 340px; height: auto; margin: 5px;}
+#site_content {
+	width: 100%;
+	min-height: 500px;
+	background: #FCFDFF;
+}
+#site_content_left {
+	width: 700px;
+	float: left;
+	background-color:#FCFDFF; 
+	box-shadow: 0px 3px 2px #888888;
+}
+#site_content_slider {
+	min-height: 100px;
+	/*background: #31A1FF;*/
+	/*border: solid 1px #0f0;*/
+	display: block;
+	overflow: hidden;
+	position: relative;
+	padding: 10px;
+}
+#site_content_article {
+	margin:5px;
+	text-align:justify;
+	padding: 10px;
+}
+#site_article_comment {
+	padding: 10px;
+}
+#site_content_more {
+	border-top: solid 5px #31A1FF;
+	min-height: 100px;
+	padding: 10px;
+}
+#site_content_right {
+	float: right;
+	width: 290px;
+}
+.site_panel {
+	border: solid 1px #31A1FF;
+	margin: 5px 3px 10px;
+	box-shadow: 0px 1px 1px #888888;
+}
+.site_panel_head {
+	color: #000; background-color: #004A87; padding: 5px;
+	font-weight: bold; color: #fff;
+}
+.site_panel_body {
+	min-height: 50px; padding: 5px;
+	background-color:#FCFDFF; 
+}
+#site_footer {
+	position: absolute;
+	color: #fff;
+	background: url('../images/foot.png') repeat-x;
+	min-height: 200px;
+	left: 0px;
+	right: 0px;
+	font-size: 10pt;
+}
+
+#site_footer_body {
+	width: 1000px;
+	margin: 0px auto;
+	padding-top: 10px;
+}
+#site_footer_contact {
+	width: 350px;
+	float: left;
+	padding: 10px;
+}
+#site_footer_partner {
+	width: 600px;
+	float: right;
+	padding: 10px;
+	border-left: solid 1px #fff;
+	min-height: 150px;
+}
+.site_partner {
+	float: left;
+	width: 150px;
+	height: auto;
+	margin: 5px;
+}
+#site_bg_top {
+	position: absolute;
+	top:0px;
+	left:0px;
+	right: 0px;
+	height: 175px;
+	background: url('../images/head.png') repeat-x;
+	background-position: 0px -10px;
+	border-bottom: solid 10px #31A1FF;
+	z-index: -1;
+}
+
+#site_bg_{
+	position: fixed;
+	top:0px;
+	left:0px;
+	right: 0px;
+	height: 360px;
+	background: url('../images/undip_watermark.png') no-repeat;
+	background-size: 300px;
+	background-position: 10px 10px;
+	z-index: -2;
+}
+#site_header_search {
+	height: 32px;
+}
+
+#site_tabs {
+	display: block;
+	background-color: #31A1FF;
+}
+#site_tabs li {
+	list-style: none;
+	float: left;
+	padding: 3px 10px;
+	background: #82C6FF;
+}
+
+#site_tabs li:hover {
+	list-style: none;
+	float: left;
+	padding: 3px 10px;
+	background: #6EA5D3;
+	color:white;
+}
+
+/*tambahan adik*/
+.kode_picture{
+	width:400px;
+	height:350px;
+	position: absolute;
+	top:0px;
+	right: 0px;
+}
+.kode_picture1{
+	width:280px;
+	height:300px;
+	position: fixed;
+	top:20px;
+	right: 10px;
+	background: url('../images/IF.png')no-repeat;
+	z-index:-3;
+}
+#sosial_panel{
+	height:40px;
+	background:#31A1FF;
+	padding:5px;
+	margin:0px 10px 0px 10px;
+}
+.sosial_icon{
+	float:left;
+	width:30px;
+	height:30px;
+	background:#FFFFFF;
+	padding:5px;
+	margin-left:5px;
+	border-radius:2px;
+}
+.search_box{
+	float:right;
+	width:230px;
+	height:30px;
+	margin-top:5px;
+	border:none;
+}
+.search_but{
+	float:right;
+	width:20px;
+	height:22px;
+	margin-top:5px;
+	padding:5px;
+	background:#E7E7E7;
+}
+.event_unit{
+	clear:both;
+	list-style:none;
+	min-height:60px;
+	width:250px;
+	margin-left:-25px;
+	margin-top:5px;
+	padding-bottom:10px;
+	border-bottom:#0066FF solid 1px;
+}
+.date_event{
+	float:left;
+	width:60px;
+	height:60px;
+	background: url('../images/bg_date.png')no-repeat;
+	text-align:center;
+	padding-top:3px;
+}
+.desc_event{
+	float:left;
+	width:190px;
+	min-height:60px;
+	font-weight:600;
+}
+.year{
+	font-size: 10pt;
+}
+.day{
+	font-size: 17pt;
+	font-weight:bold;
+	line-height:30px;
+}
+.month{
+	font-size: 10pt;
+	line-height:1px;
+	color: #fff;
+}
+.link_unit{
+	list-style:none;
+	margin-left:-25px;
+	background-image: url(/assets/images/rect_bul.png);
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: 16px 16px;
+	padding: 3px 0 3px 20px;
+	/*margin: .4em 0;*/
+}
+.rect_bullet{
+	width:12px;
+	height:12px;
+	margin-right: 10px;
+}
+#site_bg_top1 {
+	position: absolute;
+	top:0px;
+	left:0px;
+	right: 0px;
+	height: 169px;
+	background: url('../images/head.png') repeat-x;
+	background-position: 0px -10px;
+	border-bottom: solid 10px #31A1FF;
+	z-index: -1;
+}
+/*=====================================*/

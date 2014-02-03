@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+/******* GENERAL RESET *******/
+
+.clear{
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	display: block;
+}
+/******* GENERAL RESET *******/
+/******* LOGO *******/
+#logo{
+	margin-top: 1em;
+	display: block;
+}
+/******* /LOGO  *******/
+/******* MENU *******/
+#container{
+	width: 100%;
+	min-height: 200px;
+}
+#container ul.menu_tab{
+	margin-left:-40px;
+	margin-top:-15px;
+	list-style-position: outside;
+}
+#container ul.menu_tab li{
+	float: left;
+	margin-right: 5px;
+	margin-bottom: -1px;
+}
+#container ul.menu_tab li{
+	font-weight: 700;
+	display: block;
+	padding: 5px 10px 5px 10px;
+	background: #31A1FF;
+	margin-bottom: -1px;
+	border: 1px solid #31A1FF;
+	border-width: 1px 1px 1px 1px;
+	position: relative;
+	color: #fff;
+	cursor: pointer;
+}
+#container ul.menu_tab li.active{
+	background: #FFF;
+	top: 1px;
+	border-bottom: 0;
+	color: #5f95ef;
+}
+/******* /MENU *******/
+/******* CONTENT *******/
+.content{
+	margin: 0pt auto;
+	background: #FFF;
+	border: 1px solid #31A1FF;
+	text-align: left;
+	padding: 10px;
+	padding-bottom: 20px;
+	min-height: 150px;
+}
+.content h1{
+	line-height: 1em;
+	vertical-align: middle;
+	height: 48px;
+	padding: 10px 10px 10px 52px;
+	font-size: 32px;
+}
+/******* /CONTENT *******/
+/******* NEWS *******/
+.content.tab_2, .content.tab_3, .content.tab_4, .content.tab_5 {display: none;}
+.content.news h1{
+	background: transparent url(images/news.jpg) no-repeat scroll left top;
+}
+.content.news{
+	display: block;
+}
+/******* /NEWS *******/
+/******* TUTORIALS *******/
+.content.tutorials h1{
+	background: transparent url(images/tuts.jpg) no-repeat scroll left top;
+}
+.content.tutorials{
+	display: none;
+}
+/******* /TUTORIALS *******/
+/******* LINKS *******/
+.content.links h1{
+	background: transparent url(images/links.jpg) no-repeat scroll left top;
+}
+.content.links{
+	display: none;
+}
+.content.links a{
+	color: #5f95ef;
+}
+/******* /LINKS *******/
