@@ -1,5 +1,5 @@
 	<div id='site_content_article'>
-		<h1><?php echo $_posting[0]->judul; ?></h1>
+		<h2 class='site_article_title'><?php echo $_posting[0]->judul; ?></h2>
 		<small>Diposting oleh <?php echo $_posting[0]->creator; ?> pada <?php echo $_posting[0]->tanggal; ?></small>
 		<hr>
 		<?php echo $_posting[0]->isi_berita; ?><br>

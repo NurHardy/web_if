@@ -93,13 +93,17 @@
 		
 		
 		$.post( "/admin/eventajax", {m: month, y: year},function( data ) {
-			ev_list = JSON.parse(data);
-			refreshCalendar();
-			$("#ev_cal_month")[0].selectedIndex = (month-1);
-			$("#ev_cal_year")[0].selectedIndex  = (year-2013);
-			if (ev_list.length != 0) {
-				$("#ev_eventlist").html("Terdapat "+ev_list.length+" event.");
-			} else $("#ev_eventlist").html("Tidak ada event.");
+			try {
+				ev_list = JSON.parse(data);
+				refreshCalendar();
+				$("#ev_cal_month")[0].selectedIndex = (month-1);
+				$("#ev_cal_year")[0].selectedIndex  = (year-2013);
+				if (ev_list.length != 0) {
+					$("#ev_eventlist").html("Terdapat "+ev_list.length+" event.");
+				} else $("#ev_eventlist").html("Tidak ada event.");
+			} catch (e) {
+				$("#ev_eventlist").html("Error parsing data. Please refresh...");
+			}
 		});
 		
 		

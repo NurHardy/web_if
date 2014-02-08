@@ -40,12 +40,17 @@
 	position: relative;
 	color: #fff;
 	cursor: pointer;
+	transition: all 0.25s;
+}
+#container ul.menu_tab li:hover {
+	background-color: #7FC5FF;
+	
 }
 #container ul.menu_tab li.active{
 	background: #FFF;
 	top: 1px;
 	border-bottom: 0;
-	color: #5f95ef;
+	color: #31A1FF;
 }
 /******* /MENU *******/
 /******* CONTENT *******/

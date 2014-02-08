@@ -47,7 +47,16 @@
 	top: 1px;
 	left: 1px;
 }
-
+#admin_content_left table.table_list{
+	width: 100%;
+	border:  solid 1px #31A1FF;
+}
+#admin_content_left table.table_list td {
+	padding: 5px;
+}
+.tb_head {background: #004A87; color: #FFF;}
+.tb_row_1 {background: #FFF;}
+.tb_row_2 {background: #E8F4FF;}
 /*adik*/
 #admin_content_left_in {
 	background:#F1F6FA;
@@ -249,6 +258,7 @@
 	border: solid 1px #777; margin: 3px; width: 48px; padding: 0px;
 	height: 24px;
 	background: #fff;
+	padding: 0px;
 }
 #ev_calendar td.postm {
 	padding: 5px;

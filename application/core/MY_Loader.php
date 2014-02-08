@@ -10,9 +10,11 @@ class MY_Loader extends CI_Loader {
 		$this->output->append_output($text);
 		if ($return) return $text;
 	}
-    public function template($template_name, $vars = array(), $return = FALSE)
+    public function template_home($template_name, $vars = array(), $return = FALSE)
     {
-        $content  = $this->view('skin/header', $vars, $return);
+		$_vars = $vars;
+		$_vars['is_home'] = true;
+        $content  = $this->view('skin/header', $_vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
 		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
@@ -27,7 +29,7 @@ class MY_Loader extends CI_Loader {
 	
 	public function template_posting($template_name, $vars = array(), $return = FALSE)
     {
-        $content  = $this->view('skin/header_sec', $vars, $return);
+        $content  = $this->view('skin/header', $vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
 		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");

@@ -1,33 +1,35 @@
 
 	<div id='site_content_slider'>
-		<div class="pix_diapo">
-			<div>
-				<img style="width:100%; min-width:300px" src="assets/images/test_banner_1.jpg">
-				<div class="caption elemHover fromLeft">
-					Tak ada yang sia - sia. Sekeceil apapun usaha yang kita lakukan pasti akan membuahkan hasil.
+		<div class='site_slider_wrapper'>
+			<div class="pix_diapo">
+				<div>
+					<img style="width:100%; min-width:300px" src="assets/images/test_banner_1.jpg">
+					<div class="caption elemHover fromLeft">
+						Tak ada yang sia - sia. Sekeceil apapun usaha yang kita lakukan pasti akan membuahkan hasil.
+					</div>
+				</div>									
+				<div>
+					<img style="width:100%; min-width:300px" src="assets/images/test_banner_2.jpg">
+					<div class="caption elemHover fromLeft">
+						Profesionalisme kami dedikasikan untuk menjamin mutu
+					</div>
+				</div>									
+				<div>
+					<img style="width:100%; min-width:300px" src="assets/images/test_banner_3.jpg">
+					<div class="elemHover caption fromLeft">
+						Kedisiplinan mengantarkan pada keteraturan hidup, menciptakan kesuksesan
+					</div>
 				</div>
-			</div>									
-			<div>
-				<img style="width:100%; min-width:300px" src="assets/images/test_banner_2.jpg">
-				<div class="caption elemHover fromLeft">
-					Profesionalisme kami dedikasikan untuk menjamin mutu
-				</div>
-			</div>									
-			<div>
-				<img style="width:100%; min-width:300px" src="assets/images/test_banner_3.jpg">
-				<div class="elemHover caption fromLeft">
-					Kedisiplinan mengantarkan pada keteraturan hidup, menciptakan kesuksesan
-				</div>
-			</div>
-	   </div><!-- #pix_diapo -->
+		   </div><!-- #pix_diapo -->
+	   </div>
 	</div>
-	<div id="sosial_panel">
+	<!-- <div id="sosial_panel">
 		<a href="#"><img class="sosial_icon" src="/assets/images/facebook_icon.png"></a>
 		<a href="#"><img class="sosial_icon" src="/assets/images/twitter_icon.png"></a>
 		<a href="#"><img class="sosial_icon" src="/assets/images/google_icon.png"></a>
 		<a href="#"><img class="sosial_icon" src="/assets/images/rss_icon.png"></a>
 		<img class='search_but' src='/assets/images/search_icon.png'><input class='search_box'type='text'></input>
-	</div>
+	</div> -->
 	<div id='site_content_article'>
 		<h3><?php echo "<a href='/news/".$newest_post[0]->id_berita."'>".$newest_post[0]->judul."</a>"; ?></h3>
 		<?php echo $newest_post[0]->isi_berita; ?>

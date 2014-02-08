@@ -1,5 +1,7 @@
 body {
 	font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+	font-size: 1.0em;
+	line-height: 1.5;
 }
 a {text-decoration: none; color: #004A87;}
 
@@ -12,10 +14,23 @@ a {text-decoration: none; color: #004A87;}
 
 #site_header {
 	width: 100%;
-	height: 145px;
 	min-height: 100px;
 }
-#site_header_logoimg {width: 340px; height: auto; margin: 5px;}
+#site_header_logoimg {height: 60px; width: auto; margin: 5px;}
+#site_bg_top {
+	position: absolute;
+	top:0px;
+	left:0px;
+	right: 0px;
+	height: 138px;
+	background: #2C2C2C url('../images/head.png') repeat-x;
+	background-position: 0px -10px;
+	border-bottom: solid 10px #31A1FF;
+	z-index: -1;
+}
+#site_navbar {
+	min-height: 40px;
+}
 #site_content {
 	width: 100%;
 	min-height: 500px;
@@ -34,15 +49,40 @@ a {text-decoration: none; color: #004A87;}
 	display: block;
 	overflow: hidden;
 	position: relative;
-	padding: 10px;
+}
+.site_slider_wrapper {
+	-moz-box-shadow: 0 3px 6px #000;
+	-webkit-box-shadow: 0 3px 6px #000;
+	box-shadow: 0 3px 6px #000;
+	margin: 10px;
 }
 #site_content_article {
 	margin:5px;
 	text-align:justify;
 	padding: 10px;
 }
+.site_article_title {
+	margin: 0px;
+}
 #site_article_comment {
 	padding: 10px;
+	min-height: 200px;
+}
+.site_list_nav {text-align: center; display: block; margin-top: 10px;}
+.site_list_nav > span, .site_list_nav > a {
+	margin: 5px;
+	padding: 5px 10px;
+}
+.site_list_nav > span {
+	background: #EAEAEA;
+	border: solid 1px #C6C6C6;
+}
+.site_list_nav > a {
+	background: #E0F1FF;
+	border: solid 1px #96CFFF;
+	}
+.site_list_nav > a:hover {
+	background: #FFF;
 }
 #site_content_more {
 	border-top: solid 5px #31A1FF;
@@ -99,17 +139,7 @@ a {text-decoration: none; color: #004A87;}
 	height: auto;
 	margin: 5px;
 }
-#site_bg_top {
-	position: absolute;
-	top:0px;
-	left:0px;
-	right: 0px;
-	height: 175px;
-	background: url('../images/head.png') repeat-x;
-	background-position: 0px -10px;
-	border-bottom: solid 10px #31A1FF;
-	z-index: -1;
-}
+
 
 #site_bg_{
 	position: fixed;
@@ -200,7 +230,6 @@ a {text-decoration: none; color: #004A87;}
 	margin-left:-25px;
 	margin-top:5px;
 	padding-bottom:10px;
-	border-bottom:#0066FF solid 1px;
 }
 .date_event{
 	float:left;
@@ -235,7 +264,7 @@ a {text-decoration: none; color: #004A87;}
 	background-image: url(/assets/images/rect_bul.png);
 	background-repeat: no-repeat;
 	background-position: 0 50%;
-	background-size: 16px 16px;
+	background-size: 10px 10px;
 	padding: 3px 0 3px 20px;
 	/*margin: .4em 0;*/
 }

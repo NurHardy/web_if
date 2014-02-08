@@ -24,8 +24,22 @@
   // Handle the hello button click event
 	function readmoreClick(e, data) {
 		var editor = data.editor;
-		var html = "<div class='readmore'>" + editor.selectedHTML(editor) +"</div>";
-		editor.execCommand(data.command, html, false, data.button);
+		var ret;
+		if (editor.doc.getSelection) {
+			var selectionRange = editor.doc.getSelection ();
+			if (selectionRange.focusNode) {
+				var anchorNodeProp = selectionRange.focusNode;
+				//if (ie) ret = editor.doc.selection;
+				ret = anchorNodeProp.tagName;
+				alert(anchorNodeProp.parentNode.nodeName+" > "+anchorNodeProp.nodeName+" "+anchorNodeProp.nodeType);
+			} else {
+				alert("No selection focus...");
+			}
+		} else {
+			alert("No selection...");
+		}
+		//var html = "<div class='readmore'>" + editor.selectedHTML(editor) +"</div>";
+		//editor.execCommand(data.command, html, false, data.button);
 		editor.focus();
 	}
  
@@ -55,6 +69,30 @@ function unAttachConfirm() {
 		// For Safari
 		return message;
 	};
+	
+	function savedraft() {
+		var _form_data = $("#form_posting").serialize();
+		$.ajax({  
+		  type: "POST",  
+		  url: "/admin/postsavedraft",  
+		  data: _form_data,  
+		  success: function(data) {
+			try {
+				var _result = JSON.parse(data);
+				if (_result.status == 'OK') {
+					$('#form_status').html("Draft saved at "+_result.datestr);
+					$('#txt_draft_id').val(_result.newid);
+				} else {
+					$('#form_status').html(_result.message);
+				}
+			} catch (e) {
+				$('#form_status').html("Cannot parsing data! Data = "+data);
+			}
+			$('#form_status').hide()  
+			.fadeIn(500);  
+		  }  
+		});  
+	}
 	<?php } // end if ?>
 </script>
 
@@ -80,18 +118,31 @@ function unAttachConfirm() {
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/newpost'; ?>' method='post' onsubmit="unAttachConfirm();">
-	<label for='txt_post_title'>Judul</label><input type='text' id='txt_post_title' name='txt_post_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 75%; min-width: 200px;'/>
-	<br>
-	<textarea id="input" name="txt_post_content"><?php if (isset($f_content)) echo $f_content; ?></textarea>
-	<select name='txt_post_cat'>
+<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/newpost'; ?>' method='post' onsubmit="unAttachConfirm();" id='form_posting'>
+	<label for='txt_post_title'>Judul</label><input type='text' id='txt_post_title' name='txt_post_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 75%; min-width: 200px;'/><br>
+	<label for='txt_post_cat'>Kategori</label>
+	<select name='txt_post_cat' id='txt_post_cat'>
 		<option value='0'>- Pilih Kategori -</option>
-		<option value='1'>Berita</option>
-		<option value='2'>Pengumuman</option>
+		<?php foreach($_cats as $_cat) { ?>
+			<option <?php
+				echo "value='".$_cat->f_id."'";
+				if (isset($f_cat))
+					if ($_cat->f_id == $f_cat) echo " selected"; ?>><?php echo $_cat->f_name; ?></option>
+		<?php } ?>
 	</select>
+	<br>
+	<textarea id="input" name="txt_post_content"><?php if (isset($f_content)) echo htmlentities($f_content); ?></textarea>
 	<!-- <input type='hidden' name='f_post_id' value='<?php if (isset($$post_id_)) echo $post_id_; ?>' /> -->
 	<!-- <input type='hidden' name='form_action' value='<?php //echo $post_action; ?>' /> -->
-	<input type='hidden' name='form_submit' value='POSTING_FORM' ?>
+	<input type='hidden' name='form_submit' value='POSTING_FORM' />
+	<input type='hidden' name='txt_post_id' value='<?php if (isset($f_post_id)) echo $f_post_id; else echo "-1"; ?>' />
+	<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
+	<input type='button' value='Simpan Draf' class='button_admin' onclick='savedraft();'/>
+	<!-- <select name='form_next_act'>
+		<option value='publish' selected>Publikasikan</option>
+		<option value='draft'>Simpan sebagai draft</option>
+	</select> -->
 	<input type='submit' value='Publikasikan' class='button_admin'/>
+	<div id='form_status'></div>
 </form>
 <?php } // end if ?>

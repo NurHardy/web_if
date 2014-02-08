@@ -12,19 +12,18 @@ background: -o-linear-gradient(top,  #91cdff 0%,#31a1ff 100%); /* Opera 11.10+ *
 background: -ms-linear-gradient(top,  #91cdff 0%,#31a1ff 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #91cdff 0%,#31a1ff 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91cdff', endColorstr='#31a1ff',GradientType=0 ); /* IE6-9 */
+	border-radius: 5px 5px 0 0;
 }
 
 div#menu ul {
-    margin: 0;
+    margin: 0 5px 0 5px;
     padding-left:0px;
     list-style: none;
     float: left;
 }
 div#menu ul.menu {
     padding-right: 0px;
-	
 }
-
 div#menu li {
 	
     position: relative;
