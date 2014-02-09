@@ -3,19 +3,19 @@
 		<div class='site_slider_wrapper'>
 			<div class="pix_diapo">
 				<div>
-					<img style="width:100%; min-width:300px" src="assets/images/test_banner_1.jpg">
+					<img style="width:100%; min-width:300px" src="assets/images/test_banner_1.jpg" alt='Gambar banner 1'>
 					<div class="caption elemHover fromLeft">
 						Tak ada yang sia - sia. Sekeceil apapun usaha yang kita lakukan pasti akan membuahkan hasil.
 					</div>
 				</div>									
 				<div>
-					<img style="width:100%; min-width:300px" src="assets/images/test_banner_2.jpg">
+					<img style="width:100%; min-width:300px" src="assets/images/test_banner_2.jpg" alt='Gambar banner 2'>
 					<div class="caption elemHover fromLeft">
 						Profesionalisme kami dedikasikan untuk menjamin mutu
 					</div>
 				</div>									
 				<div>
-					<img style="width:100%; min-width:300px" src="assets/images/test_banner_3.jpg">
+					<img style="width:100%; min-width:300px" src="assets/images/test_banner_3.jpg" alt='Gambar banner 3'>
 					<div class="elemHover caption fromLeft">
 						Kedisiplinan mengantarkan pada keteraturan hidup, menciptakan kesuksesan
 					</div>

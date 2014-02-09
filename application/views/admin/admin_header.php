@@ -1,6 +1,8 @@
 <!doctype HTML>
-<html>
+<!-- CMS by DIGIT TEAM for Informatics UNDIP -->
+<html lang="id">
 	<head>
+		<meta charset="utf-8">
 		<title><?php echo $page_title; ?> - Informatics UNDIP CMS Administrator</title>
 		
 		<?php if (isset($page_additional_head)) echo $page_additional_head; ?>
@@ -15,7 +17,7 @@
 		<div id='admin_wrapper'>
 			<div id="admin_head_parent">
 				<div id="admin_head_center">
-					<img src='/assets/images/logo.png' id='logo_' />
+					<img src='/assets/images/logo.png' id='logo_' alt='Logo' title='Ilmu Komputer/Informatika UNDIP'/>
 					<!-- <span style="color: #fff;"><p>Selamat datang, <?php echo $username_; ?></p></span> -->
 					<div id='admin_menu'>
 						<div id="menu">

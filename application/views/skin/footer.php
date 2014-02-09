@@ -14,8 +14,8 @@
 		<p>Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 		</div>
 		<div id='site_footer_partner'>
-			<img src='/assets/images/oracle.png' class='site_partner'/>
-			<img src='/assets/images/msdnaa.png' class='site_partner'/>
+			<img src='/assets/images/oracle.png' class='site_partner' alt='Oracle Academy'/>
+			<img src='/assets/images/msdnaa.png' class='site_partner' alt='MSDN Academic Alliance'/>
 		</div>
 		<div class='divclear'></div>
 	</div>

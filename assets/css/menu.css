@@ -104,6 +104,9 @@ div#menu a {
 div#menu a:hover {
 	  color: #000000;
   }
+div#menu ul.menu>li {
+	transition: all 0.25s;
+}
 div#menu li.current a,
 div #menu ul.menu>li:hover {background: #BCE3FF /*#6DBDFF*/;}
 

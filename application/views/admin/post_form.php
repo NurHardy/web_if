@@ -91,7 +91,7 @@ function unAttachConfirm() {
 			$('#form_status').hide()  
 			.fadeIn(500);  
 		  }  
-		});  
+		});
 	}
 	<?php } // end if ?>
 </script>

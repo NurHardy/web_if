@@ -4,7 +4,7 @@
 	Informatics lead the way
 	hiduplah Informatika....
 -->
-<html lang="id-ID">
+<html lang="id">
 <head>
 	<meta charset="utf-8">
 	<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
@@ -49,7 +49,7 @@
 		<div id='site_header_search'></div>
 		<div class='divclear'></div>
 		<div id='site_header_logo'>
-			<img src='/assets/images/logo.png' id='site_header_logoimg' alt='Logo'/>
+			<img src='/assets/images/logo.png' id='site_header_logoimg' alt='Logo' title='Jurusan Ilmu Komputer/Informatika Universitas Diponegoro'/>
 		</div>
 		<div class='divclear'></div>
 	</div>

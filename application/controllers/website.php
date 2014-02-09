@@ -34,22 +34,51 @@ class Website extends CI_Controller {
 		$this->load->template_home('home', $data);
 	}
 	
-	public function news($_id) {
+	public function news($_id = 0, $_cat = null) {
 		$this->load->model('web_posting');
 		$this->load->model('web_link');
 		
-		$data['_posting'] = $this->web_posting->get_post($_id);
-		if (!$data['_posting']) {
-			$this->output->set_header('Location: /');
-			return;
-		}
-		$data['page_title'] = $data['_posting'][0]->judul;
-        $data['other_posts'] = $this->web_posting->get_newest_posts(5);
-		
-		//$data['daftar_event'] = $this->web_posting->get_nearest_event(5);
+		$data['other_posts'] = $this->web_posting->get_newest_posts(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		
-		$this->load->template_posting('posting', $data);
+		if (is_numeric($_id)) {
+			if ($_id <= 0) {
+				$this->load->model ('web_functions');
+				$_ipp = $this->input->get('n'); // item per page
+				$_cur = $this->input->get('p'); // current page (zero-based)
+				$_maxpage = $this->input->get('x');
+				$_filter = intval($_cat);
+
+				$this->web_functions->check_pagination($_ipp, $_cur, $_maxpage);
+				if ($_maxpage === false) {
+					$_n = $this->web_posting->count_posts($_filter);
+					$_maxpage = ($_n==0?0:ceil($_n/$_ipp)-1);
+				}
+				
+				$data['_posts']		= $this->web_posting->get_posts($_ipp, $_cur+1, $_filter);
+				$data['_paging']	= $this->web_functions->pagination(
+					$_maxpage,
+					$_cur,
+					2,
+					'/news/',
+					'n='.$_ipp
+				);
+				$data['_ctr'] = $_cur*$_ipp;
+				$data['_ipp'] = $_ipp;
+				$data['page_title'] = "Daftar Posting";
+				$this->load->template_posting('posting_list', $data);
+			} else {
+				$data['_posting'] = $this->web_posting->get_post($_id);
+				if (!$data['_posting']) {
+					$this->output->set_header('Location: /news');
+					return;
+				}
+				$data['page_title'] = $data['_posting'][0]->judul;
+				$this->load->template_posting('posting', $data);
+			}
+		} else {
+		}
+		
 	}
 	
 	public function page($_id) {
@@ -68,6 +97,13 @@ class Website extends CI_Controller {
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		
 		$this->load->template_posting('page', $data);
+	}
+	
+	public function feed() {
+		$this->output->set_header('Content-Type: application/rss+xml; charset=utf-8');
+		$this->load->model('web_posting');
+		$data['_posts']		= $this->web_posting->get_newest_posts(10);
+		$this->load->view("rss", $data);
 	}
 }
 

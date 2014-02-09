@@ -428,9 +428,9 @@ selesai:
 					$this->load->model ('web_admin');
 					$_user_row = $this->web_admin->user_authenticate($_login_user, $_login_pass);
 					if ($_user_row != null) {
-						$this->nativesession->set('user_id_'  , $_user_row[0]->f_id);
-						$this->nativesession->set('user_name_', htmlentities($_user_row[0]->f_username));
-						$this->nativesession->set('user_role_', $_user_row[0]->f_role_id);
+						$this->nativesession->set('user_id_'  , $_user_row->f_id);
+						$this->nativesession->set('user_name_', htmlentities($_user_row->f_username));
+						$this->nativesession->set('user_role_', $_user_row->f_role_id);
 						
 						if (!$redir_url) $redir_url = "/admin/";
 						$this->output->set_header("Location: $redir_url");
@@ -597,6 +597,66 @@ selesai:
 			$this->load->template_admin('admin/user_list', $data);
 		}
 	}
+	public function newuser() {
+		// == UNDER CONSTRUCTION...!
+		if ($this->_check_session()) {
+			$data['page_title'] = $data['content_title'] = 'User Baru';
+			$data['form_action']= '/admin/newuser';
+			$data['username_']	= $this->nativesession->get('user_name_');
+			$data['errors'] = array();
+			
+			$data['f_fullname'] = htmlentities($this->input->post('f_fullname'));
+			$data['f_username'] = htmlentities($this->input->post('f_username'));
+			$data['f_email']    = htmlentities($this->input->post('f_email'));
+			$_f_pass1	= md5($this->input->post('f_passw1'));
+			$_f_pass2	= md5($this->input->post('f_passw2'));
+			
+			$_submitter = $this->input->post('form_submit');
+			if ($_submitter == 'USER_POST_FORM') {
+				// validasi
+				if (empty($data['f_fullname'])) $data['errors'][] = "Nama lengkap user harus diisi.";
+				if (empty($data['f_username'])) $data['errors'][] = "Username harus diisi.";
+				if (empty($data['f_email'])) $data['errors'][]	  = "E-mail user harus diisi.";
+				if (!($this->input->post('f_passw1')) || !($this->input->post('f_passw2')))
+					$data['errors'][]	  = "Password dan konfirmasi harus diisi.";
+				
+				if (empty($data['errors'])) { // semua data lengkap
+					if ($_f_pass1 != $_f_pass2) {
+						$data['errors'][] = "Password dan konfirmasi tidak sama";
+						goto selesai;
+					} else if (strlen($this->input->post('f_passw1')) <= 5) {
+						$data['errors'][] = "Password minimal 5 karakter...";
+						goto selesai;
+					}
+					$this->load->model ('web_admin');
+					$_chk_res = $this->web_admin->check_username($this->input->post('f_username'));
+					if ($_chk_res != null) {
+						$data['errors'][] = $_chk_res;
+						goto selesai;
+					}
+					$_newuser_data = array(
+						$data['f_username'],
+						$_f_pass1,
+						$data['f_fullname'],
+						$data['f_email'],
+						0
+					);
+					$_result = $this->web_admin->save_user(
+						$_newuser_data,
+						$this->nativesession->get('user_id_'),
+						$this->nativesession->get('user_name_')
+					);
+					if ($_result) {
+						$data['infos']	 = array('User berhasil dibuat.');
+						$data['no_form'] = true;
+					}
+					else $data['errors'] = array('Terjadi kesalahan. Silakan periksa konten dan ulangi lagi.');
+				}
+			}
+			selesai:
+			$this->load->template_admin('admin/user_form', $data);
+		}
+	}
 	public function categories($page = 1) {
 		if ($this->_check_session()) {
 			$this->load->model ('web_posting');
@@ -613,5 +673,18 @@ selesai:
 			$this->nativesession->delete('user_role_');
 		}
 		$this->output->set_header('Location: /admin');
+	}
+	
+	public function checkusername() {
+		if ($this->_check_session(true)) {
+			$_uname = $this->input->post('uname');
+			$this->load->model ('web_admin');
+			$_chk_res = $this->web_admin->check_username($_uname);
+			if ($_chk_res === null) {
+				$this->output->append_output("<span class='info_fine_mark'>Username valid.</span>");
+			} else {
+				$this->output->append_output("<span class='info_error_mark'>".$_chk_res."</span>");
+			}
+		}
 	}
 }

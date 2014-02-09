@@ -1,5 +1,7 @@
 <h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Pengguna"; ?></h2>
 <h3>Daftar Pengguna:</h3>
+<hr>
+<a href='/admin/newuser'>Buat baru &raquo;</a>
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Username</td>
 	<td>Nama Lengkap</td><td>E-mail</td>
@@ -10,7 +12,7 @@
 	echo "<tr>";
 	echo "<td>$_ctr_user</td><td><a href='/admin/edituser/".$_user->f_id."/'>";
 	if (!empty($_user->f_username)) echo $_user->f_username; else echo "[Untitled]";
-	echo "</a></td><td>{$_user->f_fullname}</td><td>{$_user->f_email}</td><td><a href='#'>Edit</a> - <a href='#'>Hapus</a></td>";
+	echo "</a></td><td>{$_user->f_fullname}</td><td><a href='mailto:{$_user->f_email}'>{$_user->f_email}</a></td><td><a href='#'>Edit</a> - <a href='#'>Hapus</a></td>";
 	echo "</tr>\n";
 	$_ctr_user++;
  }
