@@ -20,6 +20,7 @@
 	<script type='text/javascript' src='/assets/js/jquery.min.js'></script>
 	<link type="text/css" href="/assets/css/menu.css" rel="stylesheet" />
 	<link type="text/css" href="/assets/css/tabs/general.css" rel="stylesheet" />
+	<link type="text/css" href="/assets/css/tabs/tab.css" rel="stylesheet" />
 	<link type="text/css" href="/assets/css/mobile_version.css" rel="stylesheet" />
 	<link type="text/css" href="/assets/css/tablet_version.css" rel="stylesheet" />
 	
