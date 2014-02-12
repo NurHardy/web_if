@@ -8,7 +8,8 @@
 			Universitas Diponegoro <br>
 			Jl. Prof. Soedarto, S.H. Kampus Tembalang<br>
 			Semarang 50275<br>
-			Telp. (024) 76480922 Fax. (024) 76480922 E-mail: <a href='mailto:if@undip.ac.id'>if@undip.ac.id</a><br>
+			Telp. (024) 70594104<br>
+			E-mail: <a href='mailto:if@undip.ac.id' style='color: #9ED5FF;'>if@undip.ac.id</a><br>
 			<br>
 			<small>&copy; Informatics UNDIP</small>
 		<p>Page rendered in <strong>{elapsed_time}</strong> seconds</p>

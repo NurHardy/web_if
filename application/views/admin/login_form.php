@@ -1,9 +1,9 @@
 	<div id="login">
-		<div id="upbox"><img src='/assets/images/logo.png' style='width: 200px; height: auto; margin: 0px auto;'/></div>
+		<div id="upbox"><img src='/assets/images/logo.png' style='width: 200px; height: auto; margin: 0px auto;' alt='Informatika UNDIP' title='Ilmu Komputer/Informatika UNDIP'/></div>
 		<div id='login_box'>
 			<div class="left">
 				<h1>Selamat Datang</h1>
-				<p>Anda berada dalam kawasan login website,<br>masukan username dan pasword dengan benar.<br><a href="/">&laquo; Home</a></p>
+				<p>Anda berada dalam kawasan login website,<br>masukkan username dan password dengan benar.<br><a href="/">&laquo; Home</a></p>
 			</div>
 			<div class="right">
 			<form method='POST' action='/admin/login/<?php if (isset($redir_url)) echo "?next=".urlencode($redir_url); ?>'>

@@ -11,7 +11,7 @@ function refreshList() {
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Judul</td><td style='width: 200px;'>Action</td></tr>
 <?php
- $_ctr_draft = 0;
+ $_ctr_draft = 1;
  foreach($_drafts as $_draft) {
 	echo "<tr>";
 	echo "<td>$_ctr_draft</td><td><a href='/admin/".(($_draft->f_origin>0)?"editpost/".$_draft->f_origin:"newpost/".$_draft->f_id)."/'>";
@@ -51,12 +51,14 @@ function refreshList() {
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Judul</td><td style='width: 200px;'>Action</td></tr>
 <?php
  if (!isset($_ctr)) $_ctr = 0; // counter
+ $_ctr_post = 1;
  foreach($_posts as $_post) {
 	$_ctr++;
-	echo "<tr".($_ctr%2==0?' class="tb_row_2"':'').">";
+	echo "<tr".($_ctr_post%2==0?' class="tb_row_2"':'').">";
 	echo "<td>$_ctr</td><td><a href='/admin/editpost/{$_post->id_berita}/'>{$_post->judul}</a></td>";
 	echo "<td><a href='#'>Unpublish</a> - <a href='#'>Hapus</a></td>";
 	echo "</tr>\n";
+	$_ctr_post++;
  }
 ?>
 </table>

@@ -70,5 +70,32 @@ class MY_Loader extends CI_Loader {
             return $content;
         }
     }
-	
+	public function template_profil($template_name, $vars = array(), $return = FALSE)
+    {
+        $content  = $this->view('skin/header', $vars, $return);
+		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
+		$content .= $this->view($template_name, $vars, $return);
+		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
+		$content .= $this->view('skin/sidebar_profil', $vars, $return);
+		$content .= $this->append_output("</div>");
+        $content .= $this->view('skin/footer', $vars, $return);
+		
+        if ($return) {
+            return $content;
+        }
+    }
+	public function template_akademik($template_name, $vars = array(), $return = FALSE)
+    {
+        $content  = $this->view('skin/header', $vars, $return);
+		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
+		$content .= $this->view($template_name, $vars, $return);
+		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
+		$content .= $this->view('skin/sidebar_akademik', $vars, $return);
+		$content .= $this->append_output("</div>");
+        $content .= $this->view('skin/footer', $vars, $return);
+		
+        if ($return) {
+            return $content;
+        }
+    }
 }

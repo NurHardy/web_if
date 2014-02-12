@@ -33,16 +33,18 @@
 	<div id='site_content_article'>
 		<h3><?php echo "<a href='/news/".$newest_post[0]->id_berita."'>".$newest_post[0]->judul."</a>"; ?></h3>
 		<?php echo $newest_post[0]->isi_berita; ?>
-		<hr>
+		<div class='divclear'></div>
 		<?php echo "<a href='/news/".$newest_post[0]->id_berita."'>Baca Selengkapnya &raquo;</a>"; ?>
 		<hr>
 		Berita terbaru lain:
 		<ul>
 			<?php
-				$_count_ = 1;
-				foreach($other_posts as $o_post) {?>
-			<li><a href='news/<?php echo $o_post->id_berita; ?>/'><?php echo $o_post->judul; ?></a></li>
-			<?php } ?>
+				if (count($newest_post)>1) {
+					for ($_ctr=1; $_ctr < count($newest_post); $_ctr++) { ?>
+			<li><a href='/news/<?php echo $newest_post[$_ctr]->id_berita; ?>/'><?php echo $newest_post[$_ctr]->judul; ?></a></li>
+			<?php }
+				}
+			 ?>
 		</ul>
 	</div>
 	<div id='site_content_more'>
@@ -55,20 +57,50 @@
 				<li id="tab_5">Beasiswa</li>
 			</ul>
 			<span class="clear"></span>
-			<div class="content tab_1">
-				Akademik: Tidak ada yang dapat ditampilkan...
-			</div>
-			<div class="content tab_2">
-				Pendidikan: Tidak ada yang dapat ditampilkan...
-			</div>
-			<div class="content tab_3">
-				Penelitian: Tidak ada yang dapat ditampilkan...
-			</div>
-			<div class="content tab_4">
-				Lowongan: Tidak ada yang dapat ditampilkan...
-			</div>
-			<div class="content tab_5">
-				Beasiswa: Tidak ada yang dapat ditampilkan...
-			</div>
+			<div class="content tab_1"><?php
+				if (count($other_posts[0])==0) echo "Tidak ada berita.";
+				else {
+					echo "<ul>\n";
+					foreach($other_posts[0] as $o_post) {
+						echo "<li><a href='news/{$o_post->id_berita}'>{$o_post->judul}</a></li>\n";
+					}
+					echo "</ul>\n";
+				} ?></div>
+			<div class="content tab_2"><?php
+				if (count($other_posts[1])==0) echo "Tidak ada berita.";
+				else {
+					echo "<ul>\n";
+					foreach($other_posts[1] as $o_post) {
+						echo "<li><a href='news/{$o_post->id_berita}'>{$o_post->judul}</a></li>\n";
+					}
+					echo "</ul>\n";
+				} ?></div>
+			<div class="content tab_3"><?php
+				if (count($other_posts[2])==0) echo "Tidak ada berita.";
+				else {
+					echo "<ul>\n";
+					foreach($other_posts[2] as $o_post) {
+						echo "<li><a href='news/{$o_post->id_berita}'>{$o_post->judul}</a></li>\n";
+					}
+					echo "</ul>\n";
+				} ?></div>
+			<div class="content tab_4"><?php
+				if (count($other_posts[3])==0) echo "Tidak ada berita.";
+				else {
+					echo "<ul>\n";
+					foreach($other_posts[3] as $o_post) {
+						echo "<li><a href='news/{$o_post->id_berita}'>{$o_post->judul}</a></li>\n";
+					}
+					echo "</ul>\n";
+				} ?></div>
+			<div class="content tab_5"><?php
+				if (count($other_posts[4])==0) echo "Tidak ada berita.";
+				else {
+					echo "<ul>\n";
+					foreach($other_posts[4] as $o_post) {
+						echo "<li><a href='news/{$o_post->id_berita}'>{$o_post->judul}</a></li>\n";
+					}
+					echo "</ul>\n";
+				} ?></div>
 		</div>
 	</div>

@@ -26,8 +26,14 @@ class Website extends CI_Controller {
 		$data['page_title'] = 'Home';
 		//$data['page_additional_head'] = "<base href='/informatika/' /><!--[if IE]></base><![endif]-->";
 		
-		$data['newest_post'] = $this->web_posting->get_newest_posts(1);
-        $data['other_posts'] = $this->web_posting->get_newest_posts(5);
+		$data['newest_post'] = $this->web_posting->get_newest_posts(3);
+		$data['other_posts'] = array();
+        $data['other_posts'][0] = $this->web_posting->get_newest_posts(5,1);
+		$data['other_posts'][1] = $this->web_posting->get_newest_posts(5,2);
+		$data['other_posts'][2] = $this->web_posting->get_newest_posts(5,3);
+		$data['other_posts'][3] = $this->web_posting->get_newest_posts(5,4);
+		$data['other_posts'][4] = $this->web_posting->get_newest_posts(5,5);
+		
 		$data['daftar_event'] = $this->web_event->get_nearest_event(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		
@@ -79,6 +85,47 @@ class Website extends CI_Controller {
 		} else {
 		}
 		
+	}
+	
+	public function staff() 
+	{ 
+		$this->load->model('web_staff');
+		$this->load->model('web_link');
+		$data['page_title'] = 'Daftar Staff';
+        $data['_staff']   = $this->web_staff->get_staff(5);
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('staff', $data);
+	}
+	
+	public function struktur_organisasi() 
+	{ 
+		$this->load->model('web_staff');
+		$this->load->model('web_link');
+		$data['page_title'] = 'Struktur Organisasi';
+		$data['kajur'] = $this->web_staff->get_jabatan(1);
+		$data['sekre'] = $this->web_staff->get_jabatan(2);
+		$data['kmhs'] = $this->web_staff->get_jabatan(3);
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('struktur_org', $data);
+	}
+	
+	/*--------------------AKADEMIK------------------------------*/
+	public function kurikulum() 
+	{ 
+		$this->load->model('web_link');
+		$data['page_title'] = 'Kurikulum';
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_akademik('kurikulum', $data);
+	}
+	
+	public function agenda() 
+	{ 
+		$this->load->model('web_link');
+		$this->load->model('web_event');
+		$data['page_title'] = 'Agenda Terdekat';
+		$data['daftar_event'] = $this->web_event->get_nearest_event(5);
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_akademik('agenda', $data);
 	}
 	
 	public function page($_id) {

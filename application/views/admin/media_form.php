@@ -20,7 +20,7 @@
 <script type="text/javascript" src="/assets/js/admin_media.js"></script>
 	<div>Maaf, masih dalam pengembangan. Belum bisa digunakan...</div>
 	
-	<form method=POST action='/admin/uploadmedia' id ='media_form'>
+	<form method=POST action='/admin/uploadmedia' id ='media_form' enctype="multipart/form-data">
 		<div class='unit'><label class='lebar_unit' for='f_file'>File</label><input type="file" id='f_file' multiple name="f_files_[]" /></div>
 		<div class='unit'><input class='button_admin' type='submit' id='btn_media_submit' value='Unggah'> </div>
 		<input type='hidden' name='form_submit' value='MEDIA_POST_FORM' />

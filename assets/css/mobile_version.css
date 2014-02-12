@@ -1,0 +1,19 @@
+@media all and (max-width: 480px) {
+	*{font-size:8px}
+	
+	div#site_wrapper {
+		width: 400px;
+		margin: 0px auto;
+	}
+	
+	div#site_content_slider {
+		display:none;
+	}
+	div#site_content_article {
+		padding:2px;
+	}
+	div#site_content_article_in{
+		font-size:7px;
+		padding-left:2px;
+	}
+}

@@ -7,7 +7,10 @@ label {margin-left: 5px; cursor: pointer;}
 .f_txt_field {width:100%; display:block;}
 .lebar_unit {display:block;}
 #fset_basic {width: 300px; float: left;}
-#fset_previleges {float: left;}
+#fset_previleges {width: 300px; float: left;}
+#fset_categories {width: 250px; overflow: hidden;}
+#fset_categories_div {display:none;}
+.unit_cat {display: block; padding: 5px;}
 </style>
 <script>
 	function cek_password() {
@@ -48,6 +51,13 @@ label {margin-left: 5px; cursor: pointer;}
 			}
 		});  
 	}
+	function toggle_cat_panel(cb) {
+		if (cb.checked) {
+			$("#fset_categories_div").slideDown('fast');
+		} else {
+			$("#fset_categories_div").slideUp('fast');
+		}
+	}
 </script>
 <h2><?php if (isset($content_title)) echo $content_title; else echo "User Baru"; ?></h2>
 <div class='divclear'></div>
@@ -87,7 +97,20 @@ label {margin-left: 5px; cursor: pointer;}
 	<fieldset id='fset_previleges'>
 		<legend>User Previleges</legend>
 		<div class='unit'><input type='checkbox' id='f_prev_admin' name='f_prev_admin'/><label for='f_prev_admin' title='User dapat membuat, mengedit dan menghapus user bukan admin.'>Admin</label></div>
-		<div class='unit'><input type='checkbox' id='f_prev_posts' name='f_prev_posts'/><label for='f_prev_posts' title='User dapat membuat, mengedit dan menghapus posting.'>Manage Posts</label></div>
+		<div class='unit'><input type='checkbox' id='f_prev_posts' name='f_prev_posts' onchange='toggle_cat_panel(this);'/><label for='f_prev_posts' title='User dapat membuat, mengedit dan menghapus posting.'>Manage Posts</label>
+		<div id='fset_categories_div'>
+		<fieldset id='fset_categories'>
+			<legend>Allowed Categories</legend>
+<?php foreach($_cats as $_cat) {
+	$_idcat = $_cat->f_id; ?>
+	<div class='unit_cat'><input type='checkbox' name='f_prev_cat[]' value='<?php echo $_idcat; ?>' id='f_prev_cat_<?php echo $_idcat; ?>'/>
+	<label for='f_prev_cat_<?php echo $_idcat; ?>'><?php echo $_cat->f_name; ?></label>&nbsp;&nbsp;<input type='radio' name='f_def_cat' id='f_def_cat_<?php echo $_idcat; ?>' />
+	<label for='f_def_cat_<?php echo $_idcat; ?>'>default</label></div>
+<?php } ?>
+			</fieldset>
+			<div class='divclear'></div>
+			</div>
+		</div>
 		<div class='unit'><input type='checkbox' id='f_prev_pages' name='f_prev_pages'/><label for='f_prev_pages' title='User dapat membuat, mengedit dan menghapus halaman.'>Manage Pages</label></div>
 		<div class='unit'><input type='checkbox' id='f_prev_events' name='f_prev_events'/><label for='f_prev_events' title='User dapat membuat, mengedit dan menghapus agenda.'>Manage Events</label></div>
 		<div class='unit'><input type='checkbox' id='f_prev_links' name='f_prev_links'/><label for='f_prev_links'>Manage Links</label></div>
