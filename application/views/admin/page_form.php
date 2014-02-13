@@ -57,7 +57,7 @@ function unAttachConfirm() {
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/newpage'; ?>' method='post' onsubmit="unAttachConfirm();">
+<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/pages/newpage'; ?>' method='post' onsubmit="unAttachConfirm();">
 	<label for='txt_post_title'>Judul</label><input type='text' id='txt_post_title' name='f_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 75%; min-width: 200px;'/><br>
 	<label for='txt_post_permalink'>Permalink</label><input type='text' id='txt_post_permalink' name='f_permalink' value='<?php if (isset($f_permalink)) echo $f_permalink; ?>' style='width: 75%; min-width: 200px;'/><br>
 	<textarea id="input" name="f_content"><?php if (isset($f_content)) echo $f_content; ?></textarea>

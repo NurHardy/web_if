@@ -149,6 +149,7 @@ class Website extends CI_Controller {
 	public function feed() {
 		$this->output->set_header('Content-Type: application/rss+xml; charset=utf-8');
 		$this->load->model('web_posting');
+		$this->load->helper('url');
 		$data['_posts']		= $this->web_posting->get_newest_posts(10);
 		$this->load->view("rss", $data);
 	}

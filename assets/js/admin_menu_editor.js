@@ -161,7 +161,7 @@ function saveEditingState() {
 	endEditing();
 }
 function saveMenu() {
-	$.post( "/admin/savemenu", {JSON_menu: JSON.stringify(mnuList)},function( data ) {
+	$.post( "/admin/menu/savemenu", {JSON_menu: JSON.stringify(mnuList)},function( data ) {
 		$("#editorMessage").html(data);
 	});
 }

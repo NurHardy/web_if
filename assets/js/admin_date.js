@@ -92,7 +92,7 @@
 		$("#btn_panel").hide();
 		
 		
-		$.post( "/admin/eventajax", {m: month, y: year},function( data ) {
+		$.post( "/admin/events/eventajax", {m: month, y: year},function( data ) {
 			try {
 				ev_list = JSON.parse(data);
 				refreshCalendar();
@@ -151,7 +151,7 @@
 	}
 	function createNewEvent() {
 		var s_arg = ('?d='+day+'&m='+month+'&y='+year);
-		window.location.href='/admin/newevent'+s_arg;
+		window.location.href='/admin/events/newevent'+s_arg;
 	}
 	
 	$(document).ready(function() {

@@ -1,0 +1,119 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class Users extends CI_Controller {
+	public function index() {
+		if ($this->load->check_session()) {
+			$this->load->model ('web_admin');
+			$this->load->model ('web_functions');
+			
+			$data['page_title'] = $data['content_title'] = 'Daftar User';
+			$data['username_']	= $this->nativesession->get('user_name_');
+			
+			$_ipp = $this->input->get('n'); // item per page
+			$_cur = $this->input->get('p'); // current page (zero-based)
+			$_maxpage = $this->input->get('x');
+			$_filter = intval($this->input->get('cat'));
+
+			$this->web_functions->check_pagination($_ipp, $_cur, $_maxpage);
+			if ($_maxpage === false) {
+				$_n = $this->web_admin->count_users();
+				$_maxpage = ($_n==0?0:ceil($_n/$_ipp)-1);
+			}
+			
+			$data['_users']		= $this->web_admin->get_users($_ipp, $_cur+1);
+			$data['_paging']	= $this->web_functions->pagination(
+				$_maxpage,
+				$_cur,
+				2,
+				'/admin/users',
+				'n='.$_ipp
+			);
+			$data['_ctr'] = $_cur*$_ipp;
+			$data['_ipp'] = $_ipp;
+			$this->load->template_admin('admin/user_list', $data);
+		}
+	}
+	public function newuser() {
+		// == UNDER CONSTRUCTION...!
+		if ($this->load->check_session()) {
+			$this->load->model ('web_posting');
+			
+			$data['page_title'] = $data['content_title'] = 'User Baru';
+			$data['form_action']= '/admin/users/newuser';
+			$data['username_']	= $this->nativesession->get('user_name_');
+			$data['errors'] = array();
+			
+			$data['f_fullname'] = htmlentities($this->input->post('f_fullname'));
+			$data['f_username'] = htmlentities($this->input->post('f_username'));
+			$data['f_email']    = htmlentities($this->input->post('f_email'));
+			$_f_pass1	= md5($this->input->post('f_passw1'));
+			$_f_pass2	= md5($this->input->post('f_passw2'));
+			
+			$_submitter = $this->input->post('form_submit');
+			if ($_submitter == 'USER_POST_FORM') {
+				// validasi
+				if (empty($data['f_fullname'])) $data['errors'][] = "Nama lengkap user harus diisi.";
+				if (empty($data['f_username'])) $data['errors'][] = "Username harus diisi.";
+				if (empty($data['f_email'])) $data['errors'][]	  = "E-mail user harus diisi.";
+				if (!($this->input->post('f_passw1')) || !($this->input->post('f_passw2')))
+					$data['errors'][]	  = "Password dan konfirmasi harus diisi.";
+				
+				if (empty($data['errors'])) { // semua data lengkap
+					if ($_f_pass1 != $_f_pass2) {
+						$data['errors'][] = "Password dan konfirmasi tidak sama";
+						goto selesai;
+					} else if (strlen($this->input->post('f_passw1')) <= 5) {
+						$data['errors'][] = "Password minimal 5 karakter...";
+						goto selesai;
+					}
+					$this->load->model ('web_admin');
+					$_chk_res = $this->web_admin->check_username($this->input->post('f_username'));
+					if ($_chk_res != null) {
+						$data['errors'][] = $_chk_res;
+						goto selesai;
+					}
+					$_newuser_data = array(
+						$data['f_username'],
+						$_f_pass1,
+						$data['f_fullname'],
+						$data['f_email'],
+						0
+					);
+					$_result = $this->web_admin->save_user(
+						$_newuser_data,
+						$this->nativesession->get('user_id_'),
+						$this->nativesession->get('user_name_')
+					);
+					if ($_result) {
+						$data['infos']	 = array('User berhasil dibuat.');
+						$data['no_form'] = true;
+					}
+					else $data['errors'] = array('Terjadi kesalahan. Silakan periksa konten dan ulangi lagi.');
+				}
+			}
+			selesai:
+			$data['_cats']	= $this->web_posting->get_categories();
+			$this->load->template_admin('admin/user_form', $data);
+		}
+	}
+	public function changeauth() {
+		if ($this->load->check_session()) {
+			//$this->load->model ('web_menu');
+			$data['page_title'] = 'Ganti Password';
+			$data['username_']	= $this->nativesession->get('user_name_');
+			$this->load->template_admin('admin/user_password', $data);
+		}
+	}
+	
+	public function checkusername() {
+		if ($this->load->check_session(true)) {
+			$_uname = $this->input->post('uname');
+			$this->load->model ('web_admin');
+			$_chk_res = $this->web_admin->check_username($_uname);
+			if ($_chk_res === null) {
+				$this->output->append_output("<span class='info_fine_mark'>Username valid.</span>");
+			} else {
+				$this->output->append_output("<span class='info_error_mark'>".$_chk_res."</span>");
+			}
+		}
+	}
+}

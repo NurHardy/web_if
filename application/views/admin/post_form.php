@@ -74,7 +74,7 @@ function unAttachConfirm() {
 		var _form_data = $("#form_posting").serialize();
 		$.ajax({  
 		  type: "POST",  
-		  url: "/admin/postsavedraft",  
+		  url: "/admin/posts/postsavedraft",  
 		  data: _form_data,  
 		  success: function(data) {
 			try {
@@ -118,7 +118,7 @@ function unAttachConfirm() {
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/newpost'; ?>' method='post' onsubmit="unAttachConfirm();" id='form_posting'>
+<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/posts/newpost'; ?>' method='post' onsubmit="unAttachConfirm();" id='form_posting'>
 	<label for='txt_post_title'>Judul</label><input type='text' id='txt_post_title' name='txt_post_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 75%; min-width: 200px;'/><br>
 	<label for='txt_post_cat'>Kategori</label>
 	<select name='txt_post_cat' id='txt_post_cat'>
@@ -137,12 +137,12 @@ function unAttachConfirm() {
 	<input type='hidden' name='form_submit' value='POSTING_FORM' />
 	<input type='hidden' name='txt_post_id' value='<?php if (isset($f_post_id)) echo $f_post_id; else echo "-1"; ?>' />
 	<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
-	<input type='button' value='Simpan Draf' class='button_admin' onclick='savedraft();'/>
+	<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();'/>
 	<!-- <select name='form_next_act'>
 		<option value='publish' selected>Publikasikan</option>
 		<option value='draft'>Simpan sebagai draft</option>
 	</select> -->
-	<input type='submit' value='Publikasikan' class='button_admin'/>
+	<input type='submit' value='Publikasikan' class='button_admin btn_publish'/>
 	<div id='form_status'></div>
 </form>
 <?php } // end if ?>

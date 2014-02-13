@@ -1,5 +1,5 @@
 <h2><?php if (isset($content_title)) echo $content_title; else echo "Media terunggah"; ?></h2>
-<a href='/admin/newmedia'>Unggah baru &raquo;</a>
+<a href='/admin/media/newmedia'>Unggah baru &raquo;</a>
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Media</td><td style='width: 200px;'>Action</td></tr>
 
@@ -15,7 +15,8 @@ foreach($_medias as $_media) {
 	} else {
 		echo "<td><a href='{$_media->f_file_path}'>{$_media->f_name}</a>\n";
 	}
-	echo "<input type='text' readonly value='".htmlentities(base_url($_media->f_file_path))."' style='width: 100%;'/></td><td><a href='#'>Hapus</a></td>";
+	echo "<input type='text' readonly value='".htmlentities(base_url($_media->f_file_path))."' style='width: 100%;'/></td>";
+	echo "<td><a href='#'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
 	echo "</tr>\n";
 	$_fctr++;
 }

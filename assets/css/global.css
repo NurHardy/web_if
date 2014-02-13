@@ -180,7 +180,10 @@ a:hover {color: #006DC6;}
 	background: #6EA5D3;
 	color:white;
 }
-
+.img_icon {
+	width: 24px;
+	vertical-align: middle;
+}
 /*tambahan adik*/
 .kode_picture{
 	width:400px;

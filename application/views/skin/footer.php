@@ -6,10 +6,11 @@
 		<div id='site_footer_contact'>
 			Jurusan Ilmu Komputer/Informatika<br>
 			Universitas Diponegoro <br>
-			Jl. Prof. Soedarto, S.H. Kampus Tembalang<br>
+			<img src='/assets/images/foot_mail.png' alt='Alamat:' class='img_icon'  title='Alamat'/> Jl. Prof. Soedarto, S.H. Kampus Tembalang<br>
 			Semarang 50275<br>
-			Telp. (024) 70594104<br>
-			E-mail: <a href='mailto:if@undip.ac.id' style='color: #9ED5FF;'>if@undip.ac.id</a><br>
+			<img src='/assets/images/foot_phone.png' alt='Telp.' class='img_icon' title='Telepon'/> (024) 70594104<br>
+			<img src='/assets/images/foot_fax.png' alt='Fax.' class='img_icon' title='Fax'/> (024) 70594104<br>
+			<img src='/assets/images/foot_email.png' alt='Email:' class='img_icon' title='Email'/> <a href='mailto:if@undip.ac.id' style='color: #9ED5FF;'>if@undip.ac.id</a><br>
 			<br>
 			<small>&copy; Informatics UNDIP</small>
 		<p>Page rendered in <strong>{elapsed_time}</strong> seconds</p>

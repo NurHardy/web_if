@@ -23,8 +23,8 @@
 						<div id="menu">
 							<ul class="menu">
 								<li><a href="/" class="parent"><span>Home</span></a></li>
-								<li><a href='/admin/dashboard' class='parent'><span>Dasbor</span></a></li></li>
-								<li><a href='/admin/logout' class='parent'><span>Logout</span></a></li></li>
+								<li><a href='/admin/dashboard' class='parent'><span>Dasbor</span></a></li>
+								<li><a href='/admin/auth/logout' class='parent'><span>Logout</span></a></li>
 							</ul>
 						</div>
 					</div>

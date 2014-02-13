@@ -46,6 +46,7 @@
 				}
 			 ?>
 		</ul>
+		<a href='/news/'>Berita Selengkapnya &raquo;</a>
 	</div>
 	<div id='site_content_more'>
 		<div id="container">

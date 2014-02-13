@@ -41,8 +41,10 @@
 $route['default_controller'] = "website";
 $route['404_override'] = '';
 
-$route['admin'] = "website_admin";
-$route['admin/(:any)'] = "website_admin/$1";
+$route['admin'] = "admin/auth";
+$route['admin/(:any)'] = "admin/$1";
+//$route['admin'] = "website_admin";
+//$route['admin/(:any)'] = "website_admin/$1";
 
 $route['(:any)'] = "website/$1";
 

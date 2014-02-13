@@ -41,7 +41,7 @@ label {margin-left: 5px; cursor: pointer;}
 		else {$("#f_uname_info").html('<span class="info_error_mark">Username harus diisi</span>'); return;}
 		$.ajax({
 			type: "POST",
-			url: "/admin/checkusername",
+			url: "/admin/users/checkusername",
 			data: {uname: _uname},
 			success: function(data) {
 				$("#f_uname_info").html(data);
@@ -81,7 +81,7 @@ label {margin-left: 5px; cursor: pointer;}
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/newuser'; ?>'>
+<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/users/newuser'; ?>'>
 	<fieldset id='fset_basic'>
 		<legend>Informasi User</legend>
 		<div class='unit'><label class='lebar_unit' for='f_fullname'>Nama Lengkap User</label><input class='f_txt_field' id='f_fullname' type=text name='f_fullname' value='<?php if (isset($f_fullname)) echo $f_fullname; ?>'></div>

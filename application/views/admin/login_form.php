@@ -6,10 +6,10 @@
 				<p>Anda berada dalam kawasan login website,<br>masukkan username dan password dengan benar.<br><a href="/">&laquo; Home</a></p>
 			</div>
 			<div class="right">
-			<form method='POST' action='/admin/login/<?php if (isset($redir_url)) echo "?next=".urlencode($redir_url); ?>'>
+			<form method='POST' action='/admin/auth/authenticate<?php if (isset($redir_url)) echo "?next=".urlencode($redir_url); ?>'>
 				<label for='f_user'>Username</label><input class='txt_input' type=text name='f_user' id='f_user' placeholder='username'>
 				<label for='f_pass'>Password</label><input class='txt_input' type=password name='f_password' id='f_pass' placeholder='password'>
-				<input class='button_admin' type=submit value=Login>
+				<input class='button_admin btn_login' type=submit value="Login">
 				<input type='hidden' name='form_submit' value='LOGIN_FORM' />
 			</form>
 			</div>

@@ -26,4 +26,4 @@
 <div style='padding: 10px; margin-top: 10px;' id='ev_eventlist'>
 Informasi seputar tanggal tsb di sini...
 </div>
-<div id='btn_panel'><button onclick="createNewEvent();" class='button_admin'>Tambah</button></div>
+<div id='btn_panel'><button onclick="createNewEvent();" class='button_admin btn_add'>Tambah</button></div>

@@ -2,7 +2,7 @@
 
 // Kode sumber: http://www.moreofless.co.uk/using-native-php-sessions-with-codeigniter
 
-class nativesession {
+class Nativesession {
     public function __construct()
     {
         session_start();

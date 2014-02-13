@@ -5,6 +5,15 @@
  */
 
 class MY_Loader extends CI_Loader {
+	//private $ci;   
+
+	/*
+	public function __construct() {
+		parent::__construct();
+		// Initiate instance
+		
+		//
+	}*/
 
 	public function append_output($text, $return = FALSE) {
 		$this->output->append_output($text);
@@ -98,4 +107,18 @@ class MY_Loader extends CI_Loader {
             return $content;
         }
     }
+	public function check_session($_no_redir = false, $_err_msg = null) {
+		$ci =& get_instance();
+		
+		if (!$ci->nativesession->get('user_id_')) {
+			if ($_no_redir) {
+				$this->append_output(($_err_msg?$_err_msg:"Sorry, you must logged in to continue..."));
+			} else $ci->output->set_header('Location: /admin/auth/authenticate?next='.urlencode($_SERVER['REQUEST_URI']));
+			return false;
+		}
+		return true;
+	}
+	public function get_session_key() {
+		return $this->nativesession->get('user_id_');
+	}
 }
