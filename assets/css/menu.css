@@ -25,7 +25,6 @@ div#menu ul.menu {
     padding-right: 0px;
 }
 div#menu li {
-	
     position: relative;
     /*margin-left: 1px;*/
     display: block;
@@ -43,20 +42,20 @@ div#menu li div {
     float: left;
     position: absolute;
     z-index: 11;
-    top: 30px;
-    left: -13px;
+    top: 40px;
+    /*left: -13px;*/
     visibility: hidden;
     width: 190px;
-	margin: 0px 0 0 -4px;
+	/*margin: 0px 0 0 -4px;*/
     padding: 0;
 	
 }
 div#menu ul ul {
 	z-index: 12;
-    padding: 10px 4px 10px 4px;   
+    padding: 10px 0px;   
     margin: 6px 0 0 0;
 	background-color: #9ED3FF;/*#31A1FF;*/
-	border-radius:2px;
+	border-radius:0px 4px 4px 4px;
 	border-bottom: solid 2px #005BA5;
 	box-shadow: 2px 2px 2px #000;
 }
@@ -81,7 +80,8 @@ div#menu span {
     /*margin-top: -2px;*/
     padding: 0px;
     color: #003E59;
-    font: bold 13px Arial,Helvetica;
+	font: normal 12px 'Lucida Sans Unicode','Lucida Grande',Helvetica,Arial,sans-serif;
+    /*font: bold 12px Arial,Helvetica;*/
     background: none;
     /*line-height: 45px;*/	
     display: block;
@@ -89,7 +89,8 @@ div#menu span {
     background-repeat: no-repeat;
     background-position: 95% 0;
     text-align: center;
-	padding: 12px 20px;
+	padding: 13px 20px;
+	text-transform:uppercase;
 }
 
 /* menu::level1 */
@@ -108,7 +109,7 @@ div#menu ul.menu>li {
 	transition: all 0.25s;
 }
 div#menu li.current a,
-div #menu ul.menu>li:hover {background: #BCE3FF /*#6DBDFF*/;}
+div #menu ul.menu>li:hover {background: #9ED3FF/*#BCE3FF /*#6DBDFF*/;}
 
 div#menu ul.menu>li:hover>a span {
 	color: #000000;
@@ -138,16 +139,17 @@ div#menu ul ul a {
     
 div#menu ul ul span {
     font-weight:normal;
-	padding: 0 5px;
+	padding: 0 15px;
     line-height: 25px;
     font-size: 12px;
     color: #202020;
+	text-transform:none;
 }
 div#menu li.current ul a,
 div#menu li.current ul a span {
     background:#31A1FF;
 }
-div#menu ul ul span:hover, div#menu ul ul a:hover {
+div#menu ul ul span:hover,div#menu ul ul li:hover, div#menu ul ul a:hover {
  background:none;
  background-color: #DBEEFF;/* #DEDEDE;*/
  transition: all 0.25s;

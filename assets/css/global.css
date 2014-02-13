@@ -25,7 +25,7 @@ a:hover {color: #006DC6;}
 	top:0px;
 	left:0px;
 	right: 0px;
-	height: 134px;
+	height: 140px;
 	background: #2C2C2C url('../images/head.png') repeat-x;
 	background-position: 0px -30px;
 	border-bottom: solid 10px #31A1FF;
@@ -250,9 +250,11 @@ a:hover {color: #006DC6;}
 }
 .desc_event{
 	float:left;
-	width:190px;
+	width:50%;
+	max-width:190px;
 	min-height:60px;
 	font-weight:600;
+}
 }
 .year{
 	font-size: 10pt;

@@ -71,11 +71,17 @@ $(document).ready(function(){
 			<div class="content tab_1">
 				<div class="news_accordion">
 							<h3>Semester 1</h3>
+<<<<<<< HEAD
 							<div><table>
 								
 							</table>
 							</div>
 							
+=======
+							<table>
+								
+							</table>
+>>>>>>> a70649b6e19129ce21a28eccc1280c31117d0993
 							
 							<h3>Semester 2</h3>
 							<div>Ringkasan berita<a href="#">more</a></div>
@@ -103,10 +109,16 @@ $(document).ready(function(){
 			<div class="content tab_2">
 				<div class="news_accordion">
 							<h3>Semester 1</h3>
+<<<<<<< HEAD
 							<div>
 							<table>
 								
 							</table></div>
+=======
+							<table>
+								
+							</table>
+>>>>>>> a70649b6e19129ce21a28eccc1280c31117d0993
 							
 							<h3>Semester 2</h3>
 							<div>Ringkasan berita<a href="#">more</a></div>
