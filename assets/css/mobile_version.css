@@ -16,4 +16,8 @@
 		font-size:7px;
 		padding-left:2px;
 	}
+	.menu_tab{
+		max-width:200px;
+		clear:both;
+	}
 }

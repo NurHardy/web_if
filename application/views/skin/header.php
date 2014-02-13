@@ -31,6 +31,7 @@
 	<![endif]-->
 	<!-- link js tab-->
 	<script type="text/javascript" src="/assets/js/tabs.js"></script>
+	<script type="text/javascript" src="/assets/js/menu.js"></script>
 <?php if (isset($is_home)){?>
 	
 	<!-- <script type='text/javascript' src='assets/js/jquery.mobile-1.0b2.min.js'></script> -->
