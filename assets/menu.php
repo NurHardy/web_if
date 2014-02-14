@@ -1,3 +1,18 @@
+<select class='menu_mini'>
+	<option class='menu_unit' value='/'>HOME</option>
+	<option class='menu_unit'><a href='#'>profil</a></option>
+		<option class='sub_menu_unit' value="http://localhost:8080/page/sejarah">Sejarah</option>
+		<option class='sub_menu_unit'value='http://localhost/page/visi-misi'>Visi - Misi</option>
+		<option class='sub_menu_unit'><a href='/page/strukturorganisasi'>Struktur Organisasi</a></option>
+		<option class='sub_menu_unit'><a href='/page/staff'>Staff</a></option>
+		<option class='sub_menu_unit'><a href='/page/kerjasama'>Kerja Sama</a></option>
+	<option class='menu_unit'><a href='/'>Akademik</a></option>
+	<option class='menu_unit'><a href='/'>fasilitas</a></option>
+	<option class='menu_unit'><a href='/'>kemahasiswaan</a></option>
+	<option class='menu_unit'><a href='/'>berita</a></option>
+	<option class='menu_unit'><a href='/'>kontak</a></option>
+</select>
+
 <ul class='menu'>
 	<li><a href='/'><span>Home</span></a>
 	</li>
@@ -61,8 +76,6 @@
 		</ul></div>
 	</li>
 	<li><a href='/page/kontak'><span>Kontak</span></a>
-	</li>
-	<li><a href='/admin/'><span>Administrator &raquo;</span></a>
 	</li>
 </ul>
 

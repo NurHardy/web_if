@@ -99,3 +99,14 @@
 	color: #5f95ef;
 }
 /******* /LINKS *******/
+
+/*menu tab mini*/
+.menu_tab_mini{
+	padding:5px;
+	max-width:500px;
+	width:70%;
+	min-width:300px;
+	display:none;
+	float:left;
+	border: 1px solid #31A1FF;
+}

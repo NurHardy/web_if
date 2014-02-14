@@ -1,6 +1,4 @@
 @media all and (max-width: 740px) {
-	*{font-size:10pt}
-	
 	div#site_wrapper {
 		width: 100%;
 		margin: 0px auto;
@@ -9,7 +7,12 @@
 	div#site_header{
 		min-height:50px;
 	}
+	#site_header_logoimg{margin:5px;}
+	.menu{
+		display:none;
+	}
 	
+	.menu_mini{display:block}
 	div#menu li{
 		width:24%;
 		min-width:200px;

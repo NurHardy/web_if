@@ -54,10 +54,8 @@
 </head>
 <body>
 <div id='site_wrapper'>
-	<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 350px;'"; ?>></div>
+	<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 330px;'"; ?>></div>
 	<div id='site_header'>
-		<div id='site_header_search'></div>
-		<div class='divclear'></div>
 		<div id='site_header_logo'>
 			<img src='/assets/images/logo.png' id='site_header_logoimg' alt='Logo' title='Jurusan Ilmu Komputer/Informatika Universitas Diponegoro'/>
 		</div>

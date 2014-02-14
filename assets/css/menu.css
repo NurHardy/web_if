@@ -42,7 +42,7 @@ div#menu li div {
     float: left;
     position: absolute;
     z-index: 11;
-    top: 40px;
+    top: 35px;
     /*left: -13px;*/
     visibility: hidden;
     width: 190px;
@@ -89,14 +89,14 @@ div#menu span {
     background-repeat: no-repeat;
     background-position: 95% 0;
     text-align: center;
-	padding: 13px 20px;
+	padding: 11px 20px;
 	text-transform:uppercase;
 }
 
 /* menu::level1 */
 div#menu a {
     padding: 0x;
-    line-height: 40px;
+    line-height: 30px;
     margin-right: 1px;
     _margin-right: 1px;
     background: none;
@@ -224,4 +224,18 @@ div#menu li.back .left {
     top: 0;
     left: 0;
     visibility: visible;
+}
+/*menu mini*/
+.menu_mini{
+	padding:5px;
+	max-width:500px;
+	width:70%;
+	min-width:300px;
+	margin:6.5px auto;
+	display:none;
+}
+.menu_unit{
+	text-transform: uppercase
+}.sub_menu_unit{
+	padding-left:10px
 }

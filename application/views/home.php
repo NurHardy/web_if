@@ -23,13 +23,6 @@
 		   </div><!-- #pix_diapo -->
 	   </div>
 	</div>
-	<!-- <div id="sosial_panel">
-		<a href="#"><img class="sosial_icon" src="/assets/images/facebook_icon.png"></a>
-		<a href="#"><img class="sosial_icon" src="/assets/images/twitter_icon.png"></a>
-		<a href="#"><img class="sosial_icon" src="/assets/images/google_icon.png"></a>
-		<a href="#"><img class="sosial_icon" src="/assets/images/rss_icon.png"></a>
-		<img class='search_but' src='/assets/images/search_icon.png'><input class='search_box'type='text'></input>
-	</div> -->
 	<div id='site_content_article'>
 		<h3><?php echo "<a href='/news/".$newest_post[0]->id_berita."'>".$newest_post[0]->judul."</a>"; ?></h3>
 		<?php echo $newest_post[0]->isi_berita; ?>
@@ -50,6 +43,14 @@
 	</div>
 	<div id='site_content_more'>
 		<div id="container">
+			<select class='menu_tab_mini'>
+				<option id='tab_mini_1' class='active'>Akademik</option>
+				<option id='tab_mini_2'>Pendidikan</option>
+				<option id='tab_mini_3'>Penelitian</option>
+				<option id='tab_mini_4'>Lowongan</option>
+				<option id='tab_mini_5'>Beasiswa</option>
+				
+			</select>
 			<ul class="menu_tab">
 				<li id="tab_1" class="active">Akademik</li>
 				<li id="tab_2">Pendidikan</li>

@@ -1,11 +1,21 @@
 @media all and (max-width: 480px) {
-	*{font-size:8px}
+	body{font-size:0.75em}
 	
 	div#site_wrapper {
 		width: 400px;
 		margin: 0px auto;
 	}
+	.menu_tab{
+		display:none;
+	}
 	
+	.menu_tab_mini{display:block}
+	div#site_content{
+		min-width:320px;
+	}
+	div#site_navbar{
+		min-width:320px;
+	}
 	div#site_content_slider {
 		display:none;
 	}

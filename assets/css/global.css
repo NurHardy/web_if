@@ -1,7 +1,7 @@
 body {
 	font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
-	font-size: 1.0em;
-	line-height: 1.5;
+	font-size: 0.9em;
+	line-height: 1.4;
 }
 a {text-decoration: none; color: #004A87;}
 a:hover {color: #006DC6;}
@@ -16,16 +16,16 @@ a:hover {color: #006DC6;}
 
 #site_header {
 	width: 100%;
-	min-height: 100px;
+	min-height: 80px;
 }
 /*#site_header_logoimg {height: 60px; width: auto; margin: 5px;}*/
-#site_header_logoimg {max-width: 300px; height: auto; margin: 5px;width:60%;min-width:200px;min-height:40px;}
+#site_header_logoimg {max-width: 300px; height: auto; margin: 5px;width:60%;min-width:240px;min-height:40px;}
 #site_bg_top {
 	position: absolute;
 	top:0px;
 	left:0px;
 	right: 0px;
-	height: 140px;
+	height: 132px;
 	background: #2C2C2C url('../images/head.png') repeat-x;
 	background-position: 0px -30px;
 	border-bottom: solid 10px #31A1FF;
@@ -309,10 +309,6 @@ a:hover {color: #006DC6;}
 	border-bottom: solid 10px #31A1FF;
 	z-index: -1;
 }*/
-#site_header {
-	width: 100%;
-	min-height: 90px;
-}
 #site_bg_top1 {
 	position: absolute;
 	top:0px;
