@@ -35,28 +35,26 @@
 		</div>
 	</div>
 	<div class='site_panel'>
-<<<<<<< HEAD
 		<div class='site_panel_head'>Partner</div>
 		<div class='site_panel_body'>
-		<div id="divTrigger">
-			 <a href="javascript:;" onClick="openContent(this,'div1')" id="firstSlide">1</a>
-			 <a href="javascript:;" onClick="openContent(this,'div2')">2</a>
-		</div>
-			 
-		<div id="divContent">
-			<div id="div1">
-				<img src='/assets/images/oracle.png' class='site_partner' alt='Oracle Academy'/>
+			<div id="divTrigger">
+				 <a href="javascript:;" onClick="openContent(this,'div1')" id="firstSlide">1</a>
+				 <a href="javascript:;" onClick="openContent(this,'div2')">2</a>
 			</div>
-			<div id="div2">
-				<img src='/assets/images/msdnaa.png' class='site_partner' alt='MSDN Academic Alliance'/>
-			 </div>
-		</div>
-		<!--	akhir show	-->
-=======
-		<div class='site_panel_head'>Widget - [Alpha]</div>
-		<div class='site_panel_body'>
-			<!-- tanggalan -->
-			<iframe id='cv_if2' src='http://cdn.instantcal.com/cvir.html?id=cv_nav1&theme=XBL&ntype=cv_datepicker' allowTransparency='true' scrolling='no' frameborder=0 height=200 width=270></iframe>
->>>>>>> 22585706323264be09447f58c1edb3c5d35a2e8e
+				 
+			<div id="divContent">
+				<div id="div1">
+					<img src='/assets/images/oracle.png' class='site_partner' alt='Oracle Academy'/>
+				</div>
+				<div id="div2">
+					<img src='/assets/images/msdnaa.png' class='site_partner' alt='MSDN Academic Alliance'/>
+				 </div>
+			</div>
+			<!--	akhir show	-->
+			<div class='site_panel_head'>Widget - [Alpha]</div>
+			<div class='site_panel_body'>
+				<!-- tanggalan -->
+				<iframe id='cv_if2' src='http://cdn.instantcal.com/cvir.html?id=cv_nav1&theme=XBL&ntype=cv_datepicker' allowTransparency='true' scrolling='no' frameborder=0 height=200 width=270></iframe>
+			</div>
 		</div>
 	</div>

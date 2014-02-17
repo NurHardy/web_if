@@ -1,6 +1,6 @@
 body {
 	font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
-	font-size: 15px;
+	font-size: 14px;
 	line-height: 1.4;
 	color:#464242;
 }
@@ -30,11 +30,7 @@ input[type=password]:focus  {
 	top:0px;
 	left:0px;
 	right: 0px;
-<<<<<<< HEAD
 	height: 162px;
-=======
-	height: 120px;
->>>>>>> 22585706323264be09447f58c1edb3c5d35a2e8e
 	background: #2C2C2C url('../images/head.png') repeat-x;
 	background-position: 0px -13px;
 	border-bottom: solid 10px #31A1FF;
@@ -140,12 +136,8 @@ input[type=password]:focus  {
 	padding-top: 10px;
 }
 #site_footer_contact {
-<<<<<<< HEAD
 	/*width: 350px;*/
 	width:100%;
-=======
-	max-width: 350px;
->>>>>>> 22585706323264be09447f58c1edb3c5d35a2e8e
 	float: left;
 	padding: 10px;
 }
@@ -313,11 +305,9 @@ input[type=password]:focus  {
 }
 /*=====================================*/
 /*baru*/
-<<<<<<< HEAD
+
 #site_header_logo{margin-top:0px;background:url(../images/feature.png) no-repeat right center}
-=======
-#site_header_logo{padding-top:20px;}
->>>>>>> 22585706323264be09447f58c1edb3c5d35a2e8e
+
 /*#site_bg_top {
 	position: absolute;
 	top:0px;
@@ -433,7 +423,6 @@ input[type=password]:focus  {
 	line-height:80px; 
 }
 .table_struktur_org{
-<<<<<<< HEAD
 		width:99%;
 	}
 	
@@ -485,8 +474,6 @@ input[type=password]:focus  {
 	float:left;
 	padding:0px 10px;
 	border-left:none;
-	
-=======
 	width:99%;
 }
 
@@ -526,5 +513,4 @@ input[type=password]:focus  {
 	color: #D63301;
 	background-color: #FFCCBA;
 	background-image: url('../images/error.png');
->>>>>>> 22585706323264be09447f58c1edb3c5d35a2e8e
 }
