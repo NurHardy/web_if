@@ -29,7 +29,7 @@ input[type=password]:focus  {
 	top:0px;
 	left:0px;
 	right: 0px;
-	height: 132px;
+	height: 120px;
 	background: #2C2C2C url('../images/head.png') repeat-x;
 	background-position: 0px -30px;
 	border-bottom: solid 10px #31A1FF;
@@ -76,6 +76,9 @@ input[type=password]:focus  {
 #site_article_comment {
 	padding: 10px;
 	min-height: 200px;
+}
+.site_news_foot {
+	padding: 5px; background: #E2F2FF; text-align: right;
 }
 .site_list_nav {text-align: center; display: block; margin-top: 10px;}
 .site_list_nav > span, .site_list_nav > a {

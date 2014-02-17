@@ -35,8 +35,9 @@
 		</div>
 	</div>
 	<div class='site_panel'>
-		<div class='site_panel_head'>Panel 3</div>
+		<div class='site_panel_head'>Widget - [Alpha]</div>
 		<div class='site_panel_body'>
-			Isi panel 3
+			<!-- tanggalan -->
+			<iframe id='cv_if2' src='http://cdn.instantcal.com/cvir.html?id=cv_nav1&theme=XBL&ntype=cv_datepicker' allowTransparency='true' scrolling='no' frameborder=0 height=200 width=270></iframe>
 		</div>
 	</div>

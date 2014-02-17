@@ -40,9 +40,9 @@ class MY_Loader extends CI_Loader {
     {
 		$_vars = $vars;
 		if ($_preview) $_vars['is_preview'] = true;
-        $content  = $this->view('skin/header', $vars, $return);
+        $content  = $this->view('skin/header', $_vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
-		$content .= $this->view($template_name, $vars, $return);
+		$content .= $this->view($template_name, $_vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
 		$content .= $this->view('skin/sidebar_sec', $vars, $return);
 		$content .= $this->append_output("</div>");

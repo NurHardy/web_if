@@ -6,7 +6,7 @@
 				<?php	foreach($other_posts as $o_post) { ?>		
 						<li class="link_news_unit">
 							<span class="d_m_y_h_news"><?php echo date('j F Y, H:i',strtotime($o_post->tanggal) );?></span><br>
-							<a href='/news/<?php echo $o_post->id_berita; ?>/'><?php echo $o_post->judul; ?> </a></li>
+							<a href='/news/<?php echo $o_post->id_berita.'/'.$o_post->f_slug; ?>'><?php echo $o_post->judul; ?> </a></li>
 				<?php } ?>
 			  </ol>
 		</div>

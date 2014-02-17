@@ -222,8 +222,7 @@ class Posts extends CI_Controller {
 		$data['_posting']->tanggal = date('Y-m-d H:i:s');
 		
 		$data['page_title'] = $data['_posting']->judul;
-		$this->load->template_posting('posting', $data);
-	
+		$this->load->template_posting('posting', $data, false, true);
 	}
 	// AJAX
 	public function deletepost() {

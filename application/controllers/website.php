@@ -75,7 +75,9 @@ class Website extends CI_Controller {
 				$this->load->template_posting('posting_list', $data);
 			} else {
 				$data['_posting'] = $this->web_posting->get_post($_id, true, $_slug);
+				$this->load->helper('url');
 				if (!$data['_posting']) {
+					$data['page_title'] = 'Berita tidak ditemukan';
 					$this->load->template_posting('error/notfound', $data);
 					//$this->output->set_header('Location: /news');
 					return;
@@ -153,17 +155,19 @@ class Website extends CI_Controller {
 		$this->load->model('web_page');
 		$this->load->model('web_link');
 		
-		$data['_page'] = $this->web_page->get_page($_id);
-		if (!$data['_page']) {
-			$this->output->set_header('Location: /');
-			return;
-		}
-		$data['page_title'] = $data['_page'][0]->f_title;
 		$data['other_posts'] = array();
         //$data['other_posts'] = $this->web_posting->get_newest_posts(5);
 		
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		
+		$data['_page'] = $this->web_page->get_page($_id);
+		if (!$data['_page']) {
+			$data['page_title'] = 'Halaman tidak ditemukan';
+			$this->load->template_posting('error/notfound', $data);
+			//$this->output->set_header('Location: /');
+			return;
+		}
+		$data['page_title'] = $data['_page'][0]->f_title;
 		$this->load->template_posting('page', $data);
 	}
 	
