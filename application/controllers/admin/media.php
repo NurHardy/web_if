@@ -9,7 +9,7 @@ class Media extends CI_Controller {
 			$data['_medias']	= $this->web_media->get_media();
 			
 			$data['sitebase_']  = base_url();//$this->config->base_url();
-			$this->load->template_admin('admin/media_list', $data);
+			$this->load->template_admin('admin/media_list', $data, false, "&raquo; media");
 		}
 	}
 	public function newmedia() {
@@ -17,7 +17,7 @@ class Media extends CI_Controller {
 			$this->load->model ('web_media');
 			$data['page_title'] = 'Unggah file baru';
 			$data['username_']	= $this->nativesession->get('user_name_');
-			$this->load->template_admin('admin/media_form', $data);
+			$this->load->template_admin('admin/media_form', $data, false, "&raquo; <a href='/admin/media'>media</a> &raquo; upload");
 		}
 	}
 	public function upload() {

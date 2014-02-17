@@ -46,6 +46,8 @@ $route['admin/(:any)'] = "admin/$1";
 //$route['admin'] = "website_admin";
 //$route['admin/(:any)'] = "website_admin/$1";
 
+$route['guestbook'] = "guestbook";
+$route['guestbook/(:any)'] = "guestbook/$1";
 $route['(:any)'] = "website/$1";
 
 /* End of file routes.php */

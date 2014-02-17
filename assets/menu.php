@@ -1,16 +1,17 @@
 <select class='menu_mini'>
-	<option class='menu_unit' value='/'>HOME</option>
-	<option class='menu_unit'><a href='#'>profil</a></option>
-		<option class='sub_menu_unit' value="http://localhost:8080/page/sejarah">Sejarah</option>
-		<option class='sub_menu_unit'value='http://localhost/page/visi-misi'>Visi - Misi</option>
-		<option class='sub_menu_unit'><a href='/page/strukturorganisasi'>Struktur Organisasi</a></option>
-		<option class='sub_menu_unit'><a href='/page/staff'>Staff</a></option>
-		<option class='sub_menu_unit'><a href='/page/kerjasama'>Kerja Sama</a></option>
-	<option class='menu_unit'><a href='/'>Akademik</a></option>
-	<option class='menu_unit'><a href='/'>fasilitas</a></option>
-	<option class='menu_unit'><a href='/'>kemahasiswaan</a></option>
-	<option class='menu_unit'><a href='/'>berita</a></option>
-	<option class='menu_unit'><a href='/'>kontak</a></option>
+	<option class='menu_unit' value='#'>- Navigasi -</option>
+	<option class='menu_unit' value='/'>Home</option>
+	<option class='menu_unit' value='#'>profil</option>
+	<option class='menu_unit' value='/page/sejarah'>-- Sejarah</option>
+	<option class='menu_unit' value='/page/visi-misi'>-- Visi-misi</option>
+	<option class='menu_unit' value='/staff'>-- Staff</option>
+	<option class='menu_unit' value='#'>Akademik</option>
+	<option class='menu_unit' value='/kurikulum'>kurikulum</option>
+	<option class='menu_unit' value='#'>kemahasiswaan</option>
+	<option class='menu_unit' value='http://hm.if.undip.ac.id'>Himpunan Mahasiswa</option>
+	<option class='menu_unit' value='/news'>Berita</option>
+	<option class='menu_unit' value='/guestbook'>Buku Tamu</option>
+	<option class='menu_unit' value='/page/kontak'>kontak</option>
 </select>
 
 <ul class='menu'>
@@ -56,17 +57,13 @@
 		</ul></div>
 	</li>
 	<li><a href='#'><span>Kemahasiswaan</span></a>
-		<div><ul><li><a href='#'><span>Prestasi Mahasiswa</span></a>
-				</li>
-				<li><a href='http://hm.if.undip.ac.id/'><span>Himpunan Mahasiswa</span></a>
-				</li>
-				<li><a href='#'><span>Unit Kegiatan Mahasiswa</span></a>
-				</li>
-				<li><a href='#'><span>Himpunan Alumni</span></a>
-				</li>
+		<div><ul><li><a href='#'><span>Prestasi Mahasiswa</span></a></li>
+			<li><a href='http://hm.if.undip.ac.id/'><span>Himpunan Mahasiswa</span></a></li>
+			<li><a href='#'><span>Unit Kegiatan Mahasiswa</span></a></li>
+			<li><a href='#'><span>Himpunan Alumni</span></a></li>
 		</ul></div>
 	</li>
-	<li><a href='#'><span>Berita</span></a>
+	<li><a href='/news'><span>Berita</span></a>
 		<div><ul><li><a href='#'><span>Pengumuman</span></a>
 				</li>
 				<li><a href='#'><span>Agenda</span></a>
@@ -75,8 +72,8 @@
 				</li>
 		</ul></div>
 	</li>
-	<li><a href='/page/kontak'><span>Kontak</span></a>
-	</li>
+	<li><a href='/guestbook'><span>Buku Tamu</span></a></li>
+	<li><a href='/page/kontak'><span>Kontak</span></a></li>
 </ul>
 
 

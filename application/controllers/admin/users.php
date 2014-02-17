@@ -29,7 +29,7 @@ class Users extends CI_Controller {
 			);
 			$data['_ctr'] = $_cur*$_ipp;
 			$data['_ipp'] = $_ipp;
-			$this->load->template_admin('admin/user_list', $data);
+			$this->load->template_admin('admin/user_list', $data, false, "&raquo; akun");
 		}
 	}
 	public function newuser() {
@@ -45,6 +45,8 @@ class Users extends CI_Controller {
 			$data['f_fullname'] = htmlentities($this->input->post('f_fullname'));
 			$data['f_username'] = htmlentities($this->input->post('f_username'));
 			$data['f_email']    = htmlentities($this->input->post('f_email'));
+			$data['f_userprev'] = $this->input->post('f_prev_cat');
+			
 			$_f_pass1	= md5($this->input->post('f_passw1'));
 			$_f_pass2	= md5($this->input->post('f_passw2'));
 			
@@ -56,6 +58,9 @@ class Users extends CI_Controller {
 				if (empty($data['f_email'])) $data['errors'][]	  = "E-mail user harus diisi.";
 				if (!($this->input->post('f_passw1')) || !($this->input->post('f_passw2')))
 					$data['errors'][]	  = "Password dan konfirmasi harus diisi.";
+				// === EXPERIMENTAL... ==
+				$data['errors'][] = count($data['f_userprev']);
+				$data['errors'][] = $data['f_userprev'][0];
 				
 				if (empty($data['errors'])) { // semua data lengkap
 					if ($_f_pass1 != $_f_pass2) {
@@ -78,11 +83,14 @@ class Users extends CI_Controller {
 						$data['f_email'],
 						0
 					);
+					/*
 					$_result = $this->web_admin->save_user(
 						$_newuser_data,
 						$this->nativesession->get('user_id_'),
 						$this->nativesession->get('user_name_')
 					);
+					*/
+					$_result = false;
 					if ($_result) {
 						$data['infos']	 = array('User berhasil dibuat.');
 						$data['no_form'] = true;
@@ -92,7 +100,7 @@ class Users extends CI_Controller {
 			}
 			selesai:
 			$data['_cats']	= $this->web_posting->get_categories();
-			$this->load->template_admin('admin/user_form', $data);
+			$this->load->template_admin('admin/user_form', $data, false, "&raquo; <a href='/admin/users'>akun</a> &raquo; akun baru");
 		}
 	}
 	public function changeauth() {
@@ -100,7 +108,7 @@ class Users extends CI_Controller {
 			//$this->load->model ('web_menu');
 			$data['page_title'] = 'Ganti Password';
 			$data['username_']	= $this->nativesession->get('user_name_');
-			$this->load->template_admin('admin/user_password', $data);
+			$this->load->template_admin('admin/user_password', $data, false, "&raquo; <a href='/admin/users'>akun</a> &raquo; ganti password");
 		}
 	}
 	

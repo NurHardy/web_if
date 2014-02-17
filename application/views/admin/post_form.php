@@ -24,6 +24,7 @@
   // Handle the hello button click event
 	function readmoreClick(e, data) {
 		var editor = data.editor;
+		/*
 		var ret;
 		if (editor.doc.getSelection) {
 			var selectionRange = editor.doc.getSelection ();
@@ -37,9 +38,9 @@
 			}
 		} else {
 			alert("No selection...");
-		}
-		//var html = "<div class='readmore'>" + editor.selectedHTML(editor) +"</div>";
-		//editor.execCommand(data.command, html, false, data.button);
+		}*/
+		var html = "<div class='readmore'>" + editor.selectedHTML(editor) +"</div>";
+		editor.execCommand(data.command, html, false, data.button);
 		editor.focus();
 	}
  
@@ -93,6 +94,29 @@ function unAttachConfirm() {
 		  }  
 		});
 	}
+	function openWindow()
+	{
+		$.ajax({
+			type: "POST", 
+			url: "/admin/posts/preview",
+			beforeSend: function() {
+				//$("#loading_").css("display","block");
+			},
+			data: {
+				txt_post_title:  $("#txt_post_title").val(),
+				txt_post_content: $("#input").val(),
+			},
+			success: function(data){
+				var win = window.open('','',"width=1064,height=500,scrollbars=yes,left=64,top=64");
+				win.document.open();
+				win.document.write(data);
+				//$("#loading_").css("display","none");
+				win.document.close();
+			}
+		});  
+		//window.open("http://localhost:8080", '');
+		//window.focus();
+	}
 	<?php } // end if ?>
 </script>
 
@@ -137,6 +161,7 @@ function unAttachConfirm() {
 	<input type='hidden' name='form_submit' value='POSTING_FORM' />
 	<input type='hidden' name='txt_post_id' value='<?php if (isset($f_post_id)) echo $f_post_id; else echo "-1"; ?>' />
 	<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
+	<input type='button' value='Pratinjau' class='button_admin btn_add' onclick='openWindow()' />
 	<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();'/>
 	<!-- <select name='form_next_act'>
 		<option value='publish' selected>Publikasikan</option>

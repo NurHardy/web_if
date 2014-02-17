@@ -39,6 +39,7 @@
 	<script type='text/javascript' src='/assets/js/jquery.hoverIntent.minified.js'></script> 
 	<script type='text/javascript' src='/assets/js/diapo.min.js'></script>
 	<script>
+	$(document).ready(function(){
 		$(function(){
 			$('.pix_diapo').diapo({
 				autoAdvance: true,
@@ -47,12 +48,21 @@
 				thumbs: false,
 				loaderColor:"#31A1FF"});
 		});
-
-		</script>
-		<style>.readmore{display:none;}</style>
+	});
+	</script>
+	<style>.readmore{display:none;}</style>
 <?php } ?>
+<script>
+	$(document).ready(function(){
+		$(".menu_mini").change(function() {
+			var newurl = $(this).find("option:selected").val();
+			if (newurl != '#') window.location = newurl;
+		});
+	});
+</script>
 </head>
 <body>
+<div id='site_main_wrapper' style='width: 100%;'>
 <div id='site_wrapper'>
 	<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 330px;'"; ?>></div>
 	<div id='site_header'>

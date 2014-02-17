@@ -5,6 +5,7 @@
 class Nativesession {
     public function __construct()
     {
+		//if (!session_id()) session_start();
         session_start();
     }
 

@@ -1,8 +1,8 @@
 	<div id='site_content_article'>
-		<h2 class='site_article_title'><?php echo $_posting[0]->judul; ?></h2>
-		<small>Diposting oleh <?php echo $_posting[0]->creator; ?> pada <?php echo $_posting[0]->tanggal; ?></small>
+		<h2 class='site_article_title'><?php echo $_posting->judul; ?></h2>
+		<small>Diposting oleh <?php echo $_posting->creator; ?> pada <?php echo $_posting->tanggal; ?></small>
 		<hr>
-		<?php echo $_posting[0]->isi_berita; ?><br>
+		<?php echo $_posting->isi_berita; ?><br>
 	</div>
 	<div id='site_content_more'>
 		<ul>

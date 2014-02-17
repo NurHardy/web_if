@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title><?php echo $page_title; ?> - Informatics UNDIP CMS Administrator</title>
-		
+		<link rel="icon" href="/assets/admin.ico" type="image/x-icon">
 		<?php if (isset($page_additional_head)) echo $page_additional_head; ?>
 		<link href="/assets/css/reset.css" rel="stylesheet" />
 		<link href="/assets/css/global.css" rel="stylesheet" type="text/css" media="all" />

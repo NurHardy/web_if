@@ -40,7 +40,7 @@ class Website extends CI_Controller {
 		$this->load->template_home('home', $data);
 	}
 	
-	public function news($_id = 0, $_cat = null) {
+	public function news($_id = 0, $_slug = null) {
 		$this->load->model('web_posting');
 		$this->load->model('web_link');
 		
@@ -53,7 +53,7 @@ class Website extends CI_Controller {
 				$_ipp = $this->input->get('n'); // item per page
 				$_cur = $this->input->get('p'); // current page (zero-based)
 				$_maxpage = $this->input->get('x');
-				$_filter = intval($_cat);
+				$_filter = intval($this->input->get('cat'));
 
 				$this->web_functions->check_pagination($_ipp, $_cur, $_maxpage);
 				if ($_maxpage === false) {
@@ -67,19 +67,26 @@ class Website extends CI_Controller {
 					$_cur,
 					2,
 					'/news/',
-					'n='.$_ipp
+					'cat='.$_filter.'&amp;n='.$_ipp
 				);
 				$data['_ctr'] = $_cur*$_ipp;
 				$data['_ipp'] = $_ipp;
 				$data['page_title'] = "Daftar Posting";
 				$this->load->template_posting('posting_list', $data);
 			} else {
-				$data['_posting'] = $this->web_posting->get_post($_id);
+				$data['_posting'] = $this->web_posting->get_post($_id, true, $_slug);
 				if (!$data['_posting']) {
-					$this->output->set_header('Location: /news');
+					$this->load->template_posting('error/notfound', $data);
+					//$this->output->set_header('Location: /news');
 					return;
 				}
-				$data['page_title'] = $data['_posting'][0]->judul;
+				$_nslug = $data['_posting']->f_slug;
+				if ((!empty($_nslug)) && (strcmp($_nslug, $_slug)!=0)) { // slug berbeda/lama
+					$this->output->set_header("Location: /news/{$data['_posting']->id_berita}/{$_nslug}");
+					return;
+				}
+				$this->web_posting->hit_post($data['_posting']->id_berita);
+				$data['page_title'] = $data['_posting']->judul;
 				$this->load->template_posting('posting', $data);
 			}
 		} else {
@@ -110,12 +117,26 @@ class Website extends CI_Controller {
 	}
 	
 	/*--------------------AKADEMIK------------------------------*/
-	public function kurikulum() 
+	public function kurikulum($_kurikulum = null, $_kode = null) 
 	{ 
 		$this->load->model('web_link');
-		$data['page_title'] = 'Kurikulum';
+		$this->load->model('web_matkul');
 		$data['daftar_tautan'] = $this->web_link->get_links();
-		$this->load->template_akademik('kurikulum', $data);
+		
+		if (empty($_kurikulum)) {
+			$data['page_title'] = 'Kurikulum';
+			$data['matkul'] = array_fill(0, 8, array());
+			for ($_c=0;$_c<8;$_c++) $data['matkul'][$_c] = $this->web_matkul->get_matkul_smt($_c+1);
+			$this->load->template_akademik('kurikulum', $data);
+		} else {
+			if ($_kurikulum == 2012) {
+				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
+				$data['matkul'] = $this->web_matkul->get_matkul($_kode);
+				$this->load->template_akademik('matkul', $data);
+			} else {
+				$this->output->set_header('Location: /kurikulum');
+			}	
+		}
 	}
 	
 	public function agenda() 

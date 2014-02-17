@@ -1,15 +1,16 @@
 <?php
 class web_posting extends CI_Model{
 /* ------------------------------------------ POSTING -------------------*/
-	function get_post($post_id) {
+	function get_post($post_id, $_slug = null) {
 		if ((!is_numeric($post_id)) || ($post_id <= 0)) return null;
 		$_query  = "SELECT * FROM t_posts WHERE id_berita = $post_id";
 		
 		$query = $this->db->query($_query);
-        return $query->result();
+        return $query->row();
 	}
 	
 	function save_post($_title, $_content, $_category, $_id_creator, $_creator, $_publish = true, $_draft = -1, $_id = -1) {
+		$_pslug = substr(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($_title)),0,64);
 		$_query_data = array(
 			'judul'			=> $_title,		// tidak perlu htmlentities
 			'id_kategori'	=> $_category,
@@ -18,7 +19,8 @@ class web_posting extends CI_Model{
 			'creator'		=> $_creator,	// creator sudah dalam htmlentities
 			'id_creator'	=> $_id_creator,
 			'status'		=> ($_publish?1:0),
-			'f_id_draft'	=> 0
+			'f_id_draft'	=> 0,
+			'f_slug'		=> $_pslug
 		);
 		if ($_id > 0) {
 			$_query_data['tanggal_edit'] = date('Y-m-d H:i:s');
@@ -97,7 +99,15 @@ class web_posting extends CI_Model{
 		$_res  = $query->row();
         return $_res->_count;
 	}
-	
+	function delete_post($_id) {
+		if (intval($_id) <= 0) return false;
+		//$this->db->query("DELETE FROM t_posts WHERE id_berita=$_id");
+		if ($this->db->affected_rows() == 0) return false;
+		return true;
+	}
+	function hit_post($post_id) { // caution: no validation
+		$this->db->query("UPDATE t_posts SET counter = counter+1 WHERE id_berita=".$post_id);
+	}
 /* ------------------------------------------ CATEGORY ------------------- */
 	// items bernilai < 1 => tampilkan semua
 	function get_categories($_items = 20, $_page = 1) {
