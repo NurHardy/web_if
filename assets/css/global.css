@@ -406,9 +406,11 @@ input[type=password]:focus  {
 
 .news_accordion div { 
 	text-align:left;
-	padding:5px 0 0 5px; width:475px; 
+	padding:5px 0 0 5px; 
+	width:639px; 
 	line-height:20px;
-	font-size:14px; color:#555555;
+	font-size:14px; 
+	color:#555555;
 }
 
 .news_accordion div a{
