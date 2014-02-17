@@ -13,6 +13,7 @@ background: -ms-linear-gradient(top,  #91cdff 0%,#31a1ff 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #91cdff 0%,#31a1ff 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91cdff', endColorstr='#31a1ff',GradientType=0 ); /* IE6-9 */
 	border-radius: 5px 5px 0 0;
+	height: 40px;
 }
 
 div#menu ul {
@@ -45,19 +46,20 @@ div#menu li div {
     top: 35px;
     /*left: -13px;*/
     visibility: hidden;
-    width: 190px;
+    width: 210px;
 	/*margin: 0px 0 0 -4px;*/
     padding: 0;
-	
 }
 div#menu ul ul {
 	z-index: 12;
     padding: 10px 0px;   
-    margin: 6px 0 0 0;
+    margin: 2px 0 0 0;
 	background-color: #9ED3FF;/*#31A1FF;*/
+	background-color: rgba(158, 211, 255, 0.9);
 	border-radius:0px 4px 4px 4px;
+	border: solid 1px #005BA5;
 	border-bottom: solid 2px #005BA5;
-	box-shadow: 2px 2px 2px #000;
+	/*box-shadow: 2px 2px 2px #000;*/
 }
 div#menu li:hover>div {
     visibility: visible;
@@ -80,7 +82,7 @@ div#menu span {
     /*margin-top: -2px;*/
     padding: 0px;
     color: #003E59;
-	font: normal 12px 'Lucida Sans Unicode','Lucida Grande',Helvetica,Arial,sans-serif;
+	/*font: normal 12px 'Lucida Sans Unicode','Lucida Grande',Helvetica,Arial,sans-serif;*/
     /*font: bold 12px Arial,Helvetica;*/
     background: none;
     /*line-height: 45px;*/	
@@ -89,8 +91,7 @@ div#menu span {
     background-repeat: no-repeat;
     background-position: 95% 0;
     text-align: center;
-	padding: 11px 20px;
-	text-transform:uppercase;
+	padding: 5px 14px;
 }
 
 /* menu::level1 */
@@ -98,7 +99,7 @@ div#menu a {
     padding: 0x;
     line-height: 30px;
     margin-right: 1px;
-    _margin-right: 1px;
+    /*_margin-right: 1px;*/
     background: none;
 	
 }
@@ -114,7 +115,7 @@ div #menu ul.menu>li:hover {background: #9ED3FF/*#BCE3FF /*#6DBDFF*/;}
 div#menu ul.menu>li:hover>a span {
 	color: #000000;
 }
-div#menu li { }
+div#menu li { text-shadow: 1px 1px #7AC2FF;}
 div#menu li.last { background: none; }
 
 /* menu::level2 */
@@ -131,7 +132,6 @@ div#menu ul ul a {
     z-index: -1;
     padding: 3px 0px 0px 0px;
     white-space: normal;
-    width: 164px;
     margin: 2px 0px 0px 0px;
     text-transform: none;
     /*border-top: 1px solid #00B4CE;
@@ -142,7 +142,7 @@ div#menu ul ul span {
     font-weight:normal;
 	padding: 0 15px;
     line-height: 25px;
-    font-size: 12px;
+    font-size: 14px;
     color: #202020;
 	text-transform:none;
 }
@@ -189,7 +189,7 @@ div#menu ul ul li {
 
 /* menu::level3 */
 div#menu ul ul div {
-	width: 194px;
+	width: 210px;
 	padding: 0;
     margin: -47px 0 0 190px !important;
     margin-left: 192px;
@@ -229,14 +229,9 @@ div#menu li.back .left {
 /*menu mini*/
 .menu_mini{
 	padding:5px;
+	/*width:70%;*/
 	max-width:500px;
-	width:70%;
 	min-width:300px;
 	margin:6.5px auto;
 	display:none;	
-}
-.menu_unit{
-	text-transform: uppercase
-}.sub_menu_unit{
-	padding-left:10px
 }

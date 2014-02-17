@@ -5,7 +5,7 @@ class Events extends CI_Controller {
 		if ($this->load->check_session()) {
 			$data['page_title'] = 'Event Organizer';
 			$data['username_']	= $this->nativesession->get('user_name_');
-			$this->load->template_admin('admin/event_calendar', $data);
+			$this->load->template_admin('admin/event_calendar', $data, false, "&raquo; agenda");
 		}
 	}
 	public function eventajax() {
@@ -65,7 +65,7 @@ class Events extends CI_Controller {
 				$data['f_date_str'] = $data['f_y']."/".$data['f_m']."/".$data['f_d'];
 			}
 selesai:
-			$this->load->template_admin('admin/event_form', $data);
+			$this->load->template_admin('admin/event_form', $data, false, "&raquo; <a href='/admin/events'>Agenda</a> &raquo; agenda baru");
 		}
 	}
 }

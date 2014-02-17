@@ -57,6 +57,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
  */
 (function($) {
     $.fn.lavaLamp = function(o) {
+		/* DO NOTHING, fitur ini tidak dibutuhkan...
         o = $.extend({ fx: "linear", speed: 500, click: function(){} }, o || {});
 
         return this.each(function(index) {
@@ -104,6 +105,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
             }
             
         });
+		*/
     };
 })(jQuery);
 

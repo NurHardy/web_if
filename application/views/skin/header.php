@@ -41,6 +41,7 @@
 	<script type='text/javascript' src='/assets/js/diapo.min.js'></script>
 	<script type='text/javascript' src='/assets/js/menushow.js'></script>
 	<script>
+	$(document).ready(function(){
 		$(function(){
 			$('.pix_diapo').diapo({
 				autoAdvance: true,
@@ -49,12 +50,29 @@
 				thumbs: false,
 				loaderColor:"#31A1FF"});
 		});
-
-		</script>
-		<style>.readmore{display:none;}</style>
+	});
+	</script>
+	<style>.readmore{display:none;}</style>
 <?php } ?>
+<script>
+	$(document).ready(function(){
+		$(".menu_mini").change(function() {
+			var newurl = $(this).find("option:selected").val();
+			if (newurl != '#') window.location = newurl;
+		});
+	});
+</script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/id_ID/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id='site_main_wrapper' style='width: 100%;'>
 <div id='site_wrapper'>
 	<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 330px;'"; ?>></div>
 	<div id='site_header'>

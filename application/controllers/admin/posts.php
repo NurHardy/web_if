@@ -6,6 +6,7 @@ class Posts extends CI_Controller {
 			$data['page_title'] = $data['content_title'] = 'Tulis Posting Baru';
 			$data['form_action']= '/admin/posts/newpost';
 			$data['username_']	= $this->nativesession->get('user_name_');
+			
 			$this->load->model ('web_posting');
 			$this->load->model ('web_draft');
 			
@@ -53,7 +54,7 @@ class Posts extends CI_Controller {
 			} else {
 				$data['f_draft_id']	= -1;
 			}
-			$this->load->template_admin('admin/post_form', $data);
+			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='/admin/posts'>posting</a> &raquo; posting baru");
 		}
 	}
 	
@@ -103,21 +104,21 @@ class Posts extends CI_Controller {
 					$this->output->set_header('Location: /admin/posts');
 					return;
 				}
-				$data['f_post_id']	= $_dump[0]->id_berita;
-				$data['f_title']	= $_dump[0]->judul;
-				$data['f_content']	= $_dump[0]->isi_berita;
-				$data['f_cat']		= $_dump[0]->id_kategori;
-				if ($_dump[0]->f_id_draft != 0) { // ada draf...
-					$_draft_dump = $this->web_draft->get_draft($_dump[0]->f_id_draft);
+				$data['f_post_id']	= $_dump->id_berita;
+				$data['f_title']	= $_dump->judul;
+				$data['f_content']	= $_dump->isi_berita;
+				$data['f_cat']		= $_dump->id_kategori;
+				if ($_dump->f_id_draft != 0) { // ada draf...
+					$_draft_dump = $this->web_draft->get_draft($_dump->f_id_draft);
 					if ($_draft_dump != null) {
 						$data['f_title']	= $_draft_dump->f_title;
 						$data['f_content']	= $_draft_dump->f_content;
 						$data['f_cat']		= $_draft_dump->f_category;
 					}
-					$data['f_draft_id']	= $_dump[0]->f_id_draft;
+					$data['f_draft_id']	= $_dump->f_id_draft;
 				} else $data['f_draft_id']	= -1; // no draft
 			}
-			$this->load->template_admin('admin/post_form', $data);
+			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='/admin/posts'>posting</a> &raquo; edit posting");
 		}
 	}
 	public function index() {
@@ -153,7 +154,7 @@ class Posts extends CI_Controller {
 			$data['_ctr'] = $_cur*$_ipp;
 			$data['_filter'] = $_filter;
 			$data['_ipp'] = $_ipp;
-			$this->load->template_admin('admin/post_list', $data);
+			$this->load->template_admin('admin/post_list', $data, false, "&raquo; posting");
 		}
 	}
 	public function postsavedraft() {
@@ -203,7 +204,35 @@ class Posts extends CI_Controller {
 			$data['page_title'] = 'Daftar Kategori';
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['_cats']	= $this->web_posting->get_categories();
-			$this->load->template_admin('admin/category_list', $data);
+			$this->load->template_admin('admin/category_list', $data, false, "&raquo; <a href='/admin/posts'>posting</a> &raquo; kategori");
+		}
+	}
+	
+	public function preview() {
+		$this->load->model('web_posting');
+		$this->load->model('web_link');
+		
+		$data['other_posts'] = array();
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		
+		$data['_posting'] = new stdclass;
+		$data['_posting']->judul = "[Preview]: {$this->input->post('txt_post_title')}";
+		$data['_posting']->isi_berita = $this->input->post('txt_post_content');
+		$data['_posting']->creator = $this->nativesession->get('user_name_');
+		$data['_posting']->tanggal = date('Y-m-d H:i:s');
+		
+		$data['page_title'] = $data['_posting']->judul;
+		$this->load->template_posting('posting', $data, false, true);
+	}
+	// AJAX
+	public function deletepost() {
+		if (!$this->load->check_session(true)) return;
+		$this->load->model('web_posting');
+		$p_id= $this->input->post('_postid');
+		if ($this->web_posting->delete_post($p_id)) {
+			$this->output->append_output("OK");
+		} else {
+			$this->output->append_output("FAIL");
 		}
 	}
 }

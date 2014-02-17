@@ -1,5 +1,5 @@
 @media all and (max-width: 480px) {
-	body{font-size:0.75em}
+	body{font-size:15px;}
 	
 	div#site_wrapper {
 		width: 400px;

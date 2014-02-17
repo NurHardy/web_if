@@ -11,6 +11,9 @@ label {margin-left: 5px; cursor: pointer;}
 #fset_categories {width: 250px; overflow: hidden;}
 #fset_categories_div {display:none;}
 .unit_cat {display: block; padding: 5px;}
+.unit_cat:hover {background-color: #EDF6FF;}
+.unit_cat_l {float: left; width: 100px;}
+.unit_cat_r {float: right; width: 100px;}
 </style>
 <script>
 	function cek_password() {
@@ -47,7 +50,7 @@ label {margin-left: 5px; cursor: pointer;}
 				$("#f_uname_info").html(data);
 			},
 			error: function() {
-				$("#f_uname_info").html("<span class='info_error_mark'>Terjadi kesalahan. Silakan coba lagi</span>");
+				$("#f_uname_info").html("<span class='info_error_mark'>Terjadi kesalahan. <a href='javascript:cek_username()'>Coba lagi</a></span>");
 			}
 		});  
 	}
@@ -57,6 +60,46 @@ label {margin-left: 5px; cursor: pointer;}
 		} else {
 			$("#fset_categories_div").slideUp('fast');
 		}
+	}
+	function cat_check(_id) {
+		$("#f_def_cat_"+_id).removeAttr('disabled');
+		$("#f_def_cat_r"+_id).show();
+	}
+	function cat_uncheck(_id) {
+		$("#f_def_cat_"+_id).attr('disabled',true);
+		$("#f_def_cat_r"+_id).hide();
+		if ($("#f_def_cat_"+_id).is(':checked')) {
+			$("#f_def_cat_"+_id).removeAttr('checked');
+			$("#f_def_cat_0").attr('checked',true);
+		}
+	}
+	function cat_check_all(c) {
+		$("#fset_categories").find(":checkbox").each(function() {
+			var _id; _id=$(this).val();
+			if (c) {
+				$(this).attr('checked',true);
+				cat_check(_id);
+			} else {
+				cat_uncheck(_id);
+				$(this).removeAttr('checked');
+			}
+		});
+		check_selcat();
+	}
+	function catcheck(cb,_id) {
+		if (cb.checked) {
+			cat_check(_id);
+		} else {
+			cat_uncheck(_id);
+		}
+		check_selcat();
+	}
+	function check_selcat() {
+		if ($('#fset_categories input:checkbox:checked').length > 0) $("#no_sel_warn").hide();
+		else $("#no_sel_warn").show();
+	}
+	function surme() {
+		alert($("#userform").serialize());
 	}
 </script>
 <h2><?php if (isset($content_title)) echo $content_title; else echo "User Baru"; ?></h2>
@@ -81,7 +124,7 @@ label {margin-left: 5px; cursor: pointer;}
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/users/newuser'; ?>'>
+<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/users/newuser'; ?>' id='userform'>
 	<fieldset id='fset_basic'>
 		<legend>Informasi User</legend>
 		<div class='unit'><label class='lebar_unit' for='f_fullname'>Nama Lengkap User</label><input class='f_txt_field' id='f_fullname' type=text name='f_fullname' value='<?php if (isset($f_fullname)) echo $f_fullname; ?>'></div>
@@ -97,16 +140,34 @@ label {margin-left: 5px; cursor: pointer;}
 	<fieldset id='fset_previleges'>
 		<legend>User Previleges</legend>
 		<div class='unit'><input type='checkbox' id='f_prev_admin' name='f_prev_admin'/><label for='f_prev_admin' title='User dapat membuat, mengedit dan menghapus user bukan admin.'>Admin</label></div>
+	<!-- non-admin -->
+	<div id='f_prev_nonadmin'>
 		<div class='unit'><input type='checkbox' id='f_prev_posts' name='f_prev_posts' onchange='toggle_cat_panel(this);'/><label for='f_prev_posts' title='User dapat membuat, mengedit dan menghapus posting.'>Manage Posts</label>
 		<div id='fset_categories_div'>
 		<fieldset id='fset_categories'>
 			<legend>Allowed Categories</legend>
+	<div class='unit_cat'>
+		<input type='button' onclick='cat_check_all(true);' value='Check All' class='button_admin'/>
+		<input type='button' onclick='cat_check_all(false);' value='Uncheck All' class='button_admin'/>
+	</div>
+	<div class='unit_cat'>
+		<div class='unit_cat_r'><input type='radio' name='f_def_cat' id='f_def_cat_0' value='0' checked='checked' />
+			<label for='f_def_cat_0'>No default</label></div>
+		<div class='divclear'></div>
+	</div>
 <?php foreach($_cats as $_cat) {
 	$_idcat = $_cat->f_id; ?>
-	<div class='unit_cat'><input type='checkbox' name='f_prev_cat[]' value='<?php echo $_idcat; ?>' id='f_prev_cat_<?php echo $_idcat; ?>'/>
-	<label for='f_prev_cat_<?php echo $_idcat; ?>'><?php echo $_cat->f_name; ?></label>&nbsp;&nbsp;<input type='radio' name='f_def_cat' id='f_def_cat_<?php echo $_idcat; ?>' />
-	<label for='f_def_cat_<?php echo $_idcat; ?>'>default</label></div>
+	<div class='unit_cat'>
+		<div class='unit_cat_l'>
+			<?php echo "<input type='checkbox' name='f_prev_cat[]' value='{$_idcat}' id='f_prev_cat_{$_idcat}' onchange='catcheck(this,{$_idcat});' checked='checked'/>\n"; ?>
+			<label for='f_prev_cat_<?php echo $_idcat; ?>'><?php echo $_cat->f_name; ?></label></div>
+		<div class='unit_cat_r'>
+			<input type='radio' name='f_def_cat' id='f_def_cat_<?php echo $_idcat; ?>' value='<?php echo $_idcat; ?>' />
+			<label for='f_def_cat_<?php echo $_idcat; ?>' id='f_def_cat_r<?php echo $_idcat; ?>'>default</label></div>
+		<div class='divclear'></div>
+	</div>
 <?php } ?>
+			<span class='info_error_mark' id='no_sel_warn' style='display:none;'>Tidak ada kategori yang dipilih!</span>
 			</fieldset>
 			<div class='divclear'></div>
 			</div>
@@ -116,9 +177,13 @@ label {margin-left: 5px; cursor: pointer;}
 		<div class='unit'><input type='checkbox' id='f_prev_links' name='f_prev_links'/><label for='f_prev_links'>Manage Links</label></div>
 		<div class='unit'><input type='checkbox' id='f_prev_medias' name='f_prev_medias'/><label for='f_prev_medias'>Manage Medias</label></div>
 		<div class='unit'><input type='checkbox' id='f_prev_menu' name='f_prev_menu'/><label for='f_prev_menu'>Manage Menu</label></div>
+	</div>
 	</fieldset>
 	<div class='divclear'></div>
-	<div class='unit'><input class='button_admin' type='submit' value='Simpan'> </div>
+	<div class='unit'>
+	<input class='button_admin btn_publish' type='button' value='Surprise Me!' onclick='surme();'/>
+	<input class='button_admin btn_save' type='submit' value='Simpan' />
+	</div>
 	<input type='hidden' name='form_submit' value='USER_POST_FORM' />
 </form>
 <?php } // end if ?>

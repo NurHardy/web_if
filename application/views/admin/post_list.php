@@ -4,7 +4,34 @@ function refreshList() {
 	var ipp		= $("#page_items").val();
 	window.location.href = "?cat="+cat_id+"&n="+ipp+"#posts";
 }
-function unpublish
+function unpub(id) {
+	alert('Unpublishing '+id+'...');
+}
+function post_pub(id) {
+	alert('Publishing post '+id+'...');
+}
+function delpost(_id) {
+	var _conf = confirm("Hapus posting "+_id+"?");
+	if (_conf == false) return;
+	$.ajax({
+		type: "POST",
+		url: "/admin/posts/deletepost",
+		data: "_postid="+_id,
+		dateType: "string",
+		success: function(response){
+			var result = $.trim(response);
+			if(result === "OK") {
+				alert('Posting berhasil dihapus!');
+				location.reload(true);
+			} else {
+				alert('Operasi gagal...');
+			}
+		},
+		error: function(xhr){
+			alert("Terjadi kesalahan: "+xhr.status + " " + xhr.statusText);
+		}
+	});
+}
 </script>
 
 <h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Posting"; ?></h2>
@@ -17,8 +44,8 @@ function unpublish
 	echo "<tr>";
 	echo "<td>$_ctr_draft</td><td><a href='/admin/posts/".(($_draft->f_origin>0)?"editpost/".$_draft->f_origin:"newpost/".$_draft->f_id)."/'>";
 	if (!empty($_draft->f_title)) echo $_draft->f_title; else echo "[Untitled]";
-	echo "</a></td><td><a href='#'><img src='/assets/images/admin/admin_pub.png' alt='Publish - ' class='img_icon' title='Publish'/></a> ";
-	echo "<a href='#'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
+	echo "</a></td><td><a href='javascript:post_pub({$_draft->f_origin});'><img src='/assets/images/admin/admin_pub.png' alt='Publish - ' class='img_icon' title='Publish'/></a> ";
+	echo "<a href='javascript:delpost({$_draft->f_origin});'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
 	echo "</tr>\n";
 	$_ctr_draft++;
  }
@@ -53,8 +80,8 @@ function unpublish
 	$_ctr++;
 	echo "<tr".($_ctr_post%2==0?' class="tb_row_2"':'').">";
 	echo "<td>$_ctr</td><td><a href='/admin/posts/editpost/{$_post->id_berita}/'>{$_post->judul}</a></td>";
-	echo "<td><a href='#'><img src='/assets/images/admin/admin_unpub.png' alt='Unpublish -' class='img_icon' title='Unpublish'/></a> ";
-	echo "<a href='#'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
+	echo "<td><a href='javascript:unpub({$_post->id_berita});'><img src='/assets/images/admin/admin_unpub.png' alt='Unpublish -' class='img_icon' title='Unpublish'/></a> ";
+	echo "<a href='javascript:delpost({$_post->id_berita});'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
 	echo "</tr>\n";
 	$_ctr_post++;
  }

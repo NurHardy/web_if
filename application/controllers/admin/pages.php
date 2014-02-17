@@ -30,7 +30,7 @@ class Pages extends CI_Controller {
 			$data['_ctr'] = $_cur*$_ipp;
 			$data['_ipp'] = $_ipp;
 			
-			$this->load->template_admin('admin/page_list', $data);
+			$this->load->template_admin('admin/page_list', $data, false, '&raquo; halaman');
 		}
 	}
 	public function editpage($id_page = -1) {
@@ -74,7 +74,7 @@ class Pages extends CI_Controller {
 				$data['f_content']	= $_dump[0]->f_content;
 				$data['f_permalink']= $_dump[0]->f_permalink;
 			}
-			$this->load->template_admin('admin/page_form', $data);
+			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='/admin/pages/'>halaman</a> &raquo; edit halaman");
 		}
 	}
 	
@@ -107,7 +107,7 @@ class Pages extends CI_Controller {
 					else $data['errors'] = array('Terjadi kesalahan. Silakan periksa konten dan ulangi lagi.');
 				}
 			}
-			$this->load->template_admin('admin/page_form', $data);
+			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='/admin/pages/'>halaman</a> &raquo; halaman baru");
 		}
 	}
 }

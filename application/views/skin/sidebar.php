@@ -35,6 +35,7 @@
 		</div>
 	</div>
 	<div class='site_panel'>
+<<<<<<< HEAD
 		<div class='site_panel_head'>Partner</div>
 		<div class='site_panel_body'>
 		<div id="divTrigger">
@@ -51,5 +52,11 @@
 			 </div>
 		</div>
 		<!--	akhir show	-->
+=======
+		<div class='site_panel_head'>Widget - [Alpha]</div>
+		<div class='site_panel_body'>
+			<!-- tanggalan -->
+			<iframe id='cv_if2' src='http://cdn.instantcal.com/cvir.html?id=cv_nav1&theme=XBL&ntype=cv_datepicker' allowTransparency='true' scrolling='no' frameborder=0 height=200 width=270></iframe>
+>>>>>>> 22585706323264be09447f58c1edb3c5d35a2e8e
 		</div>
 	</div>

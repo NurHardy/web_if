@@ -5,8 +5,9 @@ class Links extends CI_Controller {
 			$this->load->model ('web_link');
 			$data['page_title'] = 'Daftar Tautan';
 			$data['username_']	= $this->nativesession->get('user_name_');
-			$data['_links']		= $this->web_link->get_links();
-			$this->load->template_admin('admin/link_list', $data);
+			$data['_links_pub']		= $this->web_link->get_links(-1, 1);
+			$data['_links_unpub']		= $this->web_link->get_links(-1, 0);
+			$this->load->template_admin('admin/link_list', $data, false, "&raquo; tautan");
 		}
 	}
 	
@@ -42,7 +43,7 @@ class Links extends CI_Controller {
 				}
 			}
 			selesai:
-			$this->load->template_admin('admin/link_form', $data);
+			$this->load->template_admin('admin/link_form', $data, false, "&raquo; <a href='/admin/links'>tautan</a> &raquo; tautan baru");
 		}
 	}
 	public function editlink($id_link = -1) {
@@ -82,7 +83,49 @@ class Links extends CI_Controller {
 				$data['f_lnk_name']	= $_dump[0]->f_name;
 				$data['f_lnk_url']	= htmlentities($_dump[0]->f_url);
 			}
-			$this->load->template_admin('admin/link_form', $data);
+			$this->load->template_admin('admin/link_form', $data, false, "&raquo; <a href='/admin/links'>tautan</a> &raquo; edit tautan");
+		}
+	}
+	// AJAX
+	public function updatelinks_pub() {
+		if (!$this->load->check_session(true)) return;
+		$_orderdata = $this->input->post('order_');
+		$_publishdata = $this->input->post('hide_');
+		if (!$_orderdata || !is_array($_orderdata)) {
+			$this->output->append_output("Invalid data structure.");
+		} else {
+			if ($_publishdata === false) $_publishdata = array();
+			$this->load->model ('web_link');
+			foreach ($_orderdata as $key => $val) {
+				$pub = true;
+				if (isset($_publishdata[$key]))
+					if ($_publishdata[$key]=='1') {
+						$pub = false;
+					}
+				$this->web_link->update_order($key, $val, $pub);
+			}
+			$this->output->append_output("OK");
+		}
+	}
+	// AJAX
+	public function updatelinks_unpub() {
+		if (!$this->load->check_session(true)) return;
+		$_orderdata = $this->input->post('order_');
+		$_publishdata = $this->input->post('show_');
+		if (!$_orderdata || !is_array($_orderdata)) {
+			$this->output->append_output("Invalid data structure.");
+		} else {
+			if ($_publishdata === false) $_publishdata = array();
+			$this->load->model ('web_link');
+			foreach ($_orderdata as $key => $val) {
+				$pub = false;
+				if (isset($_publishdata[$key]))
+					if ($_publishdata[$key]=='1') {
+						$pub = true;
+					}
+				$this->web_link->update_order($key, $val, $pub);
+			}
+			$this->output->append_output("OK");
 		}
 	}
 }

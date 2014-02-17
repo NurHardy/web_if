@@ -5,7 +5,7 @@ class Menu extends CI_Controller {
 			$this->load->model ('web_menu');
 			$data['page_title'] = 'Menu Editor';
 			$data['username_']	= $this->nativesession->get('user_name_');
-			$this->load->template_admin('admin/menueditor', $data);
+			$this->load->template_admin('admin/menueditor', $data, false, "&raquo; menu editor");
 		}
 	}
 	
