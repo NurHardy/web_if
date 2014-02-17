@@ -108,7 +108,7 @@ div#menu a:hover {
 div#menu ul.menu>li {
 	transition: all 0.25s;
 }
-div#menu li.current a,
+
 div #menu ul.menu>li:hover {background: #9ED3FF/*#BCE3FF /*#6DBDFF*/;}
 
 div#menu ul.menu>li:hover>a span {
@@ -121,6 +121,7 @@ div#menu li.last { background: none; }
 div#menu ul ul li {
     background: none;
     padding: 0;
+	border-bottom:solid #92A8B7 1px;
 }
 div#menu ul ul a {
     height: auto;
@@ -195,7 +196,7 @@ div#menu ul ul div {
 }
 div#menu ul ul ul {
     padding: 17px 4px 0 4px;
-	margin-top:-2px;
+	margin-top:10px;
 }
 div#menu ul ul div li {
     position:relative;
@@ -232,7 +233,7 @@ div#menu li.back .left {
 	width:70%;
 	min-width:300px;
 	margin:6.5px auto;
-	display:none;
+	display:none;	
 }
 .menu_unit{
 	text-transform: uppercase

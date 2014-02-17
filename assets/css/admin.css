@@ -1,7 +1,8 @@
 /* ============== Layout Admin ========= */
 /* INI kOMEN */
 #admin_wrapper {
-	width: 1020px;
+	max-width: 1020px;
+	width:100%;
 	margin: 0px auto;
 	box-shadow: 2px 2px 6px #000;
 	
@@ -13,14 +14,15 @@
 }
 
 #admin_head_center {
-	width: 1000px;
+	width:98%;
+	max-width: 1000px;
 	margin: 0px auto;
 	padding: 25px 0px 10px;
 	position: relative;
 }
 
 #admin_head_center #logo_ {
-	width: 250px; height: auto;
+	width: 300px; height: auto;
 }
 
 #admin_menu {
@@ -79,12 +81,15 @@
 	padding: 10px;
 	box-shadow: 0px 2px 2px #888888;
 }
+
+
 #admin_sidebar_nav{
 	background:#F1F6FA;
 	list-style:none;
-	padding:10px;
-	margin-top:0px;
-	box-shadow: 0px 2px 2px #888888;
+	padding:10px 10px 10px 25px;
+	border:2px solid #8B959E;
+	margin:10px;
+	border-radius:5px;
 }
 .admin_sidebar_nav_head{
 	background: #004A87;
@@ -222,12 +227,15 @@
 #admin_content {min-height: 500px;}
 #admin_content_left {
 	float: left;
-	width: 750px;
+	max-width: 710px;
+	width:71%;
 	padding: 10px;
 }
 #admin_content_right {
 	float: right;
-	width: 250px;
+	max-width: 280px;
+	width:28%;
+	min-width:270px;
 }
 /* ============== Login ========= */
 #login									{margin:65px auto; max-width: 500px; width: 100%;border-radius:0px 0px 10px 10px;-webkit-box-shadow: 0 3px 6px #000;box-shadow: 0 3px 6px #000}
@@ -310,3 +318,9 @@
 #txtMenuLabel, #txtMenuURL {width: 250px;padding: 3px;}
 #menuControl {padding: 5px;}
 #menuEditForm {float: right; width: 350px; display:none;}
+
+.lable_text{
+	min-width:250px;
+	margin:5px;
+}
+

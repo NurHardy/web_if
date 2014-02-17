@@ -1,0 +1,38 @@
+#shuffle{
+	margin-top:4px;
+	border:1px solid #CCC;
+	width: 600px;
+	height: 150px;
+	padding: 4px;
+}
+#divTrigger a:link,#divTrigger a:visited{
+	text-decoration: none; /* hilangkan garis bawah pada link */
+	margin:4px 0px; /* memberi jarak antar link */
+	padding: 1px 4px; /* menjadikan link seperti kotak */
+	border: 1px solid #CCC;
+	background-color: #FFF;
+	color: #000;
+ }
+ /* link yang dilalui oleh mouse dan element dengan class='selected' akan mempunyai efek yang sama */
+ #divTrigger a:hover,#divTrigger a:active,.selected{ 
+	background-color: #0000AA;
+	color: #FFF;
+ }
+ #divContent{
+	margin-top:4px;
+	border:1px solid #CCC;
+	height: 90px;
+	padding: 10px 50px;
+ }
+ #divContent div{ 
+ /* semua div di dalam element dengan id='divContent' akan di sembunyikan sementara */
+	display:none
+ } 
+ .title{
+	font-size: 16px;
+	font-weight: bold;
+	color: #006;
+	text-decoration: underline;
+	margin-bottom: 2px;
+	display:block
+ }

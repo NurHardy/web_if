@@ -2,6 +2,7 @@ body {
 	font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
 	font-size: 0.9em;
 	line-height: 1.4;
+	color:#464242;
 }
 a {text-decoration: none; color: #004A87;}
 a:hover {color: #006DC6;}
@@ -19,15 +20,15 @@ a:hover {color: #006DC6;}
 	min-height: 80px;
 }
 /*#site_header_logoimg {height: 60px; width: auto; margin: 5px;}*/
-#site_header_logoimg {max-width: 300px; height: auto; margin: 5px;width:60%;min-width:240px;min-height:40px;}
+#site_header_logoimg {max-width: 430px; height: auto; margin: 12px;width:60%;min-width:240px;min-height:40px;}
 #site_bg_top {
 	position: absolute;
 	top:0px;
 	left:0px;
 	right: 0px;
-	height: 132px;
+	height: 162px;
 	background: #2C2C2C url('../images/head.png') repeat-x;
-	background-position: 0px -30px;
+	background-position: 0px -13px;
 	border-bottom: solid 10px #31A1FF;
 	z-index: -1;
 }
@@ -116,7 +117,7 @@ a:hover {color: #006DC6;}
 	position: absolute;
 	color: #fff;
 	background: url('../images/foot.png') repeat-x;
-	min-height: 200px;
+	min-height: 170px;
 	left: 0px;
 	right: 0px;
 	font-size: 10pt;
@@ -128,7 +129,8 @@ a:hover {color: #006DC6;}
 	padding-top: 10px;
 }
 #site_footer_contact {
-	width: 350px;
+	/*width: 350px;*/
+	width:100%;
 	float: left;
 	padding: 10px;
 }
@@ -140,10 +142,11 @@ a:hover {color: #006DC6;}
 	min-height: 150px;
 }
 .site_partner {
-	float: left;
 	width: 150px;
 	height: auto;
-	margin: 5px;
+	max-height:80px;
+	margin: 5px auto;
+	border:solid 2px #918A8A;
 }
 
 
@@ -159,7 +162,8 @@ a:hover {color: #006DC6;}
 	z-index: -2;
 }
 #site_header_search {
-	height: 12px;
+	min-height: 12px;
+	padding:5px;
 }
 
 #site_tabs {
@@ -218,18 +222,18 @@ a:hover {color: #006DC6;}
 }
 .search_box{
 	float:right;
-	width:230px;
-	height:30px;
-	margin-top:5px;
+	width:200px;
+	height:23px;
 	border:none;
+	background:#6D6868 ;opacity:0.4;filter:alpha(opacity=60);
+	color:#fff
 }
 .search_but{
 	float:right;
 	width:20px;
-	height:22px;
-	margin-top:5px;
-	padding:5px;
-	background:#E7E7E7;
+	height:19px;
+	padding:3px;
+	background:#777575 ;opacity:1;filter:alpha(opacity=60);
 }
 .event_unit{
 	clear:both;
@@ -237,16 +241,14 @@ a:hover {color: #006DC6;}
 	min-height:60px;
 	width:250px;
 	margin-left:-25px;
-	margin-top:5px;
-	padding-bottom:10px;
 }
 .date_event{
 	float:left;
-	width:60px;
-	height:60px;
+	width:50px;
+	height:50px;
 	background: url('../images/bg_date.png')no-repeat;
 	text-align:center;
-	padding-top:3px;
+	padding-top:2px;
 }
 .desc_event{
 	float:left;
@@ -260,9 +262,8 @@ a:hover {color: #006DC6;}
 	font-size: 10pt;
 }
 .day{
-	font-size: 17pt;
+	font-size: 12pt;
 	font-weight:bold;
-	line-height:30px;
 }
 .month{
 	font-size: 10pt;
@@ -297,7 +298,7 @@ a:hover {color: #006DC6;}
 }
 /*=====================================*/
 /*baru*/
-#site_header_logo{margin-top:20px;}
+#site_header_logo{margin-top:0px;background:url(../images/feature.png) no-repeat right center}
 /*#site_bg_top {
 	position: absolute;
 	top:0px;
@@ -322,21 +323,6 @@ a:hover {color: #006DC6;}
 }
 .search_panel{
 	float:right;
-	margin-top:50px;
-}
-.search_box{
-	float:right;
-	width:230px;
-	height:26px;
-	border:none;
-	background:#F0F6FD;
-}
-.search_but{
-	float:right;
-	width:20px;
-	height:20px;
-	padding:4px;
-	background:#F0F6FD;
 }
 .photo_staff{
 	max-height:100px;
@@ -424,3 +410,53 @@ a:hover {color: #006DC6;}
 		width:99%;
 	}
 	
+.list_link_header{
+	padding:4px;
+	float:left;
+	list-style:none;
+	margin-top:-10px;
+	margin-bottom:0px;
+}	
+
+.list_link_header a{
+	cursor:pointer;
+	color:#777575;
+}
+.list_link_header li{
+	float:left;
+	padding:7px 10px;
+	border-right:solid 1px #464444;
+	color:#777575;
+}
+.list_link_header li.first{
+	float:left;
+	padding:7px 10px;
+	border-right:solid 1px #464444;
+	border-left:solid 1px #464444;
+	
+}
+
+.list_link_footer{
+	padding:0px;
+	float:left;
+	list-style:none;
+	margin-top:-10px;
+	margin-bottom:0px;
+}	
+
+.list_link_footer a{
+	cursor:pointer;
+	color:#777575;
+}
+.list_link_footer li{
+	float:left;
+	padding:0px 10px;
+	border-left:solid 1px #464444;
+	color:#777575;
+}
+.list_link_footer li.first{
+	float:left;
+	padding:0px 10px;
+	border-left:none;
+	
+}

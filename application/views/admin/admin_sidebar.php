@@ -1,5 +1,4 @@
 <ul id="admin_sidebar_nav">
-	<li><p><a href="/admin/dashboard">Dasbor</a></p></li>
 	<li><p><a href="/admin/posts">Daftar Posting</a></p></li>
 	<li><p><a href="/admin/posts/newpost">Tulis Post baru</a></p></li>
 	<li><p><a href="/admin/posts/categories">Daftar Kategori</a></p></li>

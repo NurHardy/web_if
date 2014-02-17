@@ -93,7 +93,7 @@
 	width: 16px;
 }
 #pix_pag_ul > li:hover > span > span {
-	background: #ccc;
+	background: #fff;
 }
 #pix_pag_ul > li > span > span {
 	-webkit-border-radius: 8px;
@@ -106,7 +106,7 @@
 	width: 8px;
 }
 #pix_pag_ul > li.diapocurrent > span > span {
-	background: #ff0;
+	background: #2C94DF;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
@@ -143,14 +143,15 @@
 	position: absolute;
 }
 .caption {
-	background: rgba(0, 0, 0, 0.8);
+	/*background: rgba(0, 0, 0, 0.8);*/
+	background:#255177 ;opacity:0.8;filter:alpha(opacity=80);
     .filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000)\9;
-	bottom: 20px;
+	bottom: 3px;
 	color: #fff;
 	display: block;
 	font-size: 13px;
-	padding: 20px;
+	padding: 10px;
 	width: 100%;
 }
 .ui-loader {

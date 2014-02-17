@@ -18,9 +18,9 @@
 ?>
 <?php if (!isset($no_form)) { // ================?>
 <form method=POST action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/events/newevent'; ?>'>
-	<div class='unit'><label class='lebar_unit' for='txt_name'>Nama</label><input class='f_txt_field' id='txt_name' type=text name='f_ev_name' value='<?php if (isset($f_ev_name)) echo $f_ev_name; ?>'></div>
-	<div class='unit'><label class='lebar_unit' for='txt_date'>Tanggal</label><input class='f_txt_field' id='txt_date' type=text name='f_ev_date' value='<?php if (isset($f_date_str)) echo $f_date_str;?>'></div>
-	<div class='unit'><label class='lebar_unit' for='txt_desc'>Deskripsi</label>
+	<div class='unit'><label class='lable_text' for='txt_name'>Nama</label><input class='f_txt_field' id='txt_name' type=text name='f_ev_name' value='<?php if (isset($f_ev_name)) echo $f_ev_name; ?>'></div>
+	<div class='unit'><label class='lable_text' for='txt_date'>Tanggal</label><input class='f_txt_field' id='txt_date' type=text name='f_ev_date' value='<?php if (isset($f_date_str)) echo $f_date_str;?>'></div>
+	<div class='unit'><label class='lable_text' for='txt_desc'>Deskripsi</label>
 		<textarea class='deskripsi' id='txt_desc' name='f_ev_desc'><?php if (isset($f_ev_desc)) echo $f_ev_desc; ?></textarea></div>
 	<div class='unit'>
 	<select name='f_ev_status'>

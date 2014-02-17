@@ -21,6 +21,7 @@
 	<link type="text/css" href="/assets/css/menu.css" rel="stylesheet" />
 	<link type="text/css" href="/assets/css/tabs/general.css" rel="stylesheet" />
 	<link type="text/css" href="/assets/css/tabs/tab.css" rel="stylesheet" />
+	<link type="text/css" href="/assets/css/menushow.css" rel="stylesheet" />
 	<link type="text/css" href="/assets/css/mobile_version.css" rel="stylesheet" />
 	<link type="text/css" href="/assets/css/tablet_version.css" rel="stylesheet" />
 	
@@ -38,6 +39,7 @@
 	<script type='text/javascript' src='/assets/js/jquery.easing.1.3.js'></script> 
 	<script type='text/javascript' src='/assets/js/jquery.hoverIntent.minified.js'></script> 
 	<script type='text/javascript' src='/assets/js/diapo.min.js'></script>
+	<script type='text/javascript' src='/assets/js/menushow.js'></script>
 	<script>
 		$(function(){
 			$('.pix_diapo').diapo({
@@ -56,6 +58,15 @@
 <div id='site_wrapper'>
 	<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 330px;'"; ?>></div>
 	<div id='site_header'>
+		<div id='site_header_search'>
+			<ul class='list_link_header'>
+				<li class='first'><a href='/admin'>admin</a></li>
+				<li><a href='#'>site map</a></li>
+				<li><a href='/feed'>rss</a></li>
+			</ul>
+			<div class='search_panel'><img class='search_but' src='assets/images/search_icon.png'><input class='search_box'type='text'></input></div>
+		</div>
+		<div class='divclear'></div>
 		<div id='site_header_logo'>
 			<img src='/assets/images/logo.png' id='site_header_logoimg' alt='Logo' title='Jurusan Ilmu Komputer/Informatika Universitas Diponegoro'/>
 		</div>

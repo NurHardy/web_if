@@ -35,8 +35,21 @@
 		</div>
 	</div>
 	<div class='site_panel'>
-		<div class='site_panel_head'>Panel 3</div>
+		<div class='site_panel_head'>Partner</div>
 		<div class='site_panel_body'>
-			Isi panel 3
+		<div id="divTrigger">
+			 <a href="javascript:;" onClick="openContent(this,'div1')" id="firstSlide">1</a>
+			 <a href="javascript:;" onClick="openContent(this,'div2')">2</a>
+		</div>
+			 
+		<div id="divContent">
+			<div id="div1">
+				<img src='/assets/images/oracle.png' class='site_partner' alt='Oracle Academy'/>
+			</div>
+			<div id="div2">
+				<img src='/assets/images/msdnaa.png' class='site_partner' alt='MSDN Academic Alliance'/>
+			 </div>
+		</div>
+		<!--	akhir show	-->
 		</div>
 	</div>
