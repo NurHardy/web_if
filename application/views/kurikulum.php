@@ -27,15 +27,19 @@ $(document).ready(function(){
 							if (count($matkul[$_ctr-1])==0) echo "Tidak ada record.";
 							else {
 								echo "<table>\n";
-								echo "<tr><td>#</td><td>Mata kuliah</td><td>SKS</td></tr>\n";
+								echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 								$_matkulctr = 1;
 								$_skstotal = 0;
+								$_ctr_baris=0;
 								foreach($matkul[$_ctr-1] as $_matkul) {
-									echo "<tr><td>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td>{$_matkul->sks}</td></tr>\n";
+									if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+									else echo "<tr>";
+									echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
 									$_matkulctr++;
 									$_skstotal += $_matkul->sks;
+									$_ctr_baris++;
 								}
-								echo "<tr><td colspan='2' style='font-weight: bold;'>Jumlah:</td><td>{$_skstotal}</td></tr>\n";
+								echo "<tr><td colspan='2' style='font-weight: bold;'>Jumlah:</td><td width='10%'>{$_skstotal}</td></tr>\n";
 								echo "</table>\n";
 							}
 							echo "\t\t</div>\n";

@@ -404,15 +404,15 @@ input[type=password]:focus  {
 
 .news_accordion h3.active {
 	background-position: right 5px;
-	background-color:#eee;
+	background-color:#7FC5FF;
 }
 
 .news_accordion div { 
 	text-align:left;
-	padding:5px 0 0 5px; 
+	padding:5px 5px 0 5px; 
 	width:639px; 
 	line-height:20px;
-	font-size:14px; 
+	font-size:12px; 
 	color:#555555;
 }
 
@@ -424,6 +424,11 @@ input[type=password]:focus  {
 .news_accordion div a:hover{ 
 	color:#F30;  
 }
+
+.tb_row_3 {
+	background-color:#EEE;
+}
+
 .news_accordion img {
 	width:65px; height:65px;
 	overflow:hidden; 
