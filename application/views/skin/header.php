@@ -47,6 +47,7 @@
 				autoAdvance: true,
 				mobileAutoAdvance: true,
 				mobileEasing: 'simpleFade',
+				time: 5000,
 				thumbs: false,
 				loaderColor:"#31A1FF"});
 		});

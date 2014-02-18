@@ -1,5 +1,5 @@
 	<div id="login">
-		<div id="upbox"><img src='/assets/images/logo.png' style='width: 200px; height: auto; margin: 0px auto;' alt='Informatika UNDIP' title='Ilmu Komputer/Informatika UNDIP'/></div>
+		<div id="upbox"><img src='/assets/images/logo.png' style='width: 300px; height: auto; margin: 0px auto;' alt='Informatika UNDIP' title='Ilmu Komputer/Informatika UNDIP'/></div>
 		<div id='login_box'>
 			<div class="left">
 				<h1>Selamat Datang</h1>

@@ -1,5 +1,6 @@
 <script type="text/javascript" src="/assets/js/jquery.cleditor.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.cleditor.table.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.cleditor.extimage.js"></script>
 <link href="/assets/css/jquery.cleditor.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
@@ -49,19 +50,28 @@
 function unAttachConfirm() {
 	window.onbeforeunload = null;
 }
+var isSaved = true;
+var setUnsaved = function( event ) {isSaved = false;};
 
 	$(document).ready(function() {
+		
 		$("#input").cleditor({
 			height:		 500,
 			useCSS:       true, // use CSS to style HTML when possible (not supported in ie)
 			docCSSFile:   // CSS file used to style the document contained within the editor
-				"/assets/css/admin.css"
-		})[0].focus();
+				"/assets/css/admin.css",
+			bodyStyle: "font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif;font-size: 14px;line-height: 1.4;color:#464242;"
+		})[0].change(setUnsaved).focus();
+		$.cleditor.buttons.image.uploadUrl = '/admin/media/uploadonce';
+		//$("#input").onchange(setUnsaved);
+		$("#txt_post_title").keyup(setUnsaved);
+		$("#txt_post_cat").change(setUnsaved);
 	});
 
 	<?php if (!isset($no_form)) { ?>
 	window.onbeforeunload = function (e) {
-		var message = "Menutup jendela ini menyebabkan pekerjaan Anda hilang. Lanjut?",
+		if (isSaved) return;
+		var message = "Menutup jendela ini menyebabkan pekerjaan Anda hilang.",
 		e = e || window.event;
 		// For IE and Firefox
 		if (e) {
@@ -83,6 +93,7 @@ function unAttachConfirm() {
 				if (_result.status == 'OK') {
 					$('#form_status').html("Draft saved at "+_result.datestr);
 					$('#txt_draft_id').val(_result.newid);
+					isSaved = true;
 				} else {
 					$('#form_status').html(_result.message);
 				}
@@ -100,7 +111,7 @@ function unAttachConfirm() {
 			type: "POST", 
 			url: "/admin/posts/preview",
 			beforeSend: function() {
-				//$("#loading_").css("display","block");
+				$("#form_status").html("Memproses pratinjau...");
 			},
 			data: {
 				txt_post_title:  $("#txt_post_title").val(),
@@ -112,6 +123,7 @@ function unAttachConfirm() {
 				win.document.write(data);
 				//$("#loading_").css("display","none");
 				win.document.close();
+				$("#form_status").html("OK");
 			}
 		});  
 		//window.open("http://localhost:8080", '');
@@ -161,6 +173,7 @@ function unAttachConfirm() {
 	<input type='hidden' name='form_submit' value='POSTING_FORM' />
 	<input type='hidden' name='txt_post_id' value='<?php if (isset($f_post_id)) echo $f_post_id; else echo "-1"; ?>' />
 	<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
+	<div><small>Pastikan pop-up blocker dimatikan untuk melihat pratinjau.</small></div>
 	<input type='button' value='Pratinjau' class='button_admin btn_add' onclick='openWindow()' />
 	<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();'/>
 	<!-- <select name='form_next_act'>
