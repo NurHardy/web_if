@@ -24,7 +24,12 @@ class web_admin extends CI_Model {
 		$_res  = $query->row();
         return $_res->_count;
 	}
-	
+	function get_user($_uid) {
+		$__uid = intval($_uid);
+		$_query  = "SELECT * FROM t_users WHERE f_id=$__uid";
+		$query = $this->db->query($_query);
+        return $query->row();
+	}
 	function check_username($_username) {
 		$err_msg = null;
 		if (preg_match('/^[a-zA-Z0-9]+$/', $_username)) {
@@ -42,22 +47,29 @@ class web_admin extends CI_Model {
 		}
 		return $err_msg;
 	}
-	
+	function update_userpass($_uid, $_md5pass) {
+		if ($_uid <= 0) return false;
+		$_query_data = array('f_password'	=> $_md5pass);
+		$this->db->where('f_id', $_uid);
+		$this->db->update('t_users', $_query_data); 
+		if ($this->db->affected_rows() == 0) return false;
+		return true;
+	}
 	function save_user($_udata, $_id_creator, $_creator, $_uid = -1) {
 		$_query_data = array(
 			'f_username'	=> $_udata[0],
 			'f_password'	=> $_udata[1],
 			'f_fullname'	=> $_udata[2],
 			'f_email'		=> $_udata[3],
-			'f_role_id'		=> $_udata[4],
-			'f_parent'		=> $_creator,
-			'f_parent_id'	=> $_id_creator
+			'f_role_id'		=> $_udata[4]
 		);
 		if ($_uid > 0) {
 			$_query_data['f_date_edit'] = date('Y-m-d H:i:s');
 			$this->db->where('f_id', $_uid);
 			$this->db->update('t_users', $_query_data); 
 		} else {
+			$_query_data['f_parent']	= $_creator;
+			$_query_data['f_parent_id']	= $_id_creator;
 			$_query_data['f_date_reg'] = date('Y-m-d H:i:s'); // date registered
 			$this->db->insert('t_users', $_query_data);
 		}

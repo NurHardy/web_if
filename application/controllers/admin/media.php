@@ -25,6 +25,7 @@ class Media extends CI_Controller {
 			$this->load->model ('web_media');
 			$data['page_title'] = 'Daftar Media Terunggah';
 			$data['username_']	= $this->nativesession->get('user_name_');
+			$_files_ = array(); // array of array [is_success?, message, address]
 			
 			$_submitter = $this->input->post('form_submit');
 			if ($_submitter == 'MEDIA_POST_FORM') {
@@ -42,7 +43,6 @@ class Media extends CI_Controller {
 				if (count($_FILES['f_files_']['name']) > 0) {
 					$uploader_ = $_SERVER['REMOTE_ADDR'];
 					$id_g = date('dmY');
-					$_files_ = array(); // array of array [is_success?, message, address]
 					for ($c_ = 0; $c_ < count($_FILES['f_files_']['name']); $c_++) {
 						if (!empty($_FILES['f_files_']['name'][$c_])) {
 							$filesize = $_FILES['f_files_']['size'][$c_];
@@ -54,7 +54,7 @@ class Media extends CI_Controller {
 								// memastikan tidak ada nama file yang sama
 								$uploadedfile = sprintf("/assets/media/m%s_%s",$id_g,$_FILES['f_files_']['name'][$c_]);
 								$file_c = 1;
-								while (file_exists("..".$uploadedfile)) {
+								while (file_exists(FCPATH.$uploadedfile)) {
 									$uploadedfile = sprintf("/assets/media/m%s_%d_%s",$id_g,$file_c,$_FILES['f_files_']['name'][$c_]);
 									$file_c++;
 								}
@@ -93,7 +93,83 @@ class Media extends CI_Controller {
 				} else $IS_SUBMIT_ = false; // end if count(files)
 			}
 			selesai:
-			$this->output->append_output(print_r($_files_));
+			//$this->output->append_output(print_r($_files_));
+			$this->output->append_output('<div id="image">Submitter=['.$this->input->post('form_submit').']</div>');
+		}
+	}
+	
+	public function uploadonce() {
+		if ($this->load->check_session(true)) {
+			$this->load->model ('web_media');
+			$data['username_']	= $this->nativesession->get('user_name_');
+			$_files_ = array(); // array of array [is_success?, message, address]
+			
+			$_submitter = $this->input->post('form_submit');
+			if ($_submitter == 'MEDIA_POST_FORM') {
+				// proses UPLOAD =============================================
+				$tanggal = date("Y-m-d H:i:s");
+
+				$file_type_id = -1;
+				$validexts_image = array("png","jpeg","jpg","gif");
+				$validexts_docs  = array("pdf","doc","docx","xls","xlsx","ppt","pptx","txt","rtf");
+
+				$maxsize = 5 * 1024 * 1024; //1048576; // = 1 Mb // Silakan diubah sesuai kebutuhan
+
+				if (!isset($_FILES['f_file_'])) return;
+				
+				$uploader_ = $_SERVER['REMOTE_ADDR'];
+				$id_g = date('dmY');
+				
+				if (!empty($_FILES['f_file_']['name'])) {
+					$filesize = $_FILES['f_file_']['size'];
+					$ekstensi = strtolower(end(explode(".", $_FILES['f_file_']['name'])));
+					if 		(in_array($ekstensi, $validexts_image))	$file_type_id = 1;
+					else if (in_array($ekstensi, $validexts_docs))	$file_type_id = 2;
+					
+					if (($file_type_id != -1) && ($filesize <= $maxsize)) {
+						// memastikan tidak ada nama file yang sama
+						$uploadedfile = sprintf("/assets/media/m%s_%s",$id_g,$_FILES['f_file_']['name']);
+						$file_c = 1;
+						while (file_exists(FCPATH.$uploadedfile)) {
+							$uploadedfile = sprintf("/assets/media/m%s_%d_%s",$id_g,$file_c,$_FILES['f_file_']['name']);
+							$file_c++;
+						}
+						//$thumbimg    = sprintf("assets/thumbs/th_asset%d.cox",$id_g);
+						if (move_uploaded_file($_FILES['f_file_']['tmp_name'], FCPATH.$uploadedfile)) 
+						{
+							//list($width_, $height_) = getimagesize($uploadedfile);
+							//make_thumb($uploadedfile,$thumbimg,$ekstensi);
+							$_result = $this->web_media->save_media(
+								array(
+									$_FILES['f_file_']['name'],
+									$uploadedfile,
+									$ekstensi,
+									$file_type_id,
+									$filesize),
+								$uploader_,
+								$this->nativesession->get('user_id_'),
+								$this->nativesession->get('user_name_')
+							);
+							if ($_result) {
+								$this->load->helper('url');
+								$imgurl_ = base_url($uploadedfile);
+								$this->output->append_output("<div id='image'>{$imgurl_}</div>");
+							} else {
+								$this->output->append_output("[Query failed] Error mengupload ".$_FILES['f_file_']['name'].". Silakan coba lagi.");
+								return;
+							}
+						} else {
+							$this->output->append_output("[Move error] Error mengupload ".$_FILES['f_file_']['name'].". Silakan coba lagi.");
+							return;
+						}
+					} else { // jika tidak valid / terlalu besar
+						$this->output->append_output("Error mengupload ".$_FILES['f_file_']['name'].". Ukuran dan jenis file harus sesuai.");
+						return;
+					}
+				} // end is empty f_file_
+			}
+			selesai:
+			$this->output->append_output('Invalid oparation.');
 		}
 	}
 }

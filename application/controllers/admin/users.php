@@ -103,11 +103,65 @@ class Users extends CI_Controller {
 			$this->load->template_admin('admin/user_form', $data, false, "&raquo; <a href='/admin/users'>akun</a> &raquo; akun baru");
 		}
 	}
-	public function changeauth() {
+	public function changeauth($_uid = -1) {
 		if ($this->load->check_session()) {
 			//$this->load->model ('web_menu');
 			$data['page_title'] = 'Ganti Password';
 			$data['username_']	= $this->nativesession->get('user_name_');
+			
+			$data['errors'] = array();
+			$_isself = false;
+			$__uid = intval($_uid);
+			if ($__uid <= 0) {
+				$__uid = $this->nativesession->get('user_id_');
+				$_isself = true; // target akun yg akan diganti pass-nya adalah dirinya sendiri
+			} else if ($__uid == $this->nativesession->get('user_id_')) $_isself = true;
+			if ($_isself) $data['isself'] = true;
+			$data['form_action'] = '/admin/users/changeauth/'.$__uid;
+			$this->load->model ('web_admin');
+			$_userinfo =  $this->web_admin->get_user($__uid);
+			if (!$_userinfo) {
+				$data['errors'][] = "ID User tidak ditemukan.";
+				$data['no_form'] = true;
+				goto selesai;
+			}
+			$data['target_uname'] = $_userinfo->f_username;
+			if ($_isself) $_f_pass0	= md5($this->input->post('f_passw'));
+			$_f_pass1	= md5($this->input->post('f_passw1'));
+			$_f_pass2	= md5($this->input->post('f_passw2'));
+			$_submitter = $this->input->post('form_submit');
+			if ($_submitter == 'AUTH_FORM') {
+				if (!($this->input->post('f_passw1')) || !($this->input->post('f_passw2')))
+					$data['errors'][]	  = "Password dan konfirmasi harus diisi.";
+				
+				if (empty($data['errors'])) { // tdk ada error
+					if ($_f_pass1 != $_f_pass2) {
+						$data['errors'][] = "Password dan konfirmasi tidak sama";
+						goto selesai;
+					} else if (strlen($this->input->post('f_passw1')) < 5) {
+						$data['errors'][] = "Password minimal 5 karakter...";
+						goto selesai;
+					}
+					if ($_isself) { // perlu pengecekan password lama
+						$_oldpass = $_userinfo->f_password;
+						if ($_f_pass0 != $_oldpass) {
+							$data['errors'][] = "Password lama Anda salah.";
+							goto selesai;
+						}
+						if ($_f_pass1 == $_oldpass) {
+							$data['errors'][] = "Password baru sama dengan password lama.";
+							goto selesai;
+						}
+					}
+					$_result = $this->web_admin->update_userpass($__uid, $_f_pass1);
+					if ($_result) {
+						$data['infos']	 = array('Password berhasil diperbaharui...');
+						$data['no_form'] = true;
+					}
+					else $data['errors'] = array('Tidak ada perubahan data...');
+				}
+			}
+			selesai:
 			$this->load->template_admin('admin/user_password', $data, false, "&raquo; <a href='/admin/users'>akun</a> &raquo; ganti password");
 		}
 	}
