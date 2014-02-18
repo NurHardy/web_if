@@ -44,36 +44,85 @@ $(document).ready(function(){
 							}
 							echo "\t\t</div>\n";
 						}
+						//Pada tabel mata kuliah pilihan kurikulum 2012, mata kuliah semester 11 = Ganjil, semester 12 = Genap
+						echo "<h3>Kuliah Pilihan</h3>";
+							echo "\t\t<div>";
+							$_ctr = 11;
+							if (count($matkul[$_ctr-1])==0) echo "Tidak ada record.";
+							else{
+									echo "<table>\n";
+									echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>Semester</td></tr>\n";
+									$_matkulctr = 1;
+									$_ctr_baris=0;
+									foreach($matkul[$_ctr-1] as $_matkul) {
+										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+										else echo "<tr>";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>Genap</td></tr>\n";
+										$_matkulctr++;
+										$_ctr_baris++;
+									}
+									$_ctr++;
+									foreach($matkul[$_ctr-1] as $_matkul) {
+										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+										else echo "<tr>";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>Ganjil</td></tr>\n";
+										$_matkulctr++;
+										$_ctr_baris++;
+									}
+									echo "</table>\n";
+							}
+							echo "\t\t</div>\n";
 					?>
 				</div>	
 			</div>
 			<div class="content tab_2">
 				<div class="news_accordion">
-						<h3>Semester 1</h3>
-						<div><table>
-							
-						</table></div>
-						<h3>Semester 2</h3>
-						<div>Ringkasan berita<a href="#">more</a></div>
-						
-						<h3>Semester 3</h3>
-						<div>Ringkasan berita<a href="#">more</a></div>
-						
-						<h3>Semester 4</h3>
-						<div>Ringkasan berita<a href="#">more</a></div>
-						
-						<h3>Semester 5</h3>
-						<div>Ringkasan berita<a href="#">more</a></div>
-						
-						<h3>Semester 6</h3>
-						<div>Ringkasan berita<a href="#">more</a></div>
-						
-						<h3>Semester 7</h3>
-						<div>Ringkasan berita<a href="#">more</a></div>
-						
-						<h3>Semester 8</h3>
-						<div>Ringkasan berita<a href="#">more</a></div>
-						
+					<?php
+						for ($_ctr=1;$_ctr<=8;$_ctr++) {
+							echo "\t\t<h3>Semester {$_ctr}</h3>\n";
+							echo "\t\t<div>";
+							if (count($matkul_2007[$_ctr-1])==0) echo "Tidak ada record.";
+							else {
+								echo "<table>\n";
+								echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
+								$_matkulctr = 1;
+								$_skstotal = 0;
+								$_ctr_baris=0;
+								foreach($matkul_2007[$_ctr-1] as $_matkul_2007) {
+									if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+									else echo "<tr>";
+									echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2007/{$_matkul_2007->kodekul}'>{$_matkul_2007->namakul}</a></td><td width='10%'>{$_matkul_2007->sks}</td></tr>\n";
+									$_matkulctr++;
+									$_skstotal += $_matkul_2007->sks;
+									$_ctr_baris++;
+								}
+								echo "<tr><td colspan='2' style='font-weight: bold;'>Jumlah:</td><td width='10%'>{$_skstotal}</td></tr>\n";
+								echo "</table>\n";
+							}
+							echo "\t\t</div>\n";
+						}
+						//Pada kurikulum 2007, mata kuliah semester 11 = mata kuliah pilihan
+						echo "<h3>Kuliah Pilihan</h3>";
+							echo "\t\t<div>";
+							$_ctr = 11;
+							if (count($matkul_2007[$_ctr-1])==0) echo "Tidak ada record.";
+							else{
+									echo "<table>\n";
+									echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>Prasyarat</td></tr>\n";
+									$_matkulctr = 1;
+									//$_skstotal = 0;
+									$_ctr_baris=0;
+									foreach($matkul_2007[$_ctr-1] as $_matkul_2007) {
+										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+										else echo "<tr>";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2007/{$_matkul_2007->kodekul}'>{$_matkul_2007->namakul}</a></td><td width='10%'>{$_matkul_2007->prasyarat}</td></tr>\n";
+										$_matkulctr++;
+										$_ctr_baris++;
+									}
+									echo "</table>\n";
+							}
+							echo "\t\t</div>\n";
+					?>
 				</div>
 			</div>
 		</div>
