@@ -144,15 +144,25 @@ class Website extends CI_Controller {
 			$this->load->template_akademik('kurikulum', $data);
 		} else {
 			if ($_kurikulum == 2012) {
-				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
-				$data['matkul'] = $this->web_matkul->get_matkul($_kode);
-				$this->load->template_akademik('matkul', $data,false,'&raquo akademik &raquo kurikulum');
-			} else if ($_kurikulum == 2007) {
-				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
+				$data['page_title'] = 'Mata Kuliah'.htmlentities($_kode);
+				$data['content_title'] = 'Kurikulum 2012';
+				if ((($_kode) == false)){
+					$data['page_title'] = 'Halaman tidak ditemukan';
+					$this->load->template_posting('error/notfound', $data);
+					//$this->output->set_header('Location: /');
+					return;
+				} else {
+					$data['matkul'] = $this->web_matkul->get_matkul($_kode);
+					$this->load->template_akademik('matkul', $data);
+				}
+			} else if ($_kurikulum == 2007) { 
+				$data['page_title'] = 'Mata Kuliah'.htmlentities($_kode);
+				$data['content_title'] = 'Kurikulum 2007';
 				$data['matkul_2007'] = $this->web_matkul->get_matkul_2007($_kode);
 				$this->load->template_akademik('matkul_2007', $data);
 			} else {
-				$this->output->set_header('Location: /kurikulum');
+				$data['page_title'] = 'Kurikulum tidak ditemukan';
+				$this->load->template_posting('error/notfound', $data);
 			}	
 		}
 	}
