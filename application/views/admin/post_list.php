@@ -41,7 +41,8 @@ function delpost(_id) {
 <?php
  $_ctr_draft = 1;
  foreach($_drafts as $_draft) {
-	echo "<tr>";
+	if ($_ctr_draft %2 == 1) echo "<tr>";
+	else echo "<tr class='tb_row_2'>";
 	echo "<td>$_ctr_draft</td><td><a href='/admin/posts/".(($_draft->f_origin>0)?"editpost/".$_draft->f_origin:"newpost/".$_draft->f_id)."/'>";
 	if (!empty($_draft->f_title)) echo $_draft->f_title; else echo "[Untitled]";
 	echo "</a></td><td><a href='javascript:post_pub({$_draft->f_origin});'><img src='/assets/images/admin/admin_pub.png' alt='Publish - ' class='img_icon' title='Publish'/></a> ";
