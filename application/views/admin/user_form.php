@@ -2,8 +2,6 @@
 label {margin-left: 5px; cursor: pointer;}
 .unit {display:block; margin: 5px;}
 #f_uname_info {padding: 5px;}
-.info_error_mark {background: #FFB2B2;}
-.info_fine_mark {background: #D6FFBC;}
 .f_txt_field {width:100%; display:block;}
 .lebar_unit {display:block;}
 #fset_basic {width: 300px; float: left;}
@@ -181,6 +179,7 @@ label {margin-left: 5px; cursor: pointer;}
 	</fieldset>
 	<div class='divclear'></div>
 	<div class='unit'>
+	<a href='/admin/users' class='button_admin btn_back'>&laquo; Batal</a>
 	<input class='button_admin btn_publish' type='button' value='Surprise Me!' onclick='surme();'/>
 	<input class='button_admin btn_save' type='submit' value='Simpan' />
 	</div>

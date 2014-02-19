@@ -13,7 +13,7 @@ foreach($_posts as $_post) {
 	echo "\t\t\t<description>";
 	echo htmlentities(substr(strip_tags($_post->isi_berita),0,310)) . "...";
 	echo "</description>\n";
-	echo "\t\t\t<link>".htmlentities(base_url("/news/".$_post->id_berita))."/</link>\n";
+	echo "\t\t\t<link>".htmlentities(base_url("/news/".$_post->id_berita."/".$_post->f_slug))."/</link>\n";
 	echo "\t\t\t<pubDate>".date("D, d M Y H:i:s O", strtotime($_post->tanggal))."</pubDate>\n";
 	echo "\t\t</item>\n";
 }

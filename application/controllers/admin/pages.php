@@ -41,7 +41,7 @@ class Pages extends CI_Controller {
 			$data['username_']		= $this->nativesession->get('user_name_');
 			$data['f_title']		= htmlentities($this->input->post('f_title'));
 			$data['f_content']		= $this->input->post('f_content');
-			$data['f_permalink']	= $this->input->post('f_permalink');
+			$data['f_permalink']	= htmlentities($this->input->post('f_permalink'));
 			
 			$this->load->model ('web_page');
 			$_submitter = $this->input->post('form_submit');
@@ -49,6 +49,11 @@ class Pages extends CI_Controller {
 				if ((!$this->input->post('f_title')) || (!$this->input->post('f_content')) || (!$this->input->post('f_permalink'))) {
 					$data['errors'] = array('Mohon isi judul, permalink dan konten halaman...');
 				} else {
+					$_plinkchk = $this->web_page->check_permalink($data['f_permalink'], $id_page);
+					if ($_plinkchk != null) {
+						$data['errors'][] = 'Permalink: '.$_plinkchk;
+						goto selesai;
+					}
 					$_result = $this->web_page->save_page(
 						$this->input->post('f_title'),
 						$this->input->post('f_permalink'),
@@ -70,10 +75,11 @@ class Pages extends CI_Controller {
 					$this->output->set_header('Location: /admin/pages');
 					return;
 				}	
-				$data['f_title']	= $_dump[0]->f_title;
-				$data['f_content']	= $_dump[0]->f_content;
-				$data['f_permalink']= $_dump[0]->f_permalink;
+				$data['f_title']	= $_dump->f_title;
+				$data['f_content']	= $_dump->f_content;
+				$data['f_permalink']= $_dump->f_permalink;
 			}
+			selesai:
 			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='/admin/pages/'>halaman</a> &raquo; edit halaman");
 		}
 	}
@@ -93,6 +99,11 @@ class Pages extends CI_Controller {
 					$data['errors'] = array('Mohon isi judul, permalink dan konten halaman...');
 				} else {
 					$this->load->model ('web_page');
+					$_plinkchk = $this->web_page->check_permalink($data['f_permalink']);
+					if ($_plinkchk != null) {
+						$data['errors'][] = 'Permalink: '.$_plinkchk;
+						goto selesai;
+					}
 					$_result = $this->web_page->save_page(
 						$this->input->post('f_title'),
 						$this->input->post('f_permalink'),
@@ -107,7 +118,37 @@ class Pages extends CI_Controller {
 					else $data['errors'] = array('Terjadi kesalahan. Silakan periksa konten dan ulangi lagi.');
 				}
 			}
+			selesai:
 			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='/admin/pages/'>halaman</a> &raquo; halaman baru");
 		}
+	}
+	
+	public function checkpermalink() {
+		if ($this->load->check_session(true)) {
+			$_plink = $this->input->post('plink');
+			$this->load->model ('web_page');
+			$_chk_res = $this->web_page->check_permalink($_plink);
+			if ($_chk_res === null) {
+				$this->output->append_output("<span class='info_fine_mark'>Permalink valid.</span>");
+			} else {
+				$this->output->append_output("<span class='info_error_mark'>".$_chk_res."</span>");
+			}
+		}
+	}
+	public function preview() {
+		$this->load->model('web_page');
+		$this->load->model('web_link');
+		
+		$data['other_posts'] = array();
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		
+		$data['_page'] = new stdclass;
+		$data['_page']->f_title = "[Preview]: ".$this->input->post('f_title');
+		$data['_page']->f_content = $this->input->post('f_content');
+		$data['_page']->f_creator = $this->nativesession->get('user_name_');
+		$data['_page']->f_date_submit = date('Y-m-d H:i:s');
+		
+		$data['page_title'] = $data['_page']->f_title;
+		$this->load->template_posting('page', $data);
 	}
 }

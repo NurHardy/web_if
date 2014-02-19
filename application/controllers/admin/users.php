@@ -59,8 +59,8 @@ class Users extends CI_Controller {
 				if (!($this->input->post('f_passw1')) || !($this->input->post('f_passw2')))
 					$data['errors'][]	  = "Password dan konfirmasi harus diisi.";
 				// === EXPERIMENTAL... ==
-				$data['errors'][] = count($data['f_userprev']);
-				$data['errors'][] = $data['f_userprev'][0];
+				//$data['errors'][] = count($data['f_userprev']);
+				//$data['errors'][] = $data['f_userprev'][0];
 				
 				if (empty($data['errors'])) { // semua data lengkap
 					if ($_f_pass1 != $_f_pass2) {
@@ -71,9 +71,9 @@ class Users extends CI_Controller {
 						goto selesai;
 					}
 					$this->load->model ('web_admin');
-					$_chk_res = $this->web_admin->check_username($this->input->post('f_username'));
+					$_chk_res = $this->web_admin->check_username($data['f_username']);
 					if ($_chk_res != null) {
-						$data['errors'][] = $_chk_res;
+						$data['errors'][] = 'Username: '.$_chk_res;
 						goto selesai;
 					}
 					$_newuser_data = array(

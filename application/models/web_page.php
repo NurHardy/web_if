@@ -18,7 +18,7 @@ class web_page extends CI_Model {
 			$_query .= " WHERE f_permalink = '$_permalnk'";
 		}
 		$query = $this->db->query($_query);
-        return $query->result();
+        return $query->row();
 	}
 	function save_page($_title, $_permalink, $_content, $_id_creator, $_creator, $_publish = true, $_id = -1) {
 		$_query_data = array(
@@ -46,5 +46,26 @@ class web_page extends CI_Model {
 		$query = $this->db->query($_query);
 		$_res  = $query->row();
         return $_res->_count;
+	}
+	
+	function check_permalink($_permalink, $_excp_id = -1) {
+		$err_msg = null;
+		if (preg_match('/^[-_a-zA-Z0-9]+$/', $_permalink)) {
+			// cek ketersediaan
+			$_plink =  $this->db->escape_str($_permalink);
+			$_query = "SELECT f_id FROM t_page WHERE f_permalink = '$_plink'";
+			$query = $this->db->query($_query);
+			$_res  = $query->num_rows();
+			if ($_res == 1) {
+				$_resrw = $query->row();
+				if ($_resrw->f_id != $_excp_id) {
+					$_plink = htmlentities($_plink);
+					$err_msg = "Permalink '{$_plink}' tidak tersedia. Silakan gunakan permalink lain.";
+				}
+			}
+		} else {
+			$err_msg = "Gunakan hanya karakter alfanumerik, strip ( - ) atau underscore ( _ )";
+		}
+		return $err_msg;
 	}
 }

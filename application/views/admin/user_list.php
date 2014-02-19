@@ -1,7 +1,7 @@
 <h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Pengguna"; ?></h2>
 <h3>Daftar Pengguna:</h3>
 <hr>
-<a href='/admin/users/newuser'>Buat baru &raquo;</a>
+<a href='/admin/users/newuser' class='button_admin btn_add'>Buat baru &raquo;</a>
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Username</td>
 	<td>Nama Lengkap</td><td>E-mail</td><td>Login Terakhir</td>

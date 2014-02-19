@@ -193,8 +193,8 @@ class Website extends CI_Controller {
 			//$this->output->set_header('Location: /');
 			return;
 		}
-		$data['page_title'] = $data['_page'][0]->f_title;
-		$this->load->template_posting('page', $data,false,false,"&raquo&nbsp".$data['_page'][0]->f_title);
+		$data['page_title'] = $data['_page']->f_title;
+		$this->load->template_posting('page', $data,false,false,"&raquo ".$data['_page'][0]->f_title);
 	}
 	
 	public function feed() {

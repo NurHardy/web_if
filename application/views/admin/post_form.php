@@ -155,18 +155,26 @@ var setUnsaved = function( event ) {isSaved = false;};
 <hr>
 <?php if (!isset($no_form)) { ?>
 <form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/posts/newpost'; ?>' method='post' onsubmit="unAttachConfirm();" id='form_posting'>
-	<label for='txt_post_title'>Judul</label><input type='text' id='txt_post_title' name='txt_post_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 75%; min-width: 200px;'/><br>
-	<label for='txt_post_cat'>Kategori</label>
-	<select name='txt_post_cat' id='txt_post_cat'>
-		<option value='0'>- Pilih Kategori -</option>
-		<?php foreach($_cats as $_cat) { ?>
-			<option <?php
-				echo "value='".$_cat->f_id."'";
-				if (isset($f_cat))
-					if ($_cat->f_id == $f_cat) echo " selected"; ?>><?php echo $_cat->f_name; ?></option>
-		<?php } ?>
-	</select>
-	<br>
+	<div class='admin_form_item'>
+		<div class='admin_form_label'><label for='txt_post_title'>Judul</label></div>
+		<div class='admin_form_field'><input type='text' id='txt_post_title' name='txt_post_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 80%; min-width: 200px;'/><br></div>
+		<div class='divclear'></div>
+	</div>
+	<div class='admin_form_item'>
+		<div class='admin_form_label'><label for='txt_post_cat'>Kategori</label></div>
+		<div class='admin_form_field'>
+			<select name='txt_post_cat' id='txt_post_cat'>
+			<option value='0'>- Pilih Kategori -</option>
+			<?php foreach($_cats as $_cat) { ?>
+				<option <?php
+					echo "value='".$_cat->f_id."'";
+					if (isset($f_cat))
+						if ($_cat->f_id == $f_cat) echo " selected"; ?>><?php echo $_cat->f_name; ?></option>
+			<?php } ?>
+			</select>
+		</div>
+		<div class='divclear'></div>
+	</div>
 	<textarea id="input" name="txt_post_content"><?php if (isset($f_content)) echo htmlentities($f_content); ?></textarea>
 	<!-- <input type='hidden' name='f_post_id' value='<?php if (isset($$post_id_)) echo $post_id_; ?>' /> -->
 	<!-- <input type='hidden' name='form_action' value='<?php //echo $post_action; ?>' /> -->
@@ -174,7 +182,8 @@ var setUnsaved = function( event ) {isSaved = false;};
 	<input type='hidden' name='txt_post_id' value='<?php if (isset($f_post_id)) echo $f_post_id; else echo "-1"; ?>' />
 	<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
 	<div><small>Pastikan pop-up blocker dimatikan untuk melihat pratinjau.</small></div>
-	<input type='button' value='Pratinjau' class='button_admin btn_add' onclick='openWindow()' />
+	<a href='/admin/posts' class='button_admin btn_back'>&laquo; Batal</a>
+	<input type='button' value='Pratinjau' class='button_admin btn_search' onclick='openWindow()' />
 	<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();'/>
 	<!-- <select name='form_next_act'>
 		<option value='publish' selected>Publikasikan</option>

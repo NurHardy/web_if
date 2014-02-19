@@ -108,6 +108,11 @@ class web_posting extends CI_Model{
 	function hit_post($post_id) { // caution: no validation
 		$this->db->query("UPDATE t_posts SET counter = counter+1 WHERE id_berita=".$post_id);
 	}
+	function set_post_status($_pid, $_status) {
+		$this->db->query("UPDATE t_posts SET status=? WHERE id_berita=?", array($_status, $_pid));
+		if ($this->db->affected_rows() == 0) return false;
+		return true;
+	}
 /* ------------------------------------------ CATEGORY ------------------- */
 	// items bernilai < 1 => tampilkan semua
 	function get_categories($_items = 20, $_page = 1) {

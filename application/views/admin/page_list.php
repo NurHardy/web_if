@@ -7,7 +7,7 @@ function refreshList() {
 
 <h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Halaman"; ?></h2>
 <h3>Website Pages:</h3>
-<a href='/admin/pages/newpage'>Buat baru &raquo;</a>
+<a href='/admin/pages/newpage' class='button_admin btn_add'>Buat baru &raquo;</a>
 <hr>
 <label for='page_items'>Per halaman:</label>
 <select name='page_items' id='page_items' onchange="refreshList();">

@@ -4,19 +4,57 @@ function refreshList() {
 	var ipp		= $("#page_items").val();
 	window.location.href = "?cat="+cat_id+"&n="+ipp+"#posts";
 }
-function unpub(id) {
-	alert('Unpublishing '+id+'...');
+function unpub(_id) {
+	var _conf = confirm("Unblish post "+_id+"?");
+	if (_conf == false) return;
+	$.ajax({
+		type: "POST",
+		url: "/admin/posts/post_ajax_act",
+		data: "_act=unpub&_postid="+_id,
+		dateType: "string",
+		success: function(response){
+			var result = $.trim(response);
+			if(result === "OK") {
+				alert('Posting berhasil dihapus!');
+				location.reload(true);
+			} else {
+				alert('Operasi gagal: '+result);
+			}
+		},
+		error: function(xhr){
+			alert("Terjadi kesalahan: "+xhr.status + " " + xhr.statusText);
+		}
+	});
 }
-function post_pub(id) {
-	alert('Publishing post '+id+'...');
+function post_pub(_id) {
+	var _conf = confirm("Publish post "+_id+"?");
+	if (_conf == false) return;
+	$.ajax({
+		type: "POST",
+		url: "/admin/posts/post_ajax_act",
+		data: "_act=pub&_postid="+_id,
+		dateType: "string",
+		success: function(response){
+			var result = $.trim(response);
+			if(result === "OK") {
+				alert('Posting berhasil dihapus!');
+				location.reload(true);
+			} else {
+				alert('Operasi gagal: '+result);
+			}
+		},
+		error: function(xhr){
+			alert("Terjadi kesalahan: "+xhr.status + " " + xhr.statusText);
+		}
+	});
 }
 function delpost(_id) {
 	var _conf = confirm("Hapus posting "+_id+"?");
 	if (_conf == false) return;
 	$.ajax({
 		type: "POST",
-		url: "/admin/posts/deletepost",
-		data: "_postid="+_id,
+		url: "/admin/posts/post_ajax_act",
+		data: "_act=del&_postid="+_id,
 		dateType: "string",
 		success: function(response){
 			var result = $.trim(response);
@@ -72,8 +110,9 @@ function delpost(_id) {
 		echo '>'.$nmode.'</option>\n';
 	}
 ?></select>
+<a href='/admin/posts/newpost' class='button_admin btn_add'>Buat baru &raquo;</a>
 <table class='table_list'>
-<tr class='tb_head'><td style='width: 32px;'>#</td><td>Judul</td><td style='width: 200px;'>Action</td></tr>
+<tr class='tb_head'><td style='width: 32px;'>#</td><td>Judul</td><td>Hits</td><td style='width: 200px;'>Action</td></tr>
 <?php
  if (!isset($_ctr)) $_ctr = 0; // counter
  $_ctr_post = 1;
@@ -81,7 +120,10 @@ function delpost(_id) {
 	$_ctr++;
 	echo "<tr".($_ctr_post%2==0?' class="tb_row_2"':'').">";
 	echo "<td>$_ctr</td><td><a href='/admin/posts/editpost/{$_post->id_berita}/'>{$_post->judul}</a></td>";
-	echo "<td><a href='javascript:unpub({$_post->id_berita});'><img src='/assets/images/admin/admin_unpub.png' alt='Unpublish -' class='img_icon' title='Unpublish'/></a> ";
+	echo "<td>{$_post->counter}</td>";
+	if ($_post->status == 1) echo "<td><a href='javascript:unpub({$_post->id_berita});'><img src='/assets/images/admin/admin_unpub.png' alt='Unpublish -' class='img_icon' title='Unpublish'/></a> ";
+	else echo "<td><a href='javascript:post_pub({$_post->id_berita});'><img src='/assets/images/admin/admin_pub.png' alt='Publish -' class='img_icon' title='Publish'/></a> ";
+	
 	echo "<a href='javascript:delpost({$_post->id_berita});'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
 	echo "</tr>\n";
 	$_ctr_post++;

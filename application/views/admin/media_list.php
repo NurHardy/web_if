@@ -1,5 +1,5 @@
 <h2><?php if (isset($content_title)) echo $content_title; else echo "Media terunggah"; ?></h2>
-<a href='/admin/media/newmedia'>Unggah baru &raquo;</a>
+<a href='/admin/media/newmedia' class='button_admin btn_add'>Unggah baru &raquo;</a>
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Media</td><td style='width: 200px;'>Action</td></tr>
 

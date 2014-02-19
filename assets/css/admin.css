@@ -68,6 +68,8 @@
 .btn_upload {background-image: url('../images/admin/admin_uploadw.png');}
 .btn_add{background-image: url('../images/admin/admin_addw.png');}
 .btn_save{background-image: url('../images/admin/admin_savew.png');}
+.btn_back{background-image: url('../images/admin/admin_backw.png');}
+.btn_search{background-image: url('../images/admin/admin_searchw.png');}
 
 #admin_content_left table.table_list{
 	width: 100%;
@@ -298,3 +300,18 @@
 	margin:5px;
 }
 
+/* == General form == */
+.admin_form_item {
+	margin: 3px 0 3px;
+}
+.admin_form_label {
+	float: left;
+	width: 100px;
+	padding: 3px;
+}
+.admin_form_field {
+	float: right;
+	width: 600px;
+}
+.info_error_mark {background: #FFB2B2;}
+.info_fine_mark {background: #D6FFBC;}
