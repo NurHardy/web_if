@@ -4,7 +4,4 @@
 		<hr>
 		<?php echo $_page[0]->f_content; ?><br>
 	</div>
-	<div id='site_content_more'>
-		
-	</div>
 	

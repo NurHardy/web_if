@@ -64,11 +64,11 @@
 		</ul></div>
 	</li>
 	<li><a href='/news'><span>Berita</span></a>
-		<div><ul><li><a href='#'><span>Pengumuman</span></a>
+		<div><ul><li><a href='/news?cat=1'><span>Pengumuman</span></a>
 				</li>
-				<li><a href='#'><span>Agenda</span></a>
+				<li><a href='/agenda'><span>Agenda</span></a>
 				</li>
-				<li><a href='#'><span>Lowongan</span></a>
+				<li><a href='/news?cat=4'><span>Lowongan</span></a>
 				</li>
 		</ul></div>
 	</li>

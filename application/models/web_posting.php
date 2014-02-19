@@ -141,4 +141,9 @@ class web_posting extends CI_Model{
 		if ($this->db->affected_rows() == 0) return false;
 		return true;
 	}
+	function get_name_categori($_id) {
+		$query = $this->db->query("SELECT f_name FROM  t_category WHERE f_id=$_id");
+		$_result = $query->row();
+		return $_result->f_name;
+	}
 }

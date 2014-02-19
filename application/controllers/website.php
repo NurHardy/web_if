@@ -48,7 +48,7 @@ class Website extends CI_Controller {
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		
 		if (is_numeric($_id)) {
-			if ($_id <= 0) {
+			if ($_id <= 0) { // list news
 				$this->load->model ('web_functions');
 				$_ipp = $this->input->get('n'); // item per page
 				$_cur = $this->input->get('p'); // current page (zero-based)
@@ -69,11 +69,13 @@ class Website extends CI_Controller {
 					'/news/',
 					'cat='.$_filter.'&amp;n='.$_ipp
 				);
+				$data['cat_name'] = "semua berita";
+				if ($_filter != 0) $data['cat_name'] = $this->web_posting->get_name_categori($_filter);
 				$data['_ctr'] = $_cur*$_ipp;
 				$data['_ipp'] = $_ipp;
 				$data['page_title'] = "Daftar Posting";
-				$this->load->template_posting('posting_list', $data,false,false,'&raquo news');
-			} else {
+				$this->load->template_posting('posting_list', $data,false,false,"&raquo news &raquo ".$data['cat_name']);
+			} else {//menampilkan news
 				$data['_posting'] = $this->web_posting->get_post($_id, true, $_slug);
 				$this->load->helper('url');
 				if (!$data['_posting']) {
@@ -89,7 +91,7 @@ class Website extends CI_Controller {
 				}
 				$this->web_posting->hit_post($data['_posting']->id_berita);
 				$data['page_title'] = $data['_posting']->judul;
-				$this->load->template_posting('posting', $data,false,false,'&raquo news');
+				$this->load->template_posting('posting', $data,false,false,"&raquo news");
 			}
 		} else {
 		}
@@ -156,7 +158,7 @@ class Website extends CI_Controller {
 		$data['page_title'] = 'Agenda Terdekat';
 		$data['daftar_event'] = $this->web_event->get_nearest_event(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
-		$this->load->template_akademik('agenda', $data);
+		$this->load->template_akademik('agenda', $data,false,'&raquo berita &raquo agenda');
 	}
 	
 	public function page($_id) {
@@ -176,7 +178,7 @@ class Website extends CI_Controller {
 			return;
 		}
 		$data['page_title'] = $data['_page'][0]->f_title;
-		$this->load->template_posting('page', $data);
+		$this->load->template_posting('page', $data,false,false,"&raquo&nbsp".$data['_page'][0]->f_title);
 	}
 	
 	public function feed() {
@@ -194,7 +196,7 @@ class Website extends CI_Controller {
 		$data['page_title'] = 'Tentang Situs';
 		$data['daftar_event'] = $this->web_event->get_nearest_event(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
-		$this->load->template_akademik('tentang_situs', $data);
+		$this->load->template_akademik('tentang_situs', $data,false,'&raquo tentang - situs');
 	}
 }
 

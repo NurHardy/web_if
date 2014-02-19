@@ -239,9 +239,8 @@ input[type=password]:focus  {
 .search_but{
 	float:right;
 	width:20px;
-	height:19px;
+	height:20px;
 	padding:3px;
-	background:#777575 ;opacity:1;filter:alpha(opacity=60);
 }
 .event_unit{
 	clear:both;
@@ -332,7 +331,14 @@ input[type=password]:focus  {
 	z-index: -1;
 }
 .search_panel{
-	float:right;
+	position:absolute;
+	top:10px;
+	width:250px;
+	right:160px;
+	display:none;
+	z-index:1003;
+	list-style:none;
+	top:17px;
 }
 
 #pagging{
@@ -421,8 +427,8 @@ input[type=password]:focus  {
 	}
 	
 .list_link_header{
-	padding:0px;
-	float:left;
+	padding-top:5px;
+	float:right;
 	list-style:none;
 	margin-top:-10px;
 	margin-bottom:0px;
@@ -434,15 +440,24 @@ input[type=password]:focus  {
 }
 .list_link_header li{
 	float:left;
-	padding:10px 10px;
+	padding:5px 10px;
 	border-right:solid 1px #363738;
 	color:#777575;
+	
 }
 .list_link_header li.first{
 	float:left;
-	padding:10px 10px;
+	padding:5px 10px;
 	border-right:solid 1px #363738;
 	border-left:solid 1px #363738;
+	
+}
+
+.list_link_header li.last{
+	float:left;
+	padding:5px 10px;
+	border-right:none;
+	border-left:none;
 	
 }
 
@@ -529,4 +544,22 @@ input[type=password]:focus  {
 	padding: 5px;
 	font-size: 12px;
 	margin:10px;
+}
+.news_readmore{
+	margin-top:5px;
+	padding:2px;
+	border:solid 1px #3B6A8E;
+	border-radius:2px;
+	width:160px;
+	float:right;
+}
+
+.news_readmore:hover{
+	margin-top:5px;
+	padding:2px;
+	background:#B7C4CE;
+	border:solid 1px #3B6A8E;
+	border-radius:2px;
+	width:160px;
+	float:right;
 }

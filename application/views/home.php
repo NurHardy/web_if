@@ -30,7 +30,8 @@
 			echo "<a href='/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}'>".$newest_post[0]->judul."</a>"; ?></h3>
 		<?php echo substr(strip_tags($newest_post[0]->isi_berita),0,450) . "..."; ?>
 		<div class='divclear'></div>
-		<div class='site_news_foot'><?php echo "<a href='/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}'>Baca Selengkapnya &raquo;</a>"; ?></div>
+		<div class='news_readmore'><?php echo "<a href='/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}'>Baca Selengkapnya &raquo;</a>"; ?></div>
+		<div class='divclear'></div>
 		<hr>
 		Berita terbaru lain:
 		<ul>
@@ -42,7 +43,8 @@
 				}
 			 ?>
 		</ul>
-		<div class='site_news_foot'><a href='/news/'>Berita Selengkapnya &raquo;</a></div>
+		<div class='news_readmore'><a href='/news/'>Berita Selengkapnya &raquo;</a></div>
+		<div class='divclear'></div>
 	</div>
 	<div id='site_content_more'>
 		<div id="container">

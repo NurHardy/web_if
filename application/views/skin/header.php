@@ -50,6 +50,9 @@
 				thumbs: false,
 				loaderColor:"#31A1FF"});
 		});
+		$('#toggle_search').click(function(){
+			$('.search_panel').slideToggle();//you can give it a speed
+		  });
 	});
 	</script>
 	<style>.readmore{display:none;}</style>
@@ -71,18 +74,45 @@
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/id_ID/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+
+//google search custome
+  (function() {
+    var cx = '012334604403258577220:-xkdwekeoxc';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+//menu
+$(document).ready(function(){
+  
+  
+  /*$('li.mainlevel').mouseleave(function(){
+  $(this).find('ul').slideUp("fast");
+  });*/
+  
+});
+</script>
 <div id='site_main_wrapper' style='width: 100%;'>
 <div id='site_wrapper'>
 	<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 330px;'"; ?>></div>
 	<div id='site_header'>
 		<div id='site_header_search'>
 			<ul class='list_link_header'>
-				<li class='first'><a href='/admin'>admin</a></li>
-				<li><a href='#'>site map</a></li>
-				<li><a href='/feed'>rss</a></li>
+				<li class='first'><a href='#'><img class='search_but' src='/assets/images/sitemap_icon.png'></a></li>
+				<li><a href='/feed'><img class='search_but' src='/assets/images/rss_icon2.png'></a></li>
+				<li><a href="#" id="toggle_search"><img class='search_but' src='/assets/images/search_icon.png'></a>
+					<ul class='search_panel'>
+						<li class='last'><gcse:search></gcse:search></li>
+					</ul>
+				</li>
 			</ul>
-			<div class='search_panel'><img class='search_but' src='assets/images/search_icon.png'><input class='search_box'type='text'></input></div>
+			<!--<div class='search_button'style='width:100px;height:20px'></div>
+			<div class='search_panel'><gcse:search></gcse:search></div>-->
 		</div>
 		<div class='divclear'></div>
 		<div id='site_header_logo'>
