@@ -27,12 +27,12 @@ $(document).ready(function(){
 							if (count($matkul[$_ctr-1])==0) echo "Tidak ada record.";
 							else {
 								echo "<table>\n";
-								echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
+								echo "<tr  class='tb_row_1'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 								$_matkulctr = 1;
 								$_skstotal = 0;
 								$_ctr_baris=0;
 								foreach($matkul[$_ctr-1] as $_matkul) {
-									if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+									if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_2'>"; 
 									else echo "<tr>";
 									echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
 									$_matkulctr++;
@@ -51,13 +51,13 @@ $(document).ready(function(){
 							if (count($matkul[$_ctr-1])==0) echo "Tidak ada record.";
 							else{
 									echo "<table>\n";
-									echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>Semester</td></tr>\n";
+									echo "<tr  class='tb_row_1'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 									$_matkulctr = 1;
 									$_ctr_baris=0;
 									foreach($matkul[$_ctr-1] as $_matkul) {
-										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_2'>"; 
 										else echo "<tr>";
-										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>Genap</td></tr>\n";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
 										$_matkulctr++;
 										$_ctr_baris++;
 									}
@@ -65,7 +65,7 @@ $(document).ready(function(){
 									foreach($matkul[$_ctr-1] as $_matkul) {
 										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
 										else echo "<tr>";
-										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>Ganjil</td></tr>\n";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
 										$_matkulctr++;
 										$_ctr_baris++;
 									}
@@ -84,12 +84,12 @@ $(document).ready(function(){
 							if (count($matkul_2007[$_ctr-1])==0) echo "Tidak ada record.";
 							else {
 								echo "<table>\n";
-								echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
+								echo "<tr  class='tb_row_1'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 								$_matkulctr = 1;
 								$_skstotal = 0;
 								$_ctr_baris=0;
 								foreach($matkul_2007[$_ctr-1] as $_matkul_2007) {
-									if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+									if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_2'>"; 
 									else echo "<tr>";
 									echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2007/{$_matkul_2007->kodekul}'>{$_matkul_2007->namakul}</a></td><td width='10%'>{$_matkul_2007->sks}</td></tr>\n";
 									$_matkulctr++;
@@ -108,14 +108,14 @@ $(document).ready(function(){
 							if (count($matkul_2007[$_ctr-1])==0) echo "Tidak ada record.";
 							else{
 									echo "<table>\n";
-									echo "<tr  class='tb_row_3'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>Prasyarat</td></tr>\n";
+									echo "<tr  class='tb_row_1'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 									$_matkulctr = 1;
 									//$_skstotal = 0;
 									$_ctr_baris=0;
 									foreach($matkul_2007[$_ctr-1] as $_matkul_2007) {
-										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
+										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_2'>"; 
 										else echo "<tr>";
-										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2007/{$_matkul_2007->kodekul}'>{$_matkul_2007->namakul}</a></td><td width='10%'>{$_matkul_2007->prasyarat}</td></tr>\n";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2007/{$_matkul_2007->kodekul}'>{$_matkul_2007->namakul}</a></td><td width='10%'>{$_matkul_2007->sks}</td></tr>\n";
 										$_matkulctr++;
 										$_ctr_baris++;
 									}

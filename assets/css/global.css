@@ -398,22 +398,27 @@ input[type=password]:focus  {
 .news_accordion div { 
 	text-align:left;
 	padding:5px 5px 0 5px; 
-	width:639px; 
+	width:auto; 
 	line-height:20px;
 	font-size:12px; 
 	color:#555555;
 }
 
 .news_accordion div a{
-	color:#000; 
+	color:#555; 
 	text-decoration:none; 
 }
 
 .news_accordion div a:hover{ 
-	color:#F30;  
+	color:#006DC6;  
 }
 
-.tb_row_3 {
+.tb_row_1{
+	color: #000; background-color: #004A87; padding: 5px;
+	font-weight: bold; color: #fff;
+}
+
+.tb_row_2{
 	background-color:#EEE;
 }
 
@@ -513,4 +518,14 @@ input[type=password]:focus  {
 	color: #D63301;
 	background-color: #FFCCBA;
 	background-image: url('../images/error.png');
+}
+
+/*Google Map*/
+#googleMap {
+    width:500px;
+    height:300px;
+    border:1px solid #efefef;
+    margin:auto;
+    -moz-box-shadow:5px 5px 10px #000;
+    -webkit-box-shadow:5px 5px 10px #000;
 }
