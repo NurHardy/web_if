@@ -44,7 +44,7 @@
 .button_admin {
 	border: none;
 	padding: 3px 10px 3px;
-	background:#374451;
+	background-color:#374451;
 	color: #fff;
 	cursor: pointer;
 	transition: all 0.25s;
@@ -55,6 +55,11 @@
 	top: 1px;
 	left: 1px;
 }
+.button_admin:disabled {
+	background-color:#D3D3D3;
+	cursor: default;
+}
+
 [class*='btn_'] {
 	/*background-image: url('../images/admin/admin_login.png');*/
 	background-size: 24px;
@@ -311,7 +316,8 @@
 }
 .admin_form_field {
 	float: right;
-	width: 600px;
+	width: 650px;
+	width: 650px;
 }
 .info_error_mark {background: #FFB2B2;}
 .info_fine_mark {background: #D6FFBC;}

@@ -63,7 +63,6 @@ var setUnsaved = function( event ) {isSaved = false;};
 			bodyStyle: "font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif;font-size: 14px;line-height: 1.4;color:#464242;"
 		})[0].change(setUnsaved).focus();
 		$.cleditor.buttons.image.uploadUrl = '/admin/media/uploadonce';
-		//$("#input").onchange(setUnsaved);
 		$("#txt_post_title").keyup(setUnsaved);
 		$("#txt_post_cat").change(setUnsaved);
 	});
@@ -112,6 +111,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 			url: "/admin/posts/preview",
 			beforeSend: function() {
 				$("#form_status").html("Memproses pratinjau...");
+				$("#btn_preview").attr('disabled',true);
 			},
 			data: {
 				txt_post_title:  $("#txt_post_title").val(),
@@ -121,8 +121,8 @@ var setUnsaved = function( event ) {isSaved = false;};
 				var win = window.open('','',"width=1064,height=500,scrollbars=yes,left=64,top=64");
 				win.document.open();
 				win.document.write(data);
-				//$("#loading_").css("display","none");
 				win.document.close();
+				$("#btn_preview").removeAttr('disabled');
 				$("#form_status").html("OK");
 			}
 		});  
@@ -175,6 +175,11 @@ var setUnsaved = function( event ) {isSaved = false;};
 		</div>
 		<div class='divclear'></div>
 	</div>
+	<div class='admin_form_item'>
+		<div class='admin_form_label'>Draf tersimpan</div>
+		<div class='admin_form_field'><span id='form_draft_stat'><?php if (isset($f_last_saved)) echo date('j F Y, H:i',strtotime($f_last_saved)); else echo "Draf ini belum tersimpan." ?></span></div>
+		<div class='divclear'></div>
+	</div>
 	<textarea id="input" name="txt_post_content"><?php if (isset($f_content)) echo htmlentities($f_content); ?></textarea>
 	<!-- <input type='hidden' name='f_post_id' value='<?php if (isset($$post_id_)) echo $post_id_; ?>' /> -->
 	<!-- <input type='hidden' name='form_action' value='<?php //echo $post_action; ?>' /> -->
@@ -183,8 +188,8 @@ var setUnsaved = function( event ) {isSaved = false;};
 	<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
 	<div><small>Pastikan pop-up blocker dimatikan untuk melihat pratinjau.</small></div>
 	<a href='/admin/posts' class='button_admin btn_back'>&laquo; Batal</a>
-	<input type='button' value='Pratinjau' class='button_admin btn_search' onclick='openWindow()' />
-	<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();'/>
+	<input type='button' value='Pratinjau' class='button_admin btn_search' onclick='openWindow()' id='btn_preview'/>
+	<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();' id='btn_savedraft'/>
 	<!-- <select name='form_next_act'>
 		<option value='publish' selected>Publikasikan</option>
 		<option value='draft'>Simpan sebagai draft</option>
