@@ -1,11 +1,10 @@
 @media all and (max-width: 480px) {
-	body{font-size:15px;}
 	
 	div#site_wrapper {
 		width: 400px;
 		margin: 0px auto;
 	}
-	.menu_tab{
+	.menu_tab, .search_panel{
 		display:none;
 	}
 	
@@ -30,4 +29,5 @@
 		max-width:200px;
 		clear:both;
 	}
+	.foto_staff{height:110px;}
 }

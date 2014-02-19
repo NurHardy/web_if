@@ -19,7 +19,7 @@ class MY_Loader extends CI_Loader {
 		$this->output->append_output($text);
 		if ($return) return $text;
 	}
-    public function template_home($template_name, $vars = array(), $return = FALSE)
+    public function template_home($template_name, $vars = array(), $return = FALSE )
     {
 		$_vars = $vars;
 		$_vars['is_home'] = true;
@@ -36,12 +36,13 @@ class MY_Loader extends CI_Loader {
         }
     }
 	
-	public function template_posting($template_name, $vars = array(), $return = FALSE, $_preview = false)
+	public function template_posting($template_name, $vars = array(), $return = FALSE, $_preview = false, $_nav = '')
     {
 		$_vars = $vars;
 		if ($_preview) $_vars['is_preview'] = true;
         $content  = $this->view('skin/header', $_vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
+		$content .= $this->append_output("<div id='content_nav'><a href='/'>Home</a> {$_nav}</div>");
 		$content .= $this->view($template_name, $_vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
 		$content .= $this->view('skin/sidebar_sec', $vars, $return);
@@ -82,10 +83,11 @@ class MY_Loader extends CI_Loader {
             return $content;
         }
     }
-	public function template_profil($template_name, $vars = array(), $return = FALSE)
+	public function template_profil($template_name, $vars = array(), $return = FALSE, $_nav = '')
     {
         $content  = $this->view('skin/header', $vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
+		$content .= $this->append_output("<div id='content_nav'><a href='/'>Home</a> {$_nav}</div>");
 		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
 		$content .= $this->view('skin/sidebar_profil', $vars, $return);
@@ -96,10 +98,11 @@ class MY_Loader extends CI_Loader {
             return $content;
         }
     }
-	public function template_akademik($template_name, $vars = array(), $return = FALSE)
+	public function template_akademik($template_name, $vars = array(), $return = FALSE, $_nav = '')
     {
         $content  = $this->view('skin/header', $vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
+		$content .= $this->append_output("<div id='content_nav'><a href='/'>Home</a> {$_nav}</div>");
 		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
 		$content .= $this->view('skin/sidebar_akademik', $vars, $return);
