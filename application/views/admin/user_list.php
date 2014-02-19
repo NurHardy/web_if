@@ -9,7 +9,8 @@
 <?php
  $_ctr_user = 1;
  foreach($_users as $_user) {
-	echo "<tr>";
+	if ($_ctr_user %2 == 1) echo "<tr>";
+	else echo "<tr class='tb_row_2'>";
 	echo "<td>$_ctr_user</td><td><a href='/admin/users/edituser/".$_user->f_id."/'>";
 	if (!empty($_user->f_username)) echo $_user->f_username; else echo "[Untitled]";
 	echo "</a></td><td>{$_user->f_fullname}</td><td><a href='mailto:{$_user->f_email}'>{$_user->f_email}</a></td>";

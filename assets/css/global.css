@@ -81,7 +81,7 @@ input[type=password]:focus  {
 .site_news_foot {
 	padding: 5px; background: #E2F2FF; text-align: right;
 }
-.site_list_nav {text-align: center; display: block; margin-top: 10px;}
+.site_list_nav {text-align: center; display: block; margin-top: 12px;}
 .site_list_nav > span, .site_list_nav > a {
 	margin: 5px;
 	padding: 5px 10px;

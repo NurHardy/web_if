@@ -45,6 +45,8 @@ function savelinks_unpub() {
 	background-color: #CECECE;
 }
 </style>
+<h2>Daftar Tautan<h2>
+<h3>Published Links:</h3>
 <a href='/admin/links/newlink'>Sisipkan tautan baru &raquo;</a>
 <form action='/admin/links/updatelinks_pub' id='form_link_pub'>
 <table class='table_list'>

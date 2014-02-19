@@ -72,6 +72,7 @@
 #admin_content_left table.table_list{
 	width: 100%;
 	border:  solid 1px #31A1FF;
+	margin-top: 7px;
 }
 #admin_content_left table.table_list td {
 	padding: 5px;
@@ -79,6 +80,7 @@
 .tb_head {background: #004A87; color: #FFF;}
 .tb_row_1 {background: #FFF;}
 .tb_row_2 {background: #E8F4FF;}
+
 /*adik*/
 #admin_content_left_in {
 	background:#F1F6FA;
@@ -95,6 +97,8 @@
 	padding:10px 10px 10px 25px;
 	border:2px solid #8B959E;
 	margin:10px;
+	width: 78%;
+	float: right;
 	border-radius:5px;
 }
 .admin_sidebar_nav_head{
@@ -197,15 +201,15 @@
 #admin_content {min-height: 500px;}
 #admin_content_left {
 	float: left;
-	max-width: 710px;
-	width:71%;
-	padding: 10px;
+	max-width: 766px;
+	width:100%;
+	padding: 12px;
 }
 #admin_content_right {
 	float: right;
-	max-width: 280px;
-	width:28%;
-	min-width:270px;
+	max-width: 230px;
+	width:23%;
+	min-width:200px;
 }
 /* ============== Login ========= */
 #login									{margin:65px auto; max-width: 500px; width: 100%;border-radius:0px 0px 10px 10px;-webkit-box-shadow: 0 3px 6px #000;box-shadow: 0 3px 6px #000}
@@ -235,7 +239,7 @@
 #ev_cal_nav_prev {float: left;}
 #ev_cal_nav_next {float: right;}
 #ev_cal_nav_ctr {
-	width: 250px; float: left; padding-left: 10px; text-align: center;
+	width: 280px; float: left; padding-left: 10px; text-align: center;
 }
 #ev_calendar > table{
 	border-spacing: 1px;
