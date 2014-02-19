@@ -80,7 +80,7 @@
 		<div id='site_header_search'>
 			<ul class='list_link_header'>
 				<li class='first'><a href='/admin'>admin</a></li>
-				<li><a href='#'>site map</a></li>
+				<li><a href='/page/sitemap'>site map</a></li>
 				<li><a href='/feed'>rss</a></li>
 			</ul>
 			<div class='search_panel'><img class='search_but' src='/assets/images/search_icon.png'><input class='search_box'type='text'></input></div>

@@ -45,7 +45,12 @@ function savelinks_unpub() {
 	background-color: #CECECE;
 }
 </style>
+
 <a href='/admin/links/newlink' class='button_admin btn_add'>Tambahkan tautan baru &raquo;</a>
+
+<h2>Daftar Tautan<h2>
+<h3>Published Links:</h3>
+<a href='/admin/links/newlink'>Sisipkan tautan baru &raquo;</a>
 <form action='/admin/links/updatelinks_pub' id='form_link_pub'>
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Judul</td><td style='width: 200px;'>Prioritas</td><td>Aksi</td></tr>
