@@ -1,5 +1,6 @@
 <script type="text/javascript" src="/assets/js/admin_date.js"></script>
 
+<h2>Event Organizer</h2>
 <div id='ev_calendar_box'>
 	<div id='ev_calendar_nav'>
 		<a href='javascript:month--;initCalendar(month);' class='button_admin' id='ev_cal_nav_prev'>&laquo; Back</a>

@@ -127,15 +127,35 @@ class Website extends CI_Controller {
 		
 		if (empty($_kurikulum)) {
 			$data['page_title'] = 'Kurikulum';
-			$data['matkul'] = array_fill(0, 8, array());
-			for ($_c=0;$_c<8;$_c++) $data['matkul'][$_c] = $this->web_matkul->get_matkul_smt($_c+1);
+			$data['matkul'] = array_fill(0, 12, array());
+			$data['matkul_2007'] = array_fill(0, 12, array());
+			for ($_c=0;$_c<12;$_c++) $data['matkul'][$_c] = $this->web_matkul->get_matkul_smt($_c+1);
+			for ($_c=0;$_c<12;$_c++) $data['matkul_2007'][$_c] = $this->web_matkul->get_matkul_2007_smt($_c+1);
 			$this->load->template_akademik('kurikulum', $data);
 		} else {
 			if ($_kurikulum == 2012) {
-				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
-				$data['matkul'] = $this->web_matkul->get_matkul($_kode);
-				$this->load->template_akademik('matkul', $data);
-			} else {
+				$data['page_title'] = 'Mata Kuliah'.htmlentities($_kode);
+				$data['content_title'] = 'Kurikulum 2012';
+				if ((($_kode) == false)){
+					$data['page_title'] = 'Halaman tidak ditemukan';
+					$this->load->template_posting('error/notfound', $data);
+					//$this->output->set_header('Location: /');
+					return;
+				}
+				else {
+					$data['matkul'] = $this->web_matkul->get_matkul($_kode);
+					$this->load->template_akademik('matkul', $data);
+				}
+			} 
+			else if ($_kurikulum == 2007) { 
+				$data['page_title'] = 'Mata Kuliah'.htmlentities($_kode);
+				$data['content_title'] = 'Kurikulum 2007';
+				$data['matkul_2007'] = $this->web_matkul->get_matkul_2007($_kode);
+				$this->load->template_akademik('matkul_2007', $data);
+			} 
+			else{
+				$data['page_title'] = 'Halaman tidak ditemukan';
+				$this->load->template_posting('error/notfound', $data);
 				$this->output->set_header('Location: /kurikulum');
 			}	
 		}
