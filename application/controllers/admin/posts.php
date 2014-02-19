@@ -225,11 +225,28 @@ class Posts extends CI_Controller {
 		$this->load->template_posting('posting', $data, false, true);
 	}
 	// AJAX
-	public function deletepost() {
+	public function post_ajax_act() {
 		if (!$this->load->check_session(true)) return;
+		$_action = $this->input->post('_act');
+		if ($_action === false) {$this->output->append_output("Action parameter expected."); return;}
+		
 		$this->load->model('web_posting');
-		$p_id= $this->input->post('_postid');
-		if ($this->web_posting->delete_post($p_id)) {
+		$_actresult = false;
+		if ($_action == 'del') {
+			$p_id= $this->input->post('_postid');
+			$_actresult = $this->web_posting->delete_post($p_id);
+		} else if ($_action == 'pub') {
+			$p_id= $this->input->post('_postid');
+			$_actresult = $this->web_posting->set_post_status($p_id, 1);
+		} else if ($_action == 'unpub') {
+			$p_id= $this->input->post('_postid');
+			$_actresult = $this->web_posting->set_post_status($p_id, 0);
+		} else {
+			$this->output->append_output("Unknown action");
+			return;
+		}
+		
+		if ($_actresult) {
 			$this->output->append_output("OK");
 		} else {
 			$this->output->append_output("FAIL");

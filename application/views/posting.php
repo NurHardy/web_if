@@ -14,6 +14,6 @@
 	</div>
 <?php if (!isset($is_preview)) { ?>
 	<div id="site_article_comment">
-		<div class="fb-comments" data-href="<?php echo htmlentities(base_url("/news/{$_posting->id_berita}/{$_posting->f_fb_slug}")); ?>" data-width="650" data-numposts="2" data-colorscheme="light"></div>
+		<div class="fb-comments" data-href="<?php echo htmlentities(base_url("/news/{$_posting->id_berita}/{$_posting->f_fb_slug}")); ?>" data-numposts="2" data-colorscheme="light" style='width: 100%'></div>
 	</div>
 <?php } // end if ?>

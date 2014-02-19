@@ -83,7 +83,7 @@
 				<li><a href='#'>site map</a></li>
 				<li><a href='/feed'>rss</a></li>
 			</ul>
-			<div class='search_panel'><img class='search_but' src='assets/images/search_icon.png'><input class='search_box'type='text'></input></div>
+			<div class='search_panel'><img class='search_but' src='/assets/images/search_icon.png'><input class='search_box'type='text'></input></div>
 		</div>
 		<div class='divclear'></div>
 		<div id='site_header_logo'>
