@@ -170,7 +170,7 @@ div#menu ul ul a.parent span {
 }
 div#menu ul ul a.parent:hover {
   background: url(../images/parent.png) no-repeat right bottom;
-  _background: url(images/submenu-pointer-hover.gif) no-repeat right bottom;
+  /*_background: url(images/submenu-pointer-hover.gif) no-repeat right bottom;*/
   background-color: #DEDEDE;
 	color: #222222;  
 }
@@ -234,4 +234,8 @@ div#menu li.back .left {
 	min-width:300px;
 	margin:6.5px auto;
 	display:none;	
+}
+div#menu li.parent > a {
+	margin-right: 8px;
+	background: url('/assets/images/dropdown.png') no-repeat right 2px top 17px;
 }

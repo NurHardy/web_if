@@ -17,7 +17,7 @@
 <ul class='menu'>
 	<li><a href='/'><span>Home</span></a>
 	</li>
-	<li><a href='#'><span>Profil</span></a>
+	<li class='parent'><a href='#'><span>Profil</span></a>
 		<div><ul><li><a href='/page/sejarah'><span>Sejarah</span></a>
 				</li>
 				<li><a href='/page/visi-misi'><span>Visi-Misi</span></a>
@@ -30,7 +30,7 @@
 				</li>
 		</ul></div>
 	</li>
-	<li><a href='#'><span>Akademik</span></a>
+	<li class='parent'><a href='#'><span>Akademik</span></a>
 		<div><ul><li><a href='#'><span>Peraturan Akademik</span></a>
 				 </li>
 				 <li><a href='#'><span>Manual Prosedur</span></a>
@@ -43,7 +43,7 @@
 				</li>
 		</ul></div>
 	</li>
-	<li><a href='#'><span>Fasilitas</span></a>
+	<li class='parent'><a href='#'><span>Fasilitas</span></a>
 		<div><ul><li><a href='http://labs.if.undip.ac.id/'><span>Laboratorium Riset</span></a>
 				</li>
 				<li><a href='http://labs.if.undip.ac.id'><span>Laboratorium Layanan</span></a>
@@ -56,7 +56,7 @@
 				</li>
 		</ul></div>
 	</li>
-	<li><a href='#'><span>Kemahasiswaan</span></a>
+	<li class='parent'><a href='#'><span>Kemahasiswaan</span></a>
 		<div><ul><li><a href='#'><span>Prestasi Mahasiswa</span></a></li>
 			<li><a href='http://hm.if.undip.ac.id/'><span>Himpunan Mahasiswa</span></a></li>
 			<li><a href='#'><span>Unit Kegiatan Mahasiswa</span></a></li>
