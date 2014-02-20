@@ -27,7 +27,7 @@ $(document).ready(function(){
 							if (count($matkul[$_ctr-1])==0) echo "Tidak ada record.";
 							else {
 								echo "<table>\n";
-								echo "<tr  class='tb_row_1'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
+								echo "<tr class='tb_head'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 								$_matkulctr = 1;
 								$_skstotal = 0;
 								$_ctr_baris=0;
@@ -51,7 +51,7 @@ $(document).ready(function(){
 							if (count($matkul[$_ctr-1])==0) echo "Tidak ada record.";
 							else{
 									echo "<table>\n";
-									echo "<tr  class='tb_row_1'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
+									echo "<tr  class='tb_head'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 									$_matkulctr = 1;
 									$_ctr_baris=0;
 									foreach($matkul[$_ctr-1] as $_matkul) {
@@ -108,7 +108,7 @@ $(document).ready(function(){
 							if (count($matkul_2007[$_ctr-1])==0) echo "Tidak ada record.";
 							else{
 									echo "<table>\n";
-									echo "<tr  class='tb_row_1'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
+									echo "<tr class='tb_head'><td width='5%' style='text-align:center;'>#</td><td>Mata kuliah</td><td width='10%'>SKS</td></tr>\n";
 									$_matkulctr = 1;
 									//$_skstotal = 0;
 									$_ctr_baris=0;

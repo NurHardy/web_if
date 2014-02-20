@@ -1,12 +1,13 @@
 <script type="text/javascript" src="/assets/js/jquery.cleditor.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.cleditor.table.min.js"></script>
+<!-- <script type="text/javascript" src="/assets/js/jquery.cleditor.table.min.js"></script> -->
 <script type="text/javascript" src="/assets/js/jquery.cleditor.extimage.js"></script>
 <link href="/assets/css/jquery.cleditor.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
-(function($) {
+/*(function($) {
  
   // Define the button
+  
   $.cleditor.buttons.readmore = {
     name: "readmore",
     image: "../images/cleditor/readmore.gif",
@@ -25,7 +26,7 @@
   // Handle the hello button click event
 	function readmoreClick(e, data) {
 		var editor = data.editor;
-		/*
+		//
 		var ret;
 		if (editor.doc.getSelection) {
 			var selectionRange = editor.doc.getSelection ();
@@ -39,13 +40,13 @@
 			}
 		} else {
 			alert("No selection...");
-		}*/
+		}
 		var html = "<div class='readmore'>" + editor.selectedHTML(editor) +"</div>";
 		editor.execCommand(data.command, html, false, data.button);
 		editor.focus();
 	}
  
-})(jQuery);
+})(jQuery);*/
 
 function unAttachConfirm() {
 	window.onbeforeunload = null;

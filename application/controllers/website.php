@@ -74,7 +74,7 @@ class Website extends CI_Controller {
 				$data['_ctr'] = $_cur*$_ipp;
 				$data['_ipp'] = $_ipp;
 				$data['page_title'] = "Daftar Posting";
-				$this->load->template_posting('posting_list', $data,false,false,"&raquo news &raquo ".$data['cat_name']);
+				$this->load->template_posting('posting_list', $data,false,false,"&raquo; news &raquo; ".$data['cat_name']);
 			} else {//menampilkan news
 				$data['_posting'] = $this->web_posting->get_post($_id, true, $_slug);
 				$this->load->helper('url');
@@ -91,7 +91,7 @@ class Website extends CI_Controller {
 				}
 				$this->web_posting->hit_post($data['_posting']->id_berita);
 				$data['page_title'] = $data['_posting']->judul;
-				$this->load->template_posting('posting', $data,false,false,"&raquo news");
+				$this->load->template_posting('posting', $data,false,false,"&raquo; news");
 			}
 		} else {
 		}
@@ -107,12 +107,12 @@ class Website extends CI_Controller {
 		if(empty($detail)){
 			$data['page_title'] = 'Daftar Staff';
 			$data['_staff']   = $this->web_staff->get_staff(5);
-			$this->load->template_profil('list_staff', $data ,false,'&raquo profil &raquo staff');
+			$this->load->template_profil('list_staff', $data ,false,'&raquo; profil &raquo; staff');
 		}
 		else{
 			$data['page_title'] = 'Detail Staff';
 			$data['_staff_detail']   = $this->web_staff->get_staff_id($detail);
-			$this->load->template_profil('detail_staff', $data ,false,'&raquo profil &raquo staff' );
+			$this->load->template_profil('detail_staff', $data ,false,'&raquo; profil &raquo; staff' );
 		}
 	}
 	
@@ -141,25 +141,18 @@ class Website extends CI_Controller {
 			$data['matkul_2007'] = array_fill(0, 12, array());
 			for ($_c=0;$_c<12;$_c++) $data['matkul'][$_c] = $this->web_matkul->get_matkul_smt($_c+1);
 			for ($_c=0;$_c<12;$_c++) $data['matkul_2007'][$_c] = $this->web_matkul->get_matkul_2007_smt($_c+1);
-			$this->load->template_akademik('kurikulum', $data);
+			$this->load->template_akademik('kurikulum', $data, false, "&raquo; kurikulum");
 		} else {
 			if ($_kurikulum == 2012) {
-				$data['page_title'] = 'Mata Kuliah'.htmlentities($_kode);
+				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
 				$data['content_title'] = 'Kurikulum 2012';
-				if ((($_kode) == false)){
-					$data['page_title'] = 'Halaman tidak ditemukan';
-					$this->load->template_posting('error/notfound', $data);
-					//$this->output->set_header('Location: /');
-					return;
-				} else {
-					$data['matkul'] = $this->web_matkul->get_matkul($_kode);
-					$this->load->template_akademik('matkul', $data);
-				}
+				$data['matkul'] = $this->web_matkul->get_matkul($_kode);
+				$this->load->template_akademik('matkul', $data, false, "&raquo; <a href='/kurikulum'>kurikulum</a> &raquo; {$_kurikulum} &raquo; {$_kode}");
 			} else if ($_kurikulum == 2007) { 
-				$data['page_title'] = 'Mata Kuliah'.htmlentities($_kode);
+				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
 				$data['content_title'] = 'Kurikulum 2007';
-				$data['matkul_2007'] = $this->web_matkul->get_matkul_2007($_kode);
-				$this->load->template_akademik('matkul_2007', $data);
+				$data['matkul'] = $this->web_matkul->get_matkul_2007($_kode);
+				$this->load->template_akademik('matkul', $data, false, "&raquo; <a href='/kurikulum'>kurikulum</a> &raquo; {$_kurikulum} &raquo; {$_kode}");
 			} else {
 				$data['page_title'] = 'Kurikulum tidak ditemukan';
 				$this->load->template_posting('error/notfound', $data);
@@ -174,7 +167,7 @@ class Website extends CI_Controller {
 		$data['page_title'] = 'Agenda Terdekat';
 		$data['daftar_event'] = $this->web_event->get_nearest_event(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
-		$this->load->template_akademik('agenda', $data,false,'&raquo berita &raquo agenda');
+		$this->load->template_akademik('agenda', $data,false,'&raquo; berita &raquo; agenda');
 	}
 	
 	public function page($_id) {
@@ -194,7 +187,7 @@ class Website extends CI_Controller {
 			return;
 		}
 		$data['page_title'] = $data['_page']->f_title;
-		$this->load->template_posting('page', $data,false,false,"&raquo ".$data['_page'][0]->f_title);
+		$this->load->template_posting('page', $data,false,false,"&raquo; ".$data['_page']->f_title);
 	}
 	
 	public function feed() {
@@ -212,7 +205,7 @@ class Website extends CI_Controller {
 		$data['page_title'] = 'Tentang Situs';
 		$data['daftar_event'] = $this->web_event->get_nearest_event(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
-		$this->load->template_akademik('tentang_situs', $data,false,'&raquo tentang - situs');
+		$this->load->template_akademik('tentang_situs', $data,false,'&raquo; tentang - situs');
 	}
 }
 

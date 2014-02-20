@@ -16,15 +16,9 @@
 				<li><a href='#'><small>kredit</small></a></li>
 				<li><small>Page rendered in <strong>{elapsed_time}</strong> seconds</small></li>
 			</ul>
-			
-		<p></p>
 		</div>
-		<!--<div id='site_footer_partner'>
-			<img src='/assets/images/oracle.png' class='site_partner' alt='Oracle Academy'/>
-			<img src='/assets/images/msdnaa.png' class='site_partner' alt='MSDN Academic Alliance'/>
-		</div>
-		<div class='divclear'></div>-->
 	</div>
+	<div class='divclear'></div>
 </div>
 </div><!-- end main wrapper -->
 

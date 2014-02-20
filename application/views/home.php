@@ -26,25 +26,27 @@
 	   </div>
 	</div>
 	<div id='site_content_article'>
-		<h3><?php
-			echo "<a href='/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}'>".$newest_post[0]->judul."</a>"; ?></h3>
-		<?php echo substr(strip_tags($newest_post[0]->isi_berita),0,450) . "..."; ?>
-		<div class='divclear'></div>
-		<div class='news_readmore'><?php echo "<a href='/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}'>Baca Selengkapnya &raquo;</a>"; ?></div>
-		<div class='divclear'></div>
-		<hr>
-		Berita terbaru lain:
-		<ul>
-			<?php
-				if (count($newest_post)>1) {
-					for ($_ctr=1; $_ctr < count($newest_post); $_ctr++) { ?>
-			<li><a href='/news/<?php echo $newest_post[$_ctr]->id_berita; ?>/<?php echo $newest_post[$_ctr]->f_slug; ?>'><?php echo $newest_post[$_ctr]->judul; ?></a></li>
-			<?php }
-				}
-			 ?>
-		</ul>
-		<div class='news_readmore'><a href='/news/'>Berita Selengkapnya &raquo;</a></div>
-		<div class='divclear'></div>
+		<div class='site_news_wrapper'>
+			<h3><?php echo "<a href='/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}'>".$newest_post[0]->judul."</a>"; ?></h3>
+			<?php echo substr(strip_tags($newest_post[0]->isi_berita),0,450) . "..."; ?>
+			<div class='divclear'></div>
+			<p><?php echo "<a href='/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}' class='news_readmore'>Baca Selengkapnya &raquo;</a>"; ?></p>
+			<div class='divclear'></div>
+		</div>
+		<div class='site_news_wrapper'>
+			Berita terbaru lain:
+			<ul>
+				<?php
+					if (count($newest_post)>1) {
+						for ($_ctr=1; $_ctr < count($newest_post); $_ctr++) { ?>
+				<li><a href='/news/<?php echo $newest_post[$_ctr]->id_berita; ?>/<?php echo $newest_post[$_ctr]->f_slug; ?>'><?php echo $newest_post[$_ctr]->judul; ?></a></li>
+				<?php } // end for
+					} // end if
+				 ?>
+			</ul>
+			<a href='/news/' class='news_readmore'>Berita Selengkapnya &raquo;</a>
+			<div class='divclear'></div>
+		</div>
 	</div>
 	<div id='site_content_more'>
 		<div id="container">

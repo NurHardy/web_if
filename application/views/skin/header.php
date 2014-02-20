@@ -9,8 +9,10 @@
 	<meta charset="utf-8">
 	<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="Author" content="Tim DIGIT Undip" />
+	<meta name="Robots" content="index,follow" />
 	
-    <title><?php echo $page_title; ?> - Informatics UNDIP [Alpha]</title>
+    <title><?php echo $page_title; ?> - Informatics UNDIP [Beta]</title>
 	<?php if (isset($page_additional_head)) echo $page_additional_head; ?>
 	
 	<link href="/assets/css/reset.css" rel="stylesheet">
@@ -34,6 +36,8 @@
 	<script type="text/javascript" src="/assets/js/tabs.js"></script>
 	<script type="text/javascript" src="/assets/js/menu.js"></script>
 <?php if (isset($is_home)){?>
+	<meta name="keywords" content="Informatika Undip, ilkom Undip, Teknik Informatika, Ilmu Komputer, Universitas Diponegoro, undip" >
+	<meta name="description" content="Website resmi jurusan Teknik Informatika Universitas Diponegoro" />
 	
 	<!-- <script type='text/javascript' src='assets/js/jquery.mobile-1.0b2.min.js'></script> -->
 	<script type='text/javascript' src='/assets/js/jquery.easing.1.3.js'></script> 
@@ -49,21 +53,32 @@
 				mobileEasing: 'simpleFade',
 				time: 5000,
 				thumbs: false,
-				loaderColor:"#31A1FF"});
+				loaderColor:"#31A1FF"
+			});
 		});
-		$('#toggle_search').click(function(){
-			$('.search_panel').slideToggle();//you can give it a speed
-		  });
 	});
 	</script>
 	<style>.readmore{display:none;}</style>
 <?php } ?>
 <script>
 	$(document).ready(function(){
+		$('#toggle_search').click(function(){
+			$('.search_panel').slideToggle('fast');//you can give it a speed
+		});
 		$(".menu_mini").change(function() {
 			var newurl = $(this).find("option:selected").val();
 			if (newurl != '#') window.location = newurl;
 		});
+		(function() {
+			var cx = '012334604403258577220:-xkdwekeoxc';
+			var gcse = document.createElement('script');
+			gcse.type = 'text/javascript';
+			gcse.async = true;
+			gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//www.google.com/cse/cse.js?cx=' + cx;
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(gcse, s);
+		})();
 	});
 </script>
 </head>
@@ -77,26 +92,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-//google search custome
-  (function() {
-    var cx = '012334604403258577220:-xkdwekeoxc';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-//menu
-$(document).ready(function(){
-  
-  
-  /*$('li.mainlevel').mouseleave(function(){
-  $(this).find('ul').slideUp("fast");
-  });*/
-  
-});
 </script>
 <div id='site_main_wrapper' style='width: 100%;'>
 <div id='site_wrapper'>
@@ -104,18 +99,17 @@ $(document).ready(function(){
 	<div id='site_header'>
 		<div id='site_header_search'>
 			<ul class='list_link_header'>
-				<li class='first'><a href='#'><img class='search_but' src='/assets/images/sitemap_icon.png'></a></li>
-				<li><a href='/feed'><img class='search_but' src='/assets/images/rss_icon2.png'></a></li>
-				<li><a href="#" id="toggle_search"><img class='search_but' src='/assets/images/search_icon.png'></a>
-					<ul class='search_panel'>
-						<li class='last'><gcse:search></gcse:search></li>
-					</ul>
-				</li>
+				<li class='first'><a href='#'><img class='site_header_but' src='/assets/images/sitemap_icon.png' alt='Sitemap' title='Sitemap' /></a></li>
+				<li><a href='/feed'><img class='site_header_but' src='/assets/images/rss_icon2.png' alt='RSS' title='RSS Feed' /></a></li>
+				<li><a href="#" id="toggle_search"><img class='site_header_but' src='/assets/images/search_icon.png' alt='Cari' title='Cari' /></a></li>
 			</ul>
-			<!--<div class='search_button'style='width:100px;height:20px'></div>
-			<div class='search_panel'><gcse:search></gcse:search></div>-->
+			<div class='divclear'></div>
 		</div>
-		<div class='divclear'></div>
+		<div class='search_panel' style='display:none'>
+			<!-- <gcse:search></gcse:search> -->
+			<div class="gcse-search"  >
+			</div>
+		</div>
 		<div id='site_header_logo'>
 			<img src='/assets/images/logo.png' id='site_header_logoimg' alt='Logo' title='Jurusan Ilmu Komputer/Informatika Universitas Diponegoro'/>
 		</div>

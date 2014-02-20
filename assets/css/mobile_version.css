@@ -7,8 +7,8 @@
 	.menu_tab, .search_panel{
 		display:none;
 	}
-	
 	.menu_tab_mini{display:block}
+	div#site_header_logo{background:none;text-align: center;}
 	div#site_content{
 		min-width:320px;
 	}

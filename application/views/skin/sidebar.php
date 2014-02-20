@@ -5,6 +5,9 @@
 			<ol>
 			<?php
 					$nama_bulan = array('Bul','Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agt','Sep','Okt','Nov','Des');
+					if (empty($daftar_event)) {
+						echo "<p>Tidak ada agenda terdekat...</p>";
+					} else {
 					foreach($daftar_event as $_event){
 			?>
 					<li class="event_unit">
@@ -18,7 +21,8 @@
 							<a href='#'><?php echo $_event->f_name; ?></a>
 						</div>
 					</li>
-			   <?php } ?>
+			   <?php } // end foreach
+				} // end if ?>
 			   </ol>
 		</div>
 	</div>
@@ -56,11 +60,11 @@
 			</div>
 		</div>
 	</div>
-			<!--	akhir show	-->
-		<div class='site_panel'>
-			<div class='site_panel_head'>Widget - [Alpha]</div>
-			<div class='site_panel_body'>
-				<!-- tanggalan -->
-				<iframe id='cv_if2' src='http://cdn.instantcal.com/cvir.html?id=cv_nav1&theme=XBL&ntype=cv_datepicker' allowTransparency='true' scrolling='no' frameborder=0 height=200 width=270></iframe>
-			</div>
+		<!--	akhir show	-->
+	<div class='site_panel'>
+		<div class='site_panel_head'>Widgets</div>
+		<div class='site_panel_body'>
+			<p>Webstat</p>
+			<p>Kalendar</p>
 		</div>
+	</div>

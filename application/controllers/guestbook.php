@@ -60,6 +60,6 @@ class Guestbook extends CI_Controller {
 		$data['_ctr'] = $_cur*$_ipp;
 		$data['_ipp'] = $_ipp;
 		$data['gmessages'] = $this->web_guestbook->get_messages($_ipp, $_cur+1);
-		$this->load->template_akademik('guestbook', $data);
+		$this->load->template_akademik('guestbook', $data, false, "&raquo; Buku Tamu");
 	}
 }

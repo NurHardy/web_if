@@ -1,5 +1,5 @@
 <script type="text/javascript" src="/assets/js/jquery.cleditor.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.cleditor.table.min.js"></script>
+<!-- <script type="text/javascript" src="/assets/js/jquery.cleditor.table.min.js"></script> -->
 <script type="text/javascript" src="/assets/js/jquery.cleditor.extimage.js"></script>
 <link href="/assets/css/jquery.cleditor.css" rel="stylesheet" type="text/css">
 

@@ -5,16 +5,6 @@
  */
 
 class MY_Loader extends CI_Loader {
-	//private $ci;   
-
-	/*
-	public function __construct() {
-		parent::__construct();
-		// Initiate instance
-		
-		//
-	}*/
-
 	public function append_output($text, $return = FALSE) {
 		$this->output->append_output($text);
 		if ($return) return $text;
