@@ -3,7 +3,6 @@ class Media extends CI_Controller {
 	public function index() {
 		if ($this->load->check_session()) {
 			$this->load->model ('web_media');
-			$this->load->helper('url');
 			$data['page_title'] = 'Daftar Media Terunggah';
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['_medias']	= $this->web_media->get_media();
@@ -17,7 +16,7 @@ class Media extends CI_Controller {
 			$this->load->model ('web_media');
 			$data['page_title'] = 'Unggah file baru';
 			$data['username_']	= $this->nativesession->get('user_name_');
-			$this->load->template_admin('admin/media_form', $data, false, "&raquo; <a href='/admin/media'>media</a> &raquo; upload");
+			$this->load->template_admin('admin/media_form', $data, false, "&raquo; <a href='".base_url("/admin/media")."'>media</a> &raquo; upload");
 		}
 	}
 	public function upload() {
@@ -169,7 +168,7 @@ class Media extends CI_Controller {
 				} // end is empty f_file_
 			}
 			selesai:
-			$this->output->append_output('Invalid oparation.');
+			$this->output->append_output('Invalid operation.');
 		}
 	}
 }

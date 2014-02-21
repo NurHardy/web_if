@@ -24,7 +24,7 @@ class Users extends CI_Controller {
 				$_maxpage,
 				$_cur,
 				2,
-				'/admin/users',
+				base_url('/admin/users'),
 				'n='.$_ipp
 			);
 			$data['_ctr'] = $_cur*$_ipp;
@@ -38,7 +38,7 @@ class Users extends CI_Controller {
 			$this->load->model ('web_posting');
 			
 			$data['page_title'] = $data['content_title'] = 'User Baru';
-			$data['form_action']= '/admin/users/newuser';
+			$data['form_action']= base_url('/admin/users/newuser');
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['errors'] = array();
 			
@@ -100,7 +100,7 @@ class Users extends CI_Controller {
 			}
 			selesai:
 			$data['_cats']	= $this->web_posting->get_categories();
-			$this->load->template_admin('admin/user_form', $data, false, "&raquo; <a href='/admin/users'>akun</a> &raquo; akun baru");
+			$this->load->template_admin('admin/user_form', $data, false, "&raquo; <a href='".base_url("/admin/users")."'>akun</a> &raquo; akun baru");
 		}
 	}
 	public function changeauth($_uid = -1) {
@@ -117,7 +117,7 @@ class Users extends CI_Controller {
 				$_isself = true; // target akun yg akan diganti pass-nya adalah dirinya sendiri
 			} else if ($__uid == $this->nativesession->get('user_id_')) $_isself = true;
 			if ($_isself) $data['isself'] = true;
-			$data['form_action'] = '/admin/users/changeauth/'.$__uid;
+			$data['form_action'] = base_url('/admin/users/changeauth/'.$__uid);
 			$this->load->model ('web_admin');
 			$_userinfo =  $this->web_admin->get_user($__uid);
 			if (!$_userinfo) {
@@ -162,7 +162,7 @@ class Users extends CI_Controller {
 				}
 			}
 			selesai:
-			$this->load->template_admin('admin/user_password', $data, false, "&raquo; <a href='/admin/users'>akun</a> &raquo; ganti password");
+			$this->load->template_admin('admin/user_password', $data, false, "&raquo; <a href='".base_url("/admin/users")."'>akun</a> &raquo; ganti password");
 		}
 	}
 	

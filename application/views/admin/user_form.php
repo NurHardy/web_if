@@ -42,7 +42,7 @@ label {margin-left: 5px; cursor: pointer;}
 		else {$("#f_uname_info").html('<span class="info_error_mark">Username harus diisi</span>'); return;}
 		$.ajax({
 			type: "POST",
-			url: "/admin/users/checkusername",
+			url: "<?php echo base_url('/admin/users/checkusername'); ?>",
 			data: {uname: _uname},
 			success: function(data) {
 				$("#f_uname_info").html(data);
@@ -122,7 +122,7 @@ label {margin-left: 5px; cursor: pointer;}
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/users/newuser'; ?>' id='userform'>
+<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo base_url('/admin/users/newuser'); ?>' id='userform'>
 	<fieldset id='fset_basic'>
 		<legend>Informasi User</legend>
 		<div class='unit'><label class='lebar_unit' for='f_fullname'>Nama Lengkap User</label><input class='f_txt_field' id='f_fullname' type=text name='f_fullname' value='<?php if (isset($f_fullname)) echo $f_fullname; ?>'></div>
@@ -179,7 +179,7 @@ label {margin-left: 5px; cursor: pointer;}
 	</fieldset>
 	<div class='divclear'></div>
 	<div class='unit'>
-	<a href='/admin/users' class='button_admin btn_back'>&laquo; Batal</a>
+	<a href='<?php echo base_url('/admin/users'); ?>' class='button_admin btn_back'>&laquo; Batal</a>
 	<input class='button_admin btn_publish' type='button' value='Surprise Me!' onclick='surme();'/>
 	<input class='button_admin btn_save' type='submit' value='Simpan' />
 	</div>

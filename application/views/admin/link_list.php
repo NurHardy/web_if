@@ -3,7 +3,7 @@ function savelinks_pub() {
 	var frmdata = $("#form_link_pub").serialize();
 	$.ajax({
 		type: "POST",
-		url: "/admin/links/updatelinks_pub",
+		url: "<?php echo base_url('/admin/links/updatelinks_pub'); ?>",
 		data: frmdata,
 		dateType: "string",
 		success: function(response){
@@ -23,7 +23,7 @@ function savelinks_unpub() {
 	var frmdata = $("#form_link_unpub").serialize();
 	$.ajax({
 		type: "POST",
-		url: "/admin/links/updatelinks_unpub",
+		url: "<?php echo base_url('/admin/links/updatelinks_unpub'); ?>",
 		data: frmdata,
 		dateType: "string",
 		success: function(response){
@@ -48,9 +48,9 @@ function savelinks_unpub() {
 
 <h2>Daftar Tautan<h2>
 <h3>Published Links:</h3>
-<a href='/admin/links/newlink' class='button_admin btn_add'>Tambahkan tautan baru &raquo;</a>
+<a href='<?php echo base_url('/admin/links/newlink'); ?>' class='button_admin btn_add'>Tambahkan tautan baru &raquo;</a>
 
-<form action='/admin/links/updatelinks_pub' id='form_link_pub'>
+<form action='<?php echo base_url('/admin/links/newlink'); ?>' id='form_link_pub'>
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Judul</td><td style='width: 200px;'>Prioritas</td><td>Aksi</td></tr>
 <?php
@@ -58,7 +58,7 @@ $link_ctr = 0;
 foreach($_links_pub as $_link) {
 	$link_ctr++;
 	echo "<tr".($link_ctr%2==0?" class='tb_row_2'":'').">";
-	echo "<td>{$link_ctr}</td><td><a href='/admin/links/editlink/{$_link->f_id}/' title='".htmlentities($_link->f_url)."'>{$_link->f_name}</a></td>";
+	echo "<td>{$link_ctr}</td><td><a href='".base_url("/admin/links/editlink/{$_link->f_id}/")."' title='".htmlentities($_link->f_url)."'>{$_link->f_name}</a></td>";
 	echo "<td><input type='text' size='3' value='{$_link->f_order}' name='order_[{$_link->f_id}]' /></td>";
 	echo "<td><input type='checkbox' id='chk_{$_link->f_id}' name='hide_[{$_link->f_id}]' value='1'/><label for='chk_{$_link->f_id}'>Sembunyikan</label></td>";
 	echo "</tr>\n";
@@ -77,7 +77,7 @@ $link_ctr = 0;
 foreach($_links_unpub as $_link) {
 	$link_ctr++;
 	echo "<tr class='row_unpublished'>";
-	echo "<td>{$link_ctr}</td><td><a href='/admin/links/editlink/{$_link->f_id}/' title='".htmlentities($_link->f_url)."'>{$_link->f_name}</a></td>";
+	echo "<td>{$link_ctr}</td><td><a href='".base_url("/admin/links/editlink/{$_link->f_id}/")."' title='".htmlentities($_link->f_url)."'>{$_link->f_name}</a></td>";
 	echo "<td><input type='text' size='3' value='{$_link->f_order}' name='order_[{$_link->f_id}]' /></td>";
 	echo "<td><input type='checkbox' id='chk_{$_link->f_id}' name='show_[{$_link->f_id}]' value='1'/><label for='chk_{$_link->f_id}'>Publikasikan</label></td>";
 	echo "</tr>\n";

@@ -27,7 +27,7 @@ class Events extends CI_Controller {
 			$data['f_ev_name'] = $this->input->post('f_ev_name');
 			$data['f_ev_desc'] = $this->input->post('f_ev_desc');
 			
-			$data['form_action']= '/admin/events/newevent/'.($this->input->get('m')?"?m=".$this->input->get('m'):"");
+			$data['form_action']= base_url('/admin/events/newevent/'.($this->input->get('m')?"?m=".$this->input->get('m'):""));
 			$_submitter = $this->input->post('form_submit');
 			if ($_submitter == 'EVENT_POST_FORM') {
 				$data['f_date_str'] = $this->input->post('f_ev_date');
@@ -65,7 +65,7 @@ class Events extends CI_Controller {
 				$data['f_date_str'] = $data['f_y']."/".$data['f_m']."/".$data['f_d'];
 			}
 selesai:
-			$this->load->template_admin('admin/event_form', $data, false, "&raquo; <a href='/admin/events'>Agenda</a> &raquo; agenda baru");
+			$this->load->template_admin('admin/event_form', $data, false, "&raquo; <a href='".base_url("/admin/events")."'>Agenda</a> &raquo; agenda baru");
 		}
 	}
 }

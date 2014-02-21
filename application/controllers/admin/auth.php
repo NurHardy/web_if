@@ -5,7 +5,7 @@ class Auth extends CI_Controller {
 		if (!$this->nativesession->get('user_id_')) {
 			$this->authenticate();
 		} else { // sudah login
-			$this->output->set_header('Location: /admin/dashboard');
+			$this->output->set_header('Location: '.base_url("/admin/dashboard"));
 		}
 	}
 	
@@ -27,7 +27,7 @@ class Auth extends CI_Controller {
 						$this->nativesession->set('user_name_', htmlentities($_user_row->f_username));
 						$this->nativesession->set('user_role_', $_user_row->f_role_id);
 						
-						if (!$redir_url) $redir_url = "/admin/";
+						if (!$redir_url) $redir_url = base_url("/admin/");
 						$this->output->set_header("Location: $redir_url");
 						return;
 					} else {
@@ -38,7 +38,7 @@ class Auth extends CI_Controller {
 			if ($redir_url) $data['redir_url'] = $redir_url;
 			$this->load->template_admin_simple('admin/login_form', $data);
 		} else { // sudah login
-			$this->output->set_header('Location: /admin/dashboard');
+			$this->output->set_header('Location: '.base_url("/admin/dashboard"));
 		}
 	}
 	public function logout() {
@@ -47,6 +47,6 @@ class Auth extends CI_Controller {
 			$this->nativesession->delete('user_name_');
 			$this->nativesession->delete('user_role_');
 		}
-		$this->output->set_header('Location: /admin');
+		$this->output->set_header('Location: '.base_url("/admin"));
 	}
 }

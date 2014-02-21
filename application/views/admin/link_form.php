@@ -20,7 +20,7 @@
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/links/newlink'; ?>'>
+<form method='POST' action='<?php if (isset($form_action)) echo $form_action; else echo base_url('/admin/links/newlink'); ?>'>
 	<div class='admin_form_item'>
 		<div class='admin_form_label'><label class='lebar_unit' for='txt_name'>Nama Tautan</label></div>
 		<div class='admin_form_field'><input class='f_txt_field' id='txt_name' type=text name='f_lnk_name' value='<?php if (isset($f_lnk_name)) echo $f_lnk_name; ?>' /></div>
@@ -33,7 +33,7 @@
 		<div class='divclear'></div>
 	</div>
 	<div class='unit'>
-		<a href='/admin/links' class='button_admin btn_back'>&laquo; Batal</a>
+		<a href='<?php echo base_url('/admin/links'); ?>' class='button_admin btn_back'>&laquo; Batal</a>
 		<input class='button_admin btn_save' type='submit' value='Simpan'>
 	</div>
 	

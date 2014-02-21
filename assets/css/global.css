@@ -36,7 +36,7 @@ textarea:focus  {
 	left:0px;
 	right: 0px;
 	height: 160px;
-	background: #2C2C2C url('/assets/images/head.png') repeat-x;
+	background: #2C2C2C url('../images/head.png') repeat-x;
 	background-position: 0px -13px;
 	border-bottom: solid 10px #31A1FF;
 	z-index: -1;
@@ -127,7 +127,7 @@ textarea:focus  {
 }
 #site_footer {
 	color: #fff;
-	background: url('/assets/images/foot.png') repeat-x;
+	background: url('../images/foot.png') repeat-x;
 	min-height: 145px;
 	font-size: 10pt;
 	margin-top: 10px;
@@ -280,7 +280,7 @@ textarea:focus  {
 .link_unit{
 	list-style:none;
 	margin-left:-25px;
-	background-image: url(/assets/images/rect_bul.png);
+	background-image: url(../images/rect_bul.png);
 	background-repeat: no-repeat;
 	background-position: 0 50%;
 	background-size: 10px 10px;
@@ -306,7 +306,7 @@ textarea:focus  {
 /*=====================================*/
 /*baru*/
 
-#site_header_logo{margin-top:1px;background:url('/assets/images/feature.png') no-repeat right center; height: 93px;}
+#site_header_logo{margin-top:1px;background:url('../images/feature.png') no-repeat right center; height: 93px;}
 
 #site_bg_top1 {
 	position: absolute;
@@ -445,7 +445,7 @@ textarea:focus  {
 .list_link_footer{
 	padding:0px;
 	list-style:none;
-	max-width:620px;
+	max-width:560px;
 	margin:10px auto;
 }	
 
@@ -550,4 +550,18 @@ textarea:focus  {
     margin:auto;
     -moz-box-shadow:5px 5px 10px #000;
     -webkit-box-shadow:5px 5px 10px #000;
+}
+
+#list_staff{
+	float:left;
+	max-width:250px;
+	padding:5px;
+}
+#detail_staff{
+	float:left;
+	max-width:385px;
+	border:solid #C4B8B8 1px;
+	padding:10px 10px 10px;
+	margin:5px 5px 20px;
+	width:100%;
 }

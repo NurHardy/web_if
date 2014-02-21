@@ -66,27 +66,31 @@ class Website extends CI_Controller {
 					$_maxpage,
 					$_cur,
 					2,
-					'/news/',
+					base_url('/news/'),
 					'cat='.$_filter.'&amp;n='.$_ipp
 				);
+				$nav_path = "&raquo; <a href='".base_url('/news')."'>news</a>";
 				$data['cat_name'] = "semua berita";
-				if ($_filter != 0) $data['cat_name'] = $this->web_posting->get_name_categori($_filter);
+				if ($_filter != 0) {
+					$data['cat_name'] = $this->web_posting->get_name_categori($_filter);
+					$nav_path .= " &raquo; ".$data['cat_name'];
+				}
 				$data['_ctr'] = $_cur*$_ipp;
 				$data['_ipp'] = $_ipp;
 				$data['page_title'] = "Daftar Posting";
-				$this->load->template_posting('posting_list', $data,false,false,"&raquo; news &raquo; ".$data['cat_name']);
+				
+				$this->load->template_posting('posting_list', $data,false,false,$nav_path);
 			} else {//menampilkan news
 				$data['_posting'] = $this->web_posting->get_post($_id, true, $_slug);
 				$this->load->helper('url');
-				if (!$data['_posting']) {
+				if (!$data['_posting']) { // tidak ditemukan
 					$data['page_title'] = 'Berita tidak ditemukan';
 					$this->load->template_posting('error/notfound', $data);
-					//$this->output->set_header('Location: /news');
 					return;
 				}
 				$_nslug = $data['_posting']->f_slug;
 				if ((!empty($_nslug)) && (strcmp($_nslug, $_slug)!=0)) { // slug berbeda/lama
-					$this->output->set_header("Location: /news/{$data['_posting']->id_berita}/{$_nslug}");
+					$this->output->set_header("Location: ".base_url("/news/{$data['_posting']->id_berita}/{$_nslug}"));
 					return;
 				}
 				$this->web_posting->hit_post($data['_posting']->id_berita);
@@ -94,8 +98,8 @@ class Website extends CI_Controller {
 				$this->load->template_posting('posting', $data,false,false,"&raquo; news");
 			}
 		} else {
+			$this->output->set_header('Location: '.base_url('/news'));
 		}
-		
 	}
 	
 	public function staff($detail=null) 
@@ -106,11 +110,12 @@ class Website extends CI_Controller {
 
 		if(empty($detail)){
 			$data['page_title'] = 'Daftar Staff';
-			$data['_staff']   = $this->web_staff->get_staff(5);
+			$data['_staff']   = $this->web_staff->get_staff();
 			$this->load->template_profil('list_staff', $data ,false,'&raquo; profil &raquo; staff');
 		}
 		else{
 			$data['page_title'] = 'Detail Staff';
+			$data['_staff']   = $this->web_staff->get_staff();
 			$data['_staff_detail']   = $this->web_staff->get_staff_id($detail);
 			$this->load->template_profil('detail_staff', $data ,false,'&raquo; profil &raquo; staff' );
 		}
@@ -147,12 +152,12 @@ class Website extends CI_Controller {
 				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
 				$data['content_title'] = 'Kurikulum 2012';
 				$data['matkul'] = $this->web_matkul->get_matkul($_kode);
-				$this->load->template_akademik('matkul', $data, false, "&raquo; <a href='/kurikulum'>kurikulum</a> &raquo; {$_kurikulum} &raquo; {$_kode}");
+				$this->load->template_akademik('matkul', $data, false, "&raquo; <a href='".base_url("/kurikulum")."'>kurikulum</a> &raquo; {$_kurikulum} &raquo; {$_kode}");
 			} else if ($_kurikulum == 2007) { 
 				$data['page_title'] = 'Mata Kuliah '.htmlentities($_kode);
 				$data['content_title'] = 'Kurikulum 2007';
 				$data['matkul'] = $this->web_matkul->get_matkul_2007($_kode);
-				$this->load->template_akademik('matkul', $data, false, "&raquo; <a href='/kurikulum'>kurikulum</a> &raquo; {$_kurikulum} &raquo; {$_kode}");
+				$this->load->template_akademik('matkul', $data, false, "&raquo; <a href='".base_url("/kurikulum")."'>kurikulum</a> &raquo; {$_kurikulum} &raquo; {$_kode}");
 			} else {
 				$data['page_title'] = 'Kurikulum tidak ditemukan';
 				$this->load->template_posting('error/notfound', $data);
@@ -193,7 +198,6 @@ class Website extends CI_Controller {
 	public function feed() {
 		$this->output->set_header('Content-Type: application/rss+xml; charset=utf-8');
 		$this->load->model('web_posting');
-		$this->load->helper('url');
 		$data['_posts']		= $this->web_posting->get_newest_posts(10);
 		$this->load->view("rss", $data);
 	}

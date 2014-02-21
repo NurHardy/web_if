@@ -1,10 +1,9 @@
 <?php
 class web_staff extends CI_Model {
 /* ------------------------------------------ STAFF ------------------- */
-	function get_staff($total) 
+	function get_staff() 
 	{			
 		$_query  = "SELECT * FROM t_staff";
-		$_query .= " ORDER BY id_staff  LIMIT 0,$total";
 		$query = $this->db->query($_query);
         return $query->result();
 	}		

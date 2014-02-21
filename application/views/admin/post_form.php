@@ -1,7 +1,7 @@
-<script type="text/javascript" src="/assets/js/jquery.cleditor.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.cleditor.min.js'); ?>"></script>
 <!-- <script type="text/javascript" src="/assets/js/jquery.cleditor.table.min.js"></script> -->
-<script type="text/javascript" src="/assets/js/jquery.cleditor.extimage.js"></script>
-<link href="/assets/css/jquery.cleditor.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.cleditor.extimage.js'); ?>"></script>
+<link href="<?php echo base_url('/assets/css/jquery.cleditor.css'); ?>" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
 /*(function($) {
@@ -60,10 +60,10 @@ var setUnsaved = function( event ) {isSaved = false;};
 			height:		 500,
 			useCSS:       true, // use CSS to style HTML when possible (not supported in ie)
 			docCSSFile:   // CSS file used to style the document contained within the editor
-				"/assets/css/admin.css",
+				"<?php echo base_url('/assets/css/admin.css'); ?>",
 			bodyStyle: "font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif;font-size: 14px;line-height: 1.4;color:#464242;"
 		})[0].change(setUnsaved).focus();
-		$.cleditor.buttons.image.uploadUrl = '/admin/media/uploadonce';
+		$.cleditor.buttons.image.uploadUrl = '<?php echo base_url('/admin/media/uploadonce'); ?>';
 		$("#txt_post_title").keyup(setUnsaved);
 		$("#txt_post_cat").change(setUnsaved);
 	});
@@ -85,7 +85,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 		var _form_data = $("#form_posting").serialize();
 		$.ajax({  
 		  type: "POST",  
-		  url: "/admin/posts/postsavedraft",  
+		  url: "<?php echo base_url('/admin/posts/postsavedraft'); ?>",  
 		  data: _form_data,  
 		  success: function(data) {
 			try {
@@ -109,7 +109,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 	{
 		$.ajax({
 			type: "POST", 
-			url: "/admin/posts/preview",
+			url: "<?php echo base_url('/admin/posts/preview'); ?>",
 			beforeSend: function() {
 				$("#form_status").html("Memproses pratinjau...");
 				$("#btn_preview").attr('disabled',true);
@@ -155,7 +155,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/posts/newpost'; ?>' method='post' onsubmit="unAttachConfirm();" id='form_posting'>
+<form action='<?php if (isset($form_action)) echo $form_action; else echo base_url('/admin/posts/newpost'); ?>' method='post' onsubmit="unAttachConfirm();" id='form_posting'>
 	<div class='admin_form_item'>
 		<div class='admin_form_label'><label for='txt_post_title'>Judul</label></div>
 		<div class='admin_form_field'><input type='text' id='txt_post_title' name='txt_post_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 80%; min-width: 200px;'/><br></div>
@@ -188,7 +188,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 	<input type='hidden' name='txt_post_id' value='<?php if (isset($f_post_id)) echo $f_post_id; else echo "-1"; ?>' />
 	<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
 	<div><small>Pastikan pop-up blocker dimatikan untuk melihat pratinjau.</small></div>
-	<a href='/admin/posts' class='button_admin btn_back'>&laquo; Batal</a>
+	<a href='<?php echo base_url('/admin/posts'); ?>' class='button_admin btn_back'>&laquo; Batal</a>
 	<input type='button' value='Pratinjau' class='button_admin btn_search' onclick='openWindow()' id='btn_preview'/>
 	<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();' id='btn_savedraft'/>
 	<!-- <select name='form_next_act'>

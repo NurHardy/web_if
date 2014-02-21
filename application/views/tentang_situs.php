@@ -11,11 +11,11 @@
 	<h3>Pengembang</h3>
 	<p>Berikut ini adalah pengembangnya : </p>
 	<table cellpadding='5px'>
-		<tr><td align='center'width='130px'><?php echo "<img class='foto_staff'src='../assets/images/test_banner_2.jpg'/>";?></td>
+		<tr><td align='center'width='130px'><?php echo "<img class='foto_staff' src='".base_url("/assets/images/test_banner_2.jpg")."'/>";?></td>
 		<td valign='top' width='300px'><h4>Muhammad Nurhadyanto</h4>0856......<br>nur@gmail.com</td></tr>
-		<tr><td align='center' width='130px'><?php echo "<img class='foto_staff'src='../assets/images/test_banner_2.jpg'/>";?></td>
+		<tr><td align='center' width='130px'><?php echo "<img class='foto_staff' src='".base_url("/assets/images/test_banner_2.jpg")."'/>";?></td>
 		<td valign='top' width='300px'><h4>Adik Istanto</h4>0856......<br>adikistanto1@gmail.com</td></tr>
-		<tr><td align='center' width='130px'><?php echo "<img class='foto_staff'src='../assets/images/test_banner_2.jpg'/>";?></td>
+		<tr><td align='center' width='130px'><?php echo "<img class='foto_staff' src='".base_url("/assets/images/test_banner_2.jpg")."'/>";?></td>
 		<td valign='top' width='300px'><h4>Eko Wahyudi</h4>0856......<br>decko@gmail.com</td></tr>
 	</table>
 	<hr></hr>

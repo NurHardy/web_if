@@ -14,7 +14,7 @@ class Links extends CI_Controller {
 	public function newlink() {
 		if ($this->load->check_session()) {
 			$data['page_title'] = $data['content_title'] = 'Tulis Posting Baru';
-			$data['form_action']= '/admin/links/newlink';
+			$data['form_action']= base_url('/admin/links/newlink');
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['f_lnk_name']	= htmlentities($this->input->post('f_lnk_name'));
 			$data['f_lnk_url']	= $this->input->post('f_lnk_url');
@@ -43,14 +43,14 @@ class Links extends CI_Controller {
 				}
 			}
 			selesai:
-			$this->load->template_admin('admin/link_form', $data, false, "&raquo; <a href='/admin/links'>tautan</a> &raquo; tautan baru");
+			$this->load->template_admin('admin/link_form', $data, false, "&raquo; <a href='".base_url("/admin/links")."'>tautan</a> &raquo; tautan baru");
 		}
 	}
 	public function editlink($id_link = -1) {
-		if (!is_numeric($id_link)) $this->output->set_header('Location: /admin/links');
+		if (!is_numeric($id_link)) $this->output->set_header('Location: '.base_url("/admin/links"));
 		else {
 			$data['page_title']		= $data['content_title'] = 'Edit Tautan';
-			$data['form_action']	= '/admin/links/editlink/'.$id_link;
+			$data['form_action']	= base_url('/admin/links/editlink/'.$id_link);
 			$data['username_']		= $this->nativesession->get('user_name_');
 			$data['f_lnk_name']	= htmlentities($this->input->post('f_lnk_name'));
 			$data['f_lnk_url']	= $this->input->post('f_lnk_url');
@@ -77,13 +77,13 @@ class Links extends CI_Controller {
 			} else {
 				$_dump = $this->web_link->get_link($id_link);
 				if (empty($_dump)) {
-					$this->output->set_header('Location: /admin/links');
+					$this->output->set_header('Location: '.base_url("/admin/links"));
 					return;
 				}	
 				$data['f_lnk_name']	= $_dump[0]->f_name;
 				$data['f_lnk_url']	= htmlentities($_dump[0]->f_url);
 			}
-			$this->load->template_admin('admin/link_form', $data, false, "&raquo; <a href='/admin/links'>tautan</a> &raquo; edit tautan");
+			$this->load->template_admin('admin/link_form', $data, false, "&raquo; <a href='".base_url("/admin/links")."'>tautan</a> &raquo; edit tautan");
 		}
 	}
 	// AJAX

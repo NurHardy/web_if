@@ -53,7 +53,7 @@ class Guestbook extends CI_Controller {
 			$_maxpage,
 			$_cur,
 			2,
-			'/guestbook',
+			base_url('/guestbook'),
 			'n='.$_ipp
 		);
 		if ($_cur > 0) $data['no_form'] = true;

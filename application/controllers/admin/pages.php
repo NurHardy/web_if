@@ -35,9 +35,9 @@ class Pages extends CI_Controller {
 	}
 	public function editpage($id_page = -1) {
 		if ($this->load->check_session()) {
-			if (!is_numeric($id_page)) $this->output->set_header('Location: /admin/pages');
+			if (!is_numeric($id_page)) $this->output->set_header('Location: '.base_url("/admin/pages"));
 			$data['page_title']		= $data['content_title'] = 'Edit Halaman';
-			$data['form_action']	= '/admin/pages/editpage/'.$id_page;
+			$data['form_action']	= base_url('/admin/pages/editpage/'.$id_page);
 			$data['username_']		= $this->nativesession->get('user_name_');
 			$data['f_title']		= htmlentities($this->input->post('f_title'));
 			$data['f_content']		= $this->input->post('f_content');
@@ -72,7 +72,7 @@ class Pages extends CI_Controller {
 			} else {
 				$_dump = $this->web_page->get_page($id_page);
 				if (empty($_dump)) {
-					$this->output->set_header('Location: /admin/pages');
+					$this->output->set_header('Location: '.base_url("/admin/pages"));
 					return;
 				}	
 				$data['f_title']	= $_dump->f_title;
@@ -80,14 +80,14 @@ class Pages extends CI_Controller {
 				$data['f_permalink']= $_dump->f_permalink;
 			}
 			selesai:
-			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='/admin/pages/'>halaman</a> &raquo; edit halaman");
+			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='".base_url("/admin/pages/")."'>halaman</a> &raquo; edit halaman");
 		}
 	}
 	
 	public function newpage() {
 		if ($this->load->check_session()) {
 			$data['page_title'] = $data['content_title'] = 'Tulis Halaman Baru';
-			$data['form_action']= '/admin/pages/newpage';
+			$data['form_action']= base_url('/admin/pages/newpage');
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['f_title']	= htmlentities($this->input->post('f_title'));
 			$data['f_content']	= $this->input->post('f_content');
@@ -119,7 +119,7 @@ class Pages extends CI_Controller {
 				}
 			}
 			selesai:
-			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='/admin/pages/'>halaman</a> &raquo; halaman baru");
+			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='".base_url("/admin/pages/")."'>halaman</a> &raquo; halaman baru");
 		}
 	}
 	

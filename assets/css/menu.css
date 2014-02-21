@@ -237,5 +237,5 @@ div#menu li.back .left {
 }
 div#menu li.parent > a {
 	margin-right: 8px;
-	background: url('/assets/images/dropdown.png') no-repeat right 2px top 17px;
+	background: url('../images/dropdown.png') no-repeat right 2px top 17px;
 }

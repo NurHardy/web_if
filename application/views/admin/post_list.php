@@ -9,7 +9,7 @@ function unpub(_id) {
 	if (_conf == false) return;
 	$.ajax({
 		type: "POST",
-		url: "/admin/posts/post_ajax_act",
+		url: "<?php echo base_url('/admin/posts/post_ajax_act'); ?>",
 		data: "_act=unpub&_postid="+_id,
 		dateType: "string",
 		success: function(response){
@@ -31,7 +31,7 @@ function post_pub(_id) {
 	if (_conf == false) return;
 	$.ajax({
 		type: "POST",
-		url: "/admin/posts/post_ajax_act",
+		url: "<?php echo base_url('/admin/posts/post_ajax_act'); ?>",
 		data: "_act=pub&_postid="+_id,
 		dateType: "string",
 		success: function(response){
@@ -53,7 +53,7 @@ function delpost(_id) {
 	if (_conf == false) return;
 	$.ajax({
 		type: "POST",
-		url: "/admin/posts/post_ajax_act",
+		url: "<?php echo base_url('/admin/posts/post_ajax_act'); ?>",
 		data: "_act=del&_postid="+_id,
 		dateType: "string",
 		success: function(response){
@@ -81,10 +81,10 @@ function delpost(_id) {
  foreach($_drafts as $_draft) {
 	if ($_ctr_draft %2 == 1) echo "<tr>";
 	else echo "<tr class='tb_row_2'>";
-	echo "<td>$_ctr_draft</td><td><a href='/admin/posts/".(($_draft->f_origin>0)?"editpost/".$_draft->f_origin:"newpost/".$_draft->f_id)."/'>";
+	echo "<td>$_ctr_draft</td><td><a href='".base_url('/admin/posts/'.(($_draft->f_origin>0)?"editpost/".$_draft->f_origin:"newpost/".$_draft->f_id))."/'>";
 	if (!empty($_draft->f_title)) echo $_draft->f_title; else echo "[Untitled]";
-	echo "</a></td><td><a href='javascript:post_pub({$_draft->f_origin});'><img src='/assets/images/admin/admin_pub.png' alt='Publish - ' class='img_icon' title='Publish'/></a> ";
-	echo "<a href='javascript:delpost({$_draft->f_origin});'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
+	echo "</a></td><td><a href='javascript:post_pub({$_draft->f_origin});'><img src='".base_url('/assets/images/admin/admin_pub.png')."' alt='Publish - ' class='img_icon' title='Publish'/></a> ";
+	echo "<a href='javascript:delpost({$_draft->f_origin});'><img src='".base_url('/assets/images/admin/admin_del.png')."' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
 	echo "</tr>\n";
 	$_ctr_draft++;
  }
@@ -110,7 +110,7 @@ function delpost(_id) {
 		echo '>'.$nmode.'</option>\n';
 	}
 ?></select>
-<a href='/admin/posts/newpost' class='button_admin btn_add'>Buat baru &raquo;</a>
+<a href='<?php echo base_url('/admin/posts/newpost'); ?>' class='button_admin btn_add'>Buat baru &raquo;</a>
 <table class='table_list'>
 <tr class='tb_head'><td style='width: 32px;'>#</td><td>Judul</td><td>Hits</td><td style='width: 200px;'>Action</td></tr>
 <?php
@@ -119,12 +119,12 @@ function delpost(_id) {
  foreach($_posts as $_post) {
 	$_ctr++;
 	echo "<tr".($_ctr_post%2==0?' class="tb_row_2"':'').">";
-	echo "<td>$_ctr</td><td><a href='/admin/posts/editpost/{$_post->id_berita}/'>{$_post->judul}</a></td>";
+	echo "<td>$_ctr</td><td><a href='".base_url("/admin/posts/editpost/{$_post->id_berita}/")."'>{$_post->judul}</a></td>";
 	echo "<td>{$_post->counter}</td>";
-	if ($_post->status == 1) echo "<td><a href='javascript:unpub({$_post->id_berita});'><img src='/assets/images/admin/admin_unpub.png' alt='Unpublish -' class='img_icon' title='Unpublish'/></a> ";
-	else echo "<td><a href='javascript:post_pub({$_post->id_berita});'><img src='/assets/images/admin/admin_pub.png' alt='Publish -' class='img_icon' title='Publish'/></a> ";
+	if ($_post->status == 1) echo "<td><a href='javascript:unpub({$_post->id_berita});'><img src='".base_url('/assets/images/admin/admin_unpub.png')."' alt='Unpublish -' class='img_icon' title='Unpublish'/></a> ";
+	else echo "<td><a href='javascript:post_pub({$_post->id_berita});'><img src='".base_url('/assets/images/admin/admin_pub.png')."' alt='Publish -' class='img_icon' title='Publish'/></a> ";
 	
-	echo "<a href='javascript:delpost({$_post->id_berita});'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
+	echo "<a href='javascript:delpost({$_post->id_berita});'><img src='".base_url('/assets/images/admin/admin_del.png')."' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
 	echo "</tr>\n";
 	$_ctr_post++;
  }

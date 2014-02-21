@@ -1,42 +1,26 @@
 <div id='site_content_article'>
 		<h2><?php echo $page_title?></h2>
-		<table cellpadding='5px'>
-		<tr class='tb_head'><td width='20px'>No</td><td width='150px'>Nama</td><td width='250px'>Mata Kuliah</td><td width='100px'>Data Dosen</td></tr>
+		<table cellpadding='2px'>
+		<tr class='tb_head'><td width='20px'>No</td><td width='200px'>Nama</td><td width='250px'>Bidang Ilmu</td><td width='70px'>Data Dosen</td></tr>
 		<?php 
 		$i=1;
 		foreach($_staff as $staff_) {
-		if($i%2==1){
-		echo"<tr class='tb_row_1'>";?>
+		if($i%2==1) echo "<tr class='tb_row_1'>";
+		else echo "<tr class='tb_row_2'>";?>
 				<td>
-					<?php echo $staff_->id_staff?>
+					<?php echo $i;?>
 				</td>
 				<td>
 					<?php echo $staff_->nama?>
 				</td>
 				<td>
-					<?php echo $staff_->matkul?>
+						<?php echo $staff_->bidangilmu?>
 				</td>
 				<td>
-					<?php echo "<a href='/staff/{$staff_->nip}'>detail&raquo</a>"?>
+					<?php echo "<a href='".base_url("/staff/{$staff_->nip}")."'>detail&raquo;</a>"?>
 				</td>
 			</tr>
-			<?php } if ($i%2==0){
-			echo"<tr class='tb_row_2'>";?>
-					<td>
-					<?php echo $staff_->id_staff?>
-					</td>
-					<td>
-						<?php echo $staff_->nama?>
-					</td>
-					<td>
-						<?php echo $staff_->matkul?>
-					</td>
-					<td>
-						<?php echo "<a href='/staff/{$staff_->nip}'>detail&raquo</a>"?>
-					</td>
-				</tr><?php } 
-			$i= $i + 1;?>
-			<?php } ?>
+			<?php $i= $i + 1;}?>
 		</table>
 		<div id="divclear"></div>
 		<!--<div id="pagging">

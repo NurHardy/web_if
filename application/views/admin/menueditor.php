@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/assets/js/admin_menu_editor.js"></script>
 <script>
 var mnuListSaved = <?php echo $json_ret; ?>;
+var _menu_form_url = "<?php echo base_url("/admin/menu/savemenu"); ?>";
 </script>
 
 <h2>Menu Editor</h2>

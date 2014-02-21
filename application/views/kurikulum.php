@@ -34,7 +34,7 @@ $(document).ready(function(){
 								foreach($matkul[$_ctr-1] as $_matkul) {
 									if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_2'>"; 
 									else echo "<tr>";
-									echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
+									echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='".base_url("/kurikulum/2012/{$_matkul->kodekul}")."'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
 									$_matkulctr++;
 									$_skstotal += $_matkul->sks;
 									$_ctr_baris++;
@@ -57,7 +57,7 @@ $(document).ready(function(){
 									foreach($matkul[$_ctr-1] as $_matkul) {
 										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_2'>"; 
 										else echo "<tr>";
-										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='".base_url("/kurikulum/2012/{$_matkul->kodekul}")."'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
 										$_matkulctr++;
 										$_ctr_baris++;
 									}
@@ -65,7 +65,7 @@ $(document).ready(function(){
 									foreach($matkul[$_ctr-1] as $_matkul) {
 										if ($_ctr_baris %2 == 1) echo "<tr class='tb_row_3'>"; 
 										else echo "<tr>";
-										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='/kurikulum/2012/{$_matkul->kodekul}'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
+										echo "<td width='5%' style='text-align:center;'>{$_matkulctr}</td><td><a href='".base_url("/kurikulum/2012/{$_matkul->kodekul}")."'>{$_matkul->namakul}</a></td><td width='10%'>{$_matkul->sks}</td></tr>\n";
 										$_matkulctr++;
 										$_ctr_baris++;
 									}

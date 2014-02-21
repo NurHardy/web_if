@@ -7,7 +7,7 @@ function refreshList() {
 
 <h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Halaman"; ?></h2>
 <h3>Website Pages:</h3>
-<a href='/admin/pages/newpage' class='button_admin btn_add'>Buat baru &raquo;</a>
+<a href='<?php echo base_url('/admin/pages/newpage'); ?>' class='button_admin btn_add'>Buat baru &raquo;</a>
 <hr>
 <label for='page_items'>Per halaman:</label>
 <select name='page_items' id='page_items' onchange="refreshList();">
@@ -27,9 +27,9 @@ function refreshList() {
  foreach($_pages as $_page) {
 	$_ctr++;
 	echo "<tr".($_ctr%2==0?' class="tb_row_2"':'').">";
-	echo "<td>$_ctr</td><td><a href='/admin/pages/editpage/{$_page->f_id}/'>{$_page->f_title}</a></td>";
-	echo "<td><a href='#'><img src='/assets/images/admin/admin_unpub.png' alt='Unpublish -' class='img_icon' title='Unpublish'/></a>";
-	echo "<a href='#'><img src='/assets/images/admin/admin_del.png' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
+	echo "<td>$_ctr</td><td><a href='".base_url("/admin/pages/editpage/{$_page->f_id}/")."'>{$_page->f_title}</a></td>";
+	echo "<td><a href='#'><img src='".base_url('/assets/images/admin/admin_unpub.png')."' alt='Unpublish -' class='img_icon' title='Unpublish'/></a>";
+	echo "<a href='#'><img src='".base_url('/assets/images/admin/admin_del.png')."' alt='Hapus' class='img_icon' title='Hapus'/></a></td>";
 	echo "</tr>\n";
  }
 ?>

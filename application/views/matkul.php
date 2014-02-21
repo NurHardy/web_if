@@ -16,5 +16,5 @@
 		}
 	?>
 	<br>
-	<a href='/kurikulum'>&laquo; Kembali</a>
+	<a href='<?php echo base_url("/kurikulum"); ?>'>&laquo; Kembali</a>
 </div>

@@ -2,11 +2,11 @@
 		<div class='site_panel_head'>Profil</div>
 		<div class='site_panel_body'>
 			<ol class='side_profil'>
-				<li><a href='/page/sejarah'>Sejarah</a></li>
-				<li><a href='/page/visi-misi'>Visi Misi</a></li>
-				<li><a href='/struktur_organisasi'>Struktur Organisasi</a></li>
-				<li><a href='/staff'>Staff</a></li>
-				<li><a href='/page/kerjasama'>Kerjasama</a></li>
+				<li><a href='<?php echo base_url('/page/sejarah');?>'>Sejarah</a></li>
+				<li><a href='<?php echo base_url('/page/visi-misi');?>'>Visi Misi</a></li>
+				<li><a href='<?php echo base_url('/struktur_organisasi');?>'>Struktur Organisasi</a></li>
+				<li><a href='<?php echo base_url('/staff');?>'>Staff</a></li>
+				<li><a href='<?php echo base_url('/page/kerjasama');?>'>Kerjasama</a></li>
 			  </ol>
 		</div>
 	</div>

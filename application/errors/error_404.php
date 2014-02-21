@@ -50,14 +50,14 @@
 	<body>
 		<div id='wrapper'>
 			<div id='error_head'>
-				<img src="/assets/images/logo.png" style="width: 200px; height: auto; margin: 0px auto;" alt="Informatika UNDIP" title="Ilmu Komputer/Informatika UNDIP">
+				<img src="<?php echo base_url('/assets/images/logo.png'); ?>" style="width: 200px; height: auto; margin: 0px auto;" alt="Informatika UNDIP" title="Ilmu Komputer/Informatika UNDIP">
 			</div>
 			<div id='error_body'>
 				<h1 id='error_title'>Error 404</h1>
 				<p id='error_desc'>Object not Found</p>
 				<p><small>Jika error ini muncul karena Anda mengikuti tautan dari website kami, laporkan tautan tersebut kepada kami:
 				<a href='mailto:if@undip.ac.id'>if@undip.ac.id</a></small></p>
-				<p><a href='/'>Home</a></p>
+				<p><a href='<?php echo base_url('/'); ?>'>Home</a></p>
 			</div>
 		</div>
 	</body>

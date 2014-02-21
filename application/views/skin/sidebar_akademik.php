@@ -2,11 +2,11 @@
 		<div class='site_panel_head'>Akademik</div>
 		<div class='site_panel_body'>
 			<ol class='side_profil'>
-				<li><a href='/page/perak'>Peraturan Akademik</a></li>
-				<li><a href='/page/manual'>Manual Prosedur</a></li>
-				<li><a href='/page/kalender'>Kalender Akademik</a></li>
-				<li><a href='/kurikulum'>Kurikulum</a></li>
-				<li><a href='/page/jadwal'>Jadwal Kuliah</a></li>
+				<li><a href='<?php echo base_url('/page/perak');?>'>Peraturan Akademik</a></li>
+				<li><a href='<?php echo base_url('/page/manual');?>'>Manual Prosedur</a></li>
+				<li><a href='<?php echo base_url('/page/kalender');?>'>Kalender Akademik</a></li>
+				<li><a href='<?php echo base_url('/kurikulum');?>'>Kurikulum</a></li>
+				<li><a href='<?php echo base_url('/page/jadwal');?>'>Jadwal Kuliah</a></li>
 			  </ol>
 		</div>
 	</div>

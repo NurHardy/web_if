@@ -8,7 +8,7 @@
 		<ul>
 		<?php
 				foreach($other_posts as $o_post) {
-		?>		<li><a href='/news/<?php echo $o_post->id_berita.'/'.$o_post->f_slug; ?>'><?php echo $o_post->judul; ?></a></li>
+		?>		<li><a href='<?php echo base_url('/news');?>/<?php echo $o_post->id_berita.'/'.$o_post->f_slug; ?>'><?php echo $o_post->judul; ?></a></li>
 		<?php } ?>
 		</ul>
 	</div>

@@ -63,7 +63,7 @@
 
 if (!isset($no_form)) { ?>
 	<div id='div_gbform'>
-	<form action='/guestbook/#guestbook' method='POST'>
+	<form action='<?php echo base_url('/guestbook/#guestbook'); ?>' method='POST'>
 	<table id='table_gbform'>
 		<tr><td><label for='gb_name'>Nama *</label></td><td><input type='text' name='f_gb_name' id='gb_name' value='<?php if (isset($f_name)) echo $f_name; ?>' maxlength="64"/></td></tr>
 		<tr><td><label for='gb_email'>E-mail *</label></td><td><input type='text' name='f_gb_email' id='gb_email' value='<?php if (isset($f_email)) echo $f_email; ?>' maxlength="64"/></td></tr>
@@ -77,7 +77,7 @@ if (!isset($no_form)) { ?>
 	</form>
 	</div>
 <?php } else { // else if
-		if (empty($infos)) echo "<a href='/guestbook/#guestbook'>..:: Tulis Pesan Anda sendiri ::..</a>\n";
+		if (empty($infos)) echo "<a href='".base_url('/guestbook/#guestbook')."'>..:: Tulis Pesan Anda sendiri ::..</a>\n";
 	} // end if ?>
 	<hr>
 	

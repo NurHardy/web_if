@@ -1,5 +1,7 @@
-<script type="text/javascript" src="/assets/js/admin_date.js"></script>
-
+<script type="text/javascript" src="<?php echo base_url("/assets/js/admin_date.js"); ?>"></script>
+<script>
+var _ev_form_url = "<?php echo base_url("/admin/events/eventajax"); ?>";
+</script>
 <h2>Event Organizer</h2>
 <div id='ev_calendar_box'>
 	<div id='ev_calendar_nav'>

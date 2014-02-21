@@ -1,7 +1,7 @@
 	<div id='site_content_article'>
 		<?php foreach($_posts as $_post) { ?>
 		<div style='padding: 5px;'>
-			<h2 class='site_article_title'><a href='<?php echo "/news/{$_post->id_berita}/{$_post->f_slug}"; ?>'><?php echo $_post->judul; ?></a></h2>
+			<h2 class='site_article_title'><a href='<?php echo base_url("/news/{$_post->id_berita}/{$_post->f_slug}"); ?>'><?php echo $_post->judul; ?></a></h2>
 			<small>Diposting oleh <?php echo $_post->creator; ?> pada <?php echo date('j F Y, H:i',strtotime($_post->tanggal) ); ?></small>
 			<hr>
 			<?php

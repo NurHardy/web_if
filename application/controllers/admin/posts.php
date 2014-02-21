@@ -4,7 +4,7 @@ class Posts extends CI_Controller {
 		if ($this->load->check_session()) {
 			$_is_error = false;
 			$data['page_title'] = $data['content_title'] = 'Tulis Posting Baru';
-			$data['form_action']= '/admin/posts/newpost';
+			$data['form_action']= base_url('/admin/posts/newpost');
 			$data['username_']	= $this->nativesession->get('user_name_');
 			
 			$this->load->model ('web_posting');
@@ -44,7 +44,7 @@ class Posts extends CI_Controller {
 			} else if ($draft_id > 0) {
 				$_draft_dump = $this->web_draft->get_draft($draft_id);
 				if ($_draft_dump == null) {
-					$this->output->set_header('Location: /admin/newpost/');
+					$this->output->set_header('Location: '.base_url("/admin/newpost/"));
 					return;
 				}
 				$data['f_draft_id']	= $draft_id;
@@ -54,16 +54,16 @@ class Posts extends CI_Controller {
 			} else {
 				$data['f_draft_id']	= -1;
 			}
-			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='/admin/posts'>posting</a> &raquo; posting baru");
+			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='".base_url("/admin/posts")."'>posting</a> &raquo; posting baru");
 		}
 	}
 	
 	public function editpost($id_post = -1) {
 		if ($this->load->check_session()) {
-			if (!is_numeric($id_post)) $this->output->set_header('Location: /admin/posts');
+			if (!is_numeric($id_post)) $this->output->set_header('Location: '.base_url('/admin/posts'));
 			$_is_error = false;
 			$data['page_title']		= $data['content_title'] = 'Edit Posting';
-			$data['form_action']	= '/admin/posts/editpost/'.$id_post;
+			$data['form_action']	= base_url('/admin/posts/editpost/'.$id_post);
 			$data['username_']		= $this->nativesession->get('user_name_');
 			
 			$data['f_draft_id']		= $this->input->post('txt_draft_id');
@@ -101,7 +101,7 @@ class Posts extends CI_Controller {
 			} else {
 				$_dump = $this->web_posting->get_post($id_post);
 				if (empty($_dump)) {
-					$this->output->set_header('Location: /admin/posts');
+					$this->output->set_header('Location: '.base_url('/admin/posts'));
 					return;
 				}
 				$data['f_post_id']	= $_dump->id_berita;
@@ -118,7 +118,7 @@ class Posts extends CI_Controller {
 					$data['f_draft_id']	= $_dump->f_id_draft;
 				} else $data['f_draft_id']	= -1; // no draft
 			}
-			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='/admin/posts'>posting</a> &raquo; edit posting");
+			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='".base_url('/admin/posts')."'>posting</a> &raquo; edit posting");
 		}
 	}
 	public function index() {
@@ -148,7 +148,7 @@ class Posts extends CI_Controller {
 				$_maxpage,
 				$_cur,
 				2,
-				'/admin/posts',
+				base_url('/admin/posts'),
 				'cat='.$_filter.'&amp;n='.$_ipp
 			);
 			$data['_ctr'] = $_cur*$_ipp;
@@ -204,7 +204,7 @@ class Posts extends CI_Controller {
 			$data['page_title'] = 'Daftar Kategori';
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['_cats']	= $this->web_posting->get_categories();
-			$this->load->template_admin('admin/category_list', $data, false, "&raquo; <a href='/admin/posts'>posting</a> &raquo; kategori");
+			$this->load->template_admin('admin/category_list', $data, false, "&raquo; <a href='".base_url("/admin/posts")."'>posting</a> &raquo; kategori");
 		}
 	}
 	

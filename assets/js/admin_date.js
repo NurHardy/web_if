@@ -92,7 +92,7 @@
 		$("#btn_panel").hide();
 		
 		
-		$.post( "/admin/events/eventajax", {m: month, y: year},function( data ) {
+		$.post(_ev_form_url, {m: month, y: year},function( data ) {
 			try {
 				ev_list = JSON.parse(data);
 				refreshCalendar();

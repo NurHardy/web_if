@@ -32,7 +32,7 @@ class MY_Loader extends CI_Loader {
 		if ($_preview) $_vars['is_preview'] = true;
         $content  = $this->view('skin/header', $_vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
-		$content .= $this->append_output("<div id='content_nav'><a href='/'>Home</a> {$_nav}</div>");
+		$content .= $this->append_output("<div id='content_nav'><a href='".base_url("/")."'>Home</a> {$_nav}</div>");
 		$content .= $this->view($template_name, $_vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
 		$content .= $this->view('skin/sidebar_sec', $vars, $return);
@@ -48,7 +48,7 @@ class MY_Loader extends CI_Loader {
     {
         $content  = $this->view('admin/admin_header', $vars, $return);
 		$content .= $this->append_output("<div id='admin_content_left'>\n");
-		$content .= $this->append_output("<div id='admin_content_nav'><a href='/admin/'>Dasbor</a> {$_nav}</div>");
+		$content .= $this->append_output("<div id='admin_content_nav'><a href='".base_url("/admin/")."'>Dasbor</a> {$_nav}</div>");
 		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>\n<div id='admin_content_right'>\n");
 		$content .= $this->view('admin/admin_sidebar', $vars, $return);
@@ -77,7 +77,7 @@ class MY_Loader extends CI_Loader {
     {
         $content  = $this->view('skin/header', $vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
-		$content .= $this->append_output("<div id='content_nav'><a href='/'>Home</a> {$_nav}</div>");
+		$content .= $this->append_output("<div id='content_nav'><a href='".base_url('/')."'>Home</a> {$_nav}</div>");
 		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
 		$content .= $this->view('skin/sidebar_profil', $vars, $return);
@@ -92,7 +92,7 @@ class MY_Loader extends CI_Loader {
     {
         $content  = $this->view('skin/header', $vars, $return);
 		$content .= $this->append_output("<div id='site_content'>\n<div id='site_content_left'>");
-		$content .= $this->append_output("<div id='content_nav'><a href='/'>Home</a> {$_nav}</div>");
+		$content .= $this->append_output("<div id='content_nav'><a href='".base_url('/')."'>Home</a> {$_nav}</div>");
 		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>\n<div id='site_content_right'>");
 		$content .= $this->view('skin/sidebar_akademik', $vars, $return);
@@ -109,7 +109,7 @@ class MY_Loader extends CI_Loader {
 		if (!$ci->nativesession->get('user_id_')) {
 			if ($_no_redir) {
 				$this->append_output(($_err_msg?$_err_msg:"Sorry, you must logged in to continue..."));
-			} else $ci->output->set_header('Location: /admin/auth/authenticate?next='.urlencode($_SERVER['REQUEST_URI']));
+			} else $ci->output->set_header('Location: '.base_url('/admin/auth/authenticate?next='.urlencode($_SERVER['REQUEST_URI'])));
 			return false;
 		}
 		return true;

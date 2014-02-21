@@ -1,7 +1,7 @@
-<script type="text/javascript" src="/assets/js/jquery.cleditor.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.cleditor.min.js'); ?>"></script>
 <!-- <script type="text/javascript" src="/assets/js/jquery.cleditor.table.min.js"></script> -->
-<script type="text/javascript" src="/assets/js/jquery.cleditor.extimage.js"></script>
-<link href="/assets/css/jquery.cleditor.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.cleditor.extimage.js'); ?>"></script>
+<link href="<?php echo base_url('/assets/css/jquery.cleditor.css'); ?>" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
 
@@ -21,7 +21,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 				"/assets/css/admin.css",
 			bodyStyle: "font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif;font-size: 14px;line-height: 1.4;color:#464242;"
 		})[0].change(setUnsaved).focus();
-		$.cleditor.buttons.image.uploadUrl = '/admin/media/uploadonce';
+		$.cleditor.buttons.image.uploadUrl = '<?php echo base_url('/admin/media/uploadonce'); ?>';
 		$("#txt_post_title").keyup(setUnsaved);
 		$("#txt_post_cat").change(setUnsaved);
 	});
@@ -35,7 +35,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 		else {$("#txt_info_permalink").html('<span class="info_error_mark">Permalink harus diisi</span>'); return;}
 		$.ajax({
 			type: "POST",
-			url: "/admin/pages/checkpermalink",
+			url: "<?php echo base_url('/admin/pages/checkpermalink'); ?>",
 			data: {plink: _plink},
 			success: function(data) {
 				$("#txt_info_permalink").html(data);
@@ -64,7 +64,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 	{
 		$.ajax({
 			type: "POST", 
-			url: "/admin/pages/preview",
+			url: "<?php echo base_url('/admin/pages/preview'); ?>",
 			beforeSend: function() {
 				$("#form_status").html("Memproses pratinjau...");
 			},
@@ -108,7 +108,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 ?>
 <hr>
 <?php if (!isset($no_form)) { ?>
-<form action='<?php if (isset($form_action)) echo $form_action; else echo '/admin/pages/newpage'; ?>' method='post' onsubmit="unAttachConfirm();">
+<form action='<?php if (isset($form_action)) echo $form_action; else echo base_url('/admin/pages/newpage'); ?>' method='post' onsubmit="unAttachConfirm();">
 	<div class='admin_form_item'>
 		<div class='admin_form_label'><label for='txt_post_title'>Judul</label></div>
 		<div class='admin_form_field'><input type='text' id='txt_post_title' name='f_title' value='<?php if (isset($f_title)) echo $f_title; ?>' style='width: 75%; min-width: 200px;'/></div>
@@ -122,7 +122,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 	</div>
 	<textarea id="input" name="f_content"><?php if (isset($f_content)) echo $f_content; ?></textarea>
 	<div class='admin_form_item'>
-		<a href='/admin/pages' class='button_admin btn_back'>&laquo; Batal</a>
+		<a href='<?php echo base_url('/admin/pages'); ?>' class='button_admin btn_back'>&laquo; Batal</a>
 		<input type='button' value='Pratinjau' class='button_admin btn_search' onclick='openPreview()' />
 		<input type='submit' value='Publikasikan' class='button_admin btn_publish'/>
 	</div>
