@@ -37,7 +37,7 @@
 	margin: 0 auto;
 	position: relative;
 	width: 100%;
-	z-index: 1002;
+	z-index: 8;
 	height: 45px;
 	background-color: #31A1FF;
 }
@@ -144,15 +144,17 @@
 }
 .caption {
 	/*background: rgba(0, 0, 0, 0.8);*/
-	background:#255177 ;opacity:0.8;filter:alpha(opacity=80);
+	background: rgba(37, 81, 119, 0.8);
+	
+	/*opacity:0.8;filter:alpha(opacity=80);
     .filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000)\9;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000)\9;*/
 	bottom: 3px;
 	color: #fff;
 	display: block;
 	font-size: 13px;
 	padding: 10px;
-	width: 100%;
+	width: 660px;
 }
 .ui-loader {
 	display: none;

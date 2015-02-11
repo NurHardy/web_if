@@ -1,18 +1,59 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Media extends CI_Controller {
-	public function index() {
-		if ($this->load->check_session()) {
+	private $_cpmask = 32;
+	private $_uploadMaxSize = 2097152; // 2097152 = 2 * 1024 * 1024;
+	private $_allowedExts = array("png","jpeg","jpg","gif");
+	
+	public function index($idAlbum = -1) {
+		if ($this->load->check_session($this->_cpmask)) {
+			$this->output->set_header('Location: '.base_url('/admin/media/album'));
+		}
+	}
+	public function docs() {
+		if (!$this->load->check_session($this->_cpmask)) return;
+		$this->load->model ('web_document');
+		$data['listDocuments']	= $this->web_document->get_documents();
+		
+		$data['page_title'] = 'Lihat Album';
+		$data['username_']	= $this->nativesession->get('user_name_');
+		
+		$this->load->template_admin('admin/document_list', $data, false,
+			"&raquo; <a href='".base_url("/admin/media/")."'>Media</a> &raquo; Documents");
+	}
+	public function album($idAlbum = -1) {
+		if (!$this->load->check_session($this->_cpmask)) return;
+		$data['username_']	= $this->nativesession->get('user_name_');
+		
+		$this->load->model ('web_galeri');
+		
+		if ($idAlbum >= 0) {
+			$data['page_title'] = 'Lihat Album';
+			$data['dataAlbum']	= $this->web_galeri->get_album_data($idAlbum);
+			if ($data['dataAlbum'] == null) {
+				$this->output->set_header('Location: '.base_url('/admin/media/album'));
+				return;
+			}
+			$data['listPhoto']	= $this->web_galeri->get_album_photos($idAlbum, -1);
+			$this->load->template_admin('admin/media_album', $data, false,
+				"&raquo; <a href='".base_url("/admin/media")."'>Media</a> ".
+				"&raquo; <a href='".base_url("/admin/media/album")."'>Album</a> ".
+				"&raquo; Album #".$data['dataAlbum']->id_album." [".htmlspecialchars($data['dataAlbum']->nama_album)."]");
+		} else {
+			$data['page_title'] = 'Lihat Album';
 			$this->load->model ('web_media');
-			$data['page_title'] = 'Daftar Media Terunggah';
+			$this->load->model ('web_galeri');
+			$data['page_title'] = 'Daftar Album';
 			$data['username_']	= $this->nativesession->get('user_name_');
-			$data['_medias']	= $this->web_media->get_media();
+			$data['listAlbum']	= $this->web_galeri->get_album(-1);
+			$data['listCategory']	= $this->web_galeri->get_array_album_categories();
 			
-			$data['sitebase_']  = base_url();//$this->config->base_url();
-			$this->load->template_admin('admin/media_list', $data, false, "&raquo; media");
+			$data['sitebase_']  = base_url();
+			$this->load->template_admin('admin/media_list', $data,
+				false, "&raquo; <a href='".base_url("/admin/media")."'>Media</a> &raquo; Album");
 		}
 	}
 	public function newmedia() {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			$this->load->model ('web_media');
 			$data['page_title'] = 'Unggah file baru';
 			$data['username_']	= $this->nativesession->get('user_name_');
@@ -20,7 +61,7 @@ class Media extends CI_Controller {
 		}
 	}
 	public function upload() {
-		if ($this->load->check_session(true)) {
+		if ($this->load->check_session($this->_cpmask, true)) {
 			$this->load->model ('web_media');
 			$data['page_title'] = 'Daftar Media Terunggah';
 			$data['username_']	= $this->nativesession->get('user_name_');
@@ -94,11 +135,13 @@ class Media extends CI_Controller {
 			selesai:
 			//$this->output->append_output(print_r($_files_));
 			$this->output->append_output('<div id="image">Submitter=['.$this->input->post('form_submit').']</div>');
+		} else {
+			$this->load->showForbidden();
 		}
 	}
 	
 	public function uploadonce() {
-		if ($this->load->check_session(true)) {
+		if ($this->load->check_session($this->_cpmask, true)) {
 			$this->load->model ('web_media');
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$_files_ = array(); // array of array [is_success?, message, address]
@@ -170,5 +213,234 @@ class Media extends CI_Controller {
 			selesai:
 			$this->output->append_output('Invalid operation.');
 		}
+	}
+	
+	public function ajax() {
+		if (!$this->load->check_session($this->_cpmask, true)) {
+			$this->load->showForbidden();
+			return;
+		}
+		
+		$this->load->model ('web_galeri');
+		$actionWord = $this->input->post("act");
+		if ($actionWord == "album.getform") {
+			$albumId = $this->input->post("id");
+			if ($albumId === false) die("Invalid ID");
+			if ($albumId >= 0) {
+				$albumData = $this->web_galeri->get_album_data($albumId);
+				if ($albumData == null) die("Invalid album ID.");
+				$data['site_txt_title'] = $albumData->nama_album;
+				$data['site_cat_id'] = $albumData->id_category;
+				$data['site_txt_desc'] = $albumData->album_desc;
+				$data['site_published'] = ($albumData->status==1?1:0);
+			}
+			$data['site_item_id'] = $albumId;
+			$data['site_form_act'] = "album.save";
+			$data['listCategory'] = $this->web_galeri->get_array_album_categories();
+			$this->load->view("admin/ajax/form_album", $data);
+		} else if ($actionWord == "album.save") {
+			$albumId = $this->input->post("id");
+			if ($albumId === false) die("Invalid ID");
+			
+			$newAlbumName	= trim($this->input->post("site_txt_title"));
+			$newAlbumCatId	= intval($this->input->post("site_cat_id"));
+			$newAlbumDesc	= trim($this->input->post("site_txt_desc"));
+			$newAlbumStatus = ($this->input->post("site_published")==1?1:0);
+			
+			//== Validasi
+			if (empty($newAlbumName) || ($newAlbumCatId < 0))
+				die("Argument expected.");
+			
+			$this->load->model('web_galeri_ex');
+			if ($newAlbumCatId == 999) { // Buat kategori album baru...
+				$newAlbumCatName = trim($this->input->post("site_newcat_name"));
+				if (empty($newAlbumCatName)) die("Incomplete argument.");
+				
+				$newCatQueryResult = $this->web_galeri_ex->save_album_category($newAlbumCatName);
+				if ($newCatQueryResult) {
+					$newId = $this->db->insert_id();
+					if ($newId > 0) $newAlbumCatId = $newId;
+					else die("New ID is 0");
+				} else die("Insert query failed.");
+			}
+			
+			$queryResult	= $this->web_galeri_ex->save_album(array(
+					$newAlbumName,
+					$newAlbumCatId,
+					$newAlbumDesc,
+					$newAlbumStatus
+				),
+				$this->nativesession->get('user_id_'),
+				$this->nativesession->get('user_name_'),
+				$albumId
+			);
+			if ($queryResult) {
+				$this->output->append_output("OK");
+			} else
+				$this->output->append_output("Query error!");
+				
+		} else if ($actionWord == "album.setstatus") {
+			$albumId = $this->input->post("id");
+			$newStatus = $this->input->post("status");
+			if ($albumId === false) die("Invalid ID");
+			if ($newStatus === false) die("Argument expected.");
+			
+			$this->load->model('web_galeri_ex');
+			$queryResult = $this->web_galeri_ex->set_album_status($albumId, intval($newStatus));
+			if ($queryResult) $this->output->append_output("OK");
+			else $this->output->append_output("Query error.");
+		} else if ($actionWord == "photo.getdetail") {
+			$photoId = $this->input->post("id");
+			$photoData = $this->web_galeri->get_photo($photoId);
+			if ($photoData == null) {
+				die("Photo not found!");
+			}
+			$data['photoData'] = $photoData;
+			$this->load->view("admin/ajax/form_photo", $data);
+		} else if ($actionWord == "photo.getform") {
+			$data['site_item_id'] = $this->input->post("id");
+			$albumData = $this->web_galeri->get_album_data($data['site_item_id']);
+			if ($albumData == null) die("Album not found!");
+			
+			$data['albumName'] = $albumData->nama_album;
+			$data['albumId'] = $albumData->id_album;
+			
+			$data['allowedMaxSize']		= $this->_uploadMaxSize;
+			$data['allowedExts']		= $this->_allowedExts;
+			$this->load->view("admin/ajax/form_upload_photo", $data);
+		} else if ($actionWord == "photo.upload") {
+			$albumId = $this->input->post("id");
+			$albumData = $this->web_galeri->get_album_data($albumId);
+			if ($albumData == null) die("Album not found!");
+			
+			$uploadResult = $this->_do_upload($albumId);
+			if (!empty($uploadResult)) {
+				foreach ($uploadResult as $uploadedItem) {
+					if ($uploadedItem[0]) {
+						$this->output->append_output("<div class=\"site_box_success\"><b>Upload OK</b>: ".$uploadedItem[1]."</div>");
+					} else {
+						$this->output->append_output("<div class=\"site_box_alert\"><b>Upload error!</b>: ".$uploadedItem[1]."</div>");
+					}
+				}
+			} else {
+				$this->output->append_output("<div class=\"site_box_warning\"><b>No file uploaded!</b></div>");
+			}
+		} else {
+			$this->output->append_output('Invalid operation.');
+		}
+	}
+	
+	private function _do_upload($albumId) {
+		$this->load->model ('web_media');
+		$_files_ = array(); // array of array [is_success?, message, address]
+		
+		// proses UPLOAD =============================================
+		$tanggal = date("Y-m-d H:i:s");
+
+		$file_type_id = -1;
+		$validexts_image = $this->_allowedExts;
+		
+		$succs=0;
+		if (!isset($_FILES['f_files_'])) return null;
+		if (count($_FILES['f_files_']['name']) > 0) {
+			$uploader_ = $_SERVER['REMOTE_ADDR'];
+			$id_g = date('dmY');
+			$this->load->library('image_lib');
+			for ($c_ = 0; $c_ < count($_FILES['f_files_']['name']); $c_++) {
+				if (!empty($_FILES['f_files_']['name'][$c_])) {
+					$file_type_id = -1;
+					$filesize = $_FILES['f_files_']['size'][$c_];
+					$ekstensi = strtolower(end(explode(".", $_FILES['f_files_']['name'][$c_])));
+					if 		(in_array($ekstensi, $validexts_image))	$file_type_id = 1;
+					
+					if (($file_type_id != -1) && ($filesize <= $this->_uploadMaxSize)) {
+						//===== memastikan tidak ada nama file yang sama
+						$uploadFileName = basename(strtolower($_FILES['f_files_']['name'][$c_]), ".".$ekstensi);
+						$uploadFileName = url_title($uploadFileName, '-', TRUE);
+						if (strlen($uploadFileName) > 32)
+							$uploadFileName = substr($uploadFileName, -32);
+						
+						$folderName = date("Y-m");
+						$uploadPath = '/assets/media/'.$folderName.'/';
+						// Buat folder jika belum ada...
+						if (!file_exists(FCPATH.$uploadPath)) mkdir(FCPATH.$uploadPath, 0777, true);
+						
+						//$dateChunk = date("Ymd-His");
+						$saltChunk = substr(md5(uniqid(rand(), true)), 0, 5);
+						
+						$uploadedfile = $uploadPath.sprintf("%s_%s.%s", $saltChunk, $uploadFileName, $ekstensi);
+						
+						// Sebenarnya tidak perlu sih...., tapi untuk memastikan sekali lagi....
+						$file_c = 1;
+						while (file_exists(FCPATH.$uploadedfile)) {
+							$saltChunk = substr(md5(uniqid(rand(), true)), 0, 5);
+							$uploadedfile = $uploadPath.sprintf("%s_%s.%s", $saltChunk, $uploadFileName, $ekstensi);
+							$file_c++;
+						}
+						$thumbimg    = sprintf("/assets/media/thumbs/%s_%s_%s.%s",$folderName, $saltChunk, $uploadFileName, $ekstensi);
+						if (move_uploaded_file($_FILES['f_files_']['tmp_name'][$c_], FCPATH.$uploadedfile))
+						{
+							//Generate thumbnail
+							$config['image_library'] = 'gd2';
+							$config['source_image'] = FCPATH.$uploadedfile;
+							$config['new_image'] = FCPATH.$thumbimg;
+							$config['create_thumb'] = FALSE;
+							$config['maintain_ratio'] = TRUE;
+							$config['width'] = 200;
+							$config['height'] = 200;
+
+							$this->image_lib->clear();
+							$this->image_lib->initialize($config);
+
+							$this->image_lib->resize();
+							
+							//make_thumb($uploadedfile,$thumbimg,$ekstensi);
+							list($imgWidth, $imgHeight) = getimagesize(FCPATH.$uploadedfile);
+							$clientIPaddr	= $_SERVER['REMOTE_ADDR'];
+							$imgMetadata = json_encode(array(
+								'width'		=> $imgWidth,
+								'height'	=> $imgHeight,
+								'size'		=> $filesize,
+								'uploader'	=> $clientIPaddr,
+							));
+							$this->load->model('web_galeri_ex');
+							$_result = $this->web_galeri_ex->save_photo(
+								array(
+									$albumId,
+									$_FILES['f_files_']['name'][$c_],
+									$ekstensi,
+									null,
+									$uploadedfile,
+									$thumbimg,
+									$imgMetadata
+								),
+								$this->nativesession->get('user_id_'),
+								$this->nativesession->get('user_name_')
+							);
+							
+							$_result = true;
+							if ($_result) {
+								$data['infos'][] = 'File berhasil diunggah...';
+								$succs++;
+								$_files_[] = array(true,"File ".$_FILES['f_files_']['name'][$c_]." berhasil terunggah.",'');
+							} else {
+								$_files_[] = array(false,"[Query failed] Error mengupload ".$_FILES['f_files_']['name'][$c_].". Silakan coba lagi.",null);
+								$data['errors'][] = 'Terjadi kesalahan. Silakan periksa konten dan ulangi lagi.';
+							}
+						} else {
+							foreach ($_FILES['f_files_']['error'] as $errItem) {
+								$_files_[] = array(false,$errItem,null);
+							}
+							
+							$_files_[] = array(false,"[Move error] Error mengupload ".$_FILES['f_files_']['name'][$c_].". Silakan coba lagi.",null);
+						}
+					} else { // jika tidak valid / terlalu besar
+						$_files_[] = array(false,"Error mengupload ".$_FILES['f_files_']['name'][$c_].". Ukuran dan jenis file harus sesuai.",null);
+					}
+				} // end is empty f_files_[c_]
+			} // end for
+		} // end if count(files)
+		selesai:
+		return $_files_;
 	}
 }

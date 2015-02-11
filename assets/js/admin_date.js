@@ -117,7 +117,7 @@
 		
 		$("#ev_date").html(d_d+' '+monthNames[month]+" "+year);
 		if (ev_list.length > 0) {
-			list_buffer = "<ol>";
+			list_buffer = "<ol class='ev_item_row'>";
 			var i;
 			for (i=0;i<ev_list.length;i++) {
 				if (ev_list[i].ev_date == d_d) {
@@ -151,7 +151,7 @@
 	}
 	function createNewEvent() {
 		var s_arg = ('?d='+day+'&m='+month+'&y='+year);
-		window.location.href='/admin/events/newevent'+s_arg;
+		window.location.href=""+_ev_add_url+s_arg+"";
 	}
 	
 	$(document).ready(function() {

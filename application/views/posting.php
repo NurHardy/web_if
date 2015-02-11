@@ -1,6 +1,6 @@
 	<div id='site_content_article'>
 		<h2 class='site_article_title'><?php echo $_posting->judul; ?></h2>
-		<small>Diposting oleh <?php echo $_posting->creator; ?> pada <?php echo date('j F Y, H:i',strtotime($_posting->tanggal) ); ?></small>
+		<div class='site_news_metadate'>Diposting oleh <?php echo $_posting->creator; ?> pada <?php echo date('j F Y, H:i',strtotime($_posting->tanggal) ); ?></div>
 		<hr>
 		<?php echo $_posting->isi_berita; ?><br>
 	</div>

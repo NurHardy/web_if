@@ -2,33 +2,25 @@
 	<div id='site_content_slider'>
 		<div class='site_slider_wrapper'>
 			<div class="pix_diapo">
-				<div>
-					<img style="width:100%; min-width:300px" src="<?php echo base_url('/assets/media/hmif2013ss.jpg'); ?>" alt='Gambar banner 1'>
-					<div class="caption elemHover fromLeft">
-						Himpunan Mahasiswa Informatika (HMIF) UNDIP<br>
-						<a href='http://hm.if.undip.ac.id' style='color: white'>http://hm.if.undip.ac.id</a>
-						<!--Tak ada yang sia - sia. Sekeceil apapun usaha yang kita lakukan pasti akan membuahkan hasil.-->
-					</div>
-				</div>									
-				<div>
-					<img style="width:100%; min-width:300px" src="<?php echo base_url('/assets/media/labkomb.jpg'); ?>" alt='Gambar banner 2'>
-					<div class="caption elemHover fromLeft">
-						Profesionalisme kami dedikasikan untuk menjamin mutu
-					</div>
-				</div>									
-				<div>
-					<img style="width:100%; min-width:300px" src="<?php echo base_url('/assets/media/labkomf.jpg'); ?>" alt='Gambar banner 3'>
-					<div class="elemHover caption fromLeft">
-						Kedisiplinan mengantarkan pada keteraturan hidup, menciptakan kesuksesan
-					</div>
-				</div>
+			<?php
+			$_slidectr = 0;
+			foreach ($_homeslides as $_slide) {
+				$_slidectr++;
+				echo "<div>\n";
+				echo "	<img style=\"width:680px; height: 250px; min-width:300px\" src=\"".base_url($_slide->f_url)."\" alt='Gambar banner {$_slidectr}'>\n";
+				echo "	<div class=\"caption elemHover fromLeft\">".($_slide->f_desc)."</div>\n";
+				echo "</div>\n";
+			}
+			?>
 		   </div><!-- #pix_diapo -->
 	   </div>
 	</div>
 	<div id='site_content_article'>
 		<div class='site_news_wrapper'>
-			<h3><?php echo "<a href='".base_url("/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}")."'>".$newest_post[0]->judul."</a>"; ?></h3>
-			<?php echo substr(strip_tags($newest_post[0]->isi_berita),0,450) . "..."; ?>
+			<h2><?php echo "<a href='".base_url("/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}")."'>".$newest_post[0]->judul."</a>"; ?></h2>
+			<?php echo "<div class='site_news_metadate'>Diposting oleh {$newest_post[0]->creator} tanggal ".date('j F Y, H:i',strtotime($newest_post[0]->tanggal))."</div>"; ?>
+			<!-- <img style='width: 100px; height: auto;' src='<?php echo base_url('/assets/images/index.jpg'); ?>' alt='Gambar1' align='left'/> -->
+			<p><?php echo substr(strip_tags($newest_post[0]->isi_berita),0,450) . "..."; ?><p>
 			<div class='divclear'></div>
 			<p><?php echo "<a href='".base_url("/news/".$newest_post[0]->id_berita."/{$newest_post[0]->f_slug}")."' class='news_readmore'>Baca Selengkapnya &raquo;</a>"; ?></p>
 			<div class='divclear'></div>
@@ -52,16 +44,16 @@
 		<div id="container">
 			<select class='menu_tab_mini'>
 				<option id='tab_mini_1' class='active'>Akademik</option>
-				<option id='tab_mini_2'>Pendidikan</option>
-				<option id='tab_mini_3'>Penelitian</option>
-				<option id='tab_mini_4'>Lowongan</option>
+				<option id='tab_mini_2'>Berita IT</option>
+				<option id='tab_mini_3'>Lowongan</option>
+				<option id='tab_mini_4'>Penelitian</option>
 				<option id='tab_mini_5'>Beasiswa</option>
 			</select>
 			<ul class="menu_tab">
 				<li id="tab_1" class="active">Akademik</li>
-				<li id="tab_2">Pendidikan</li>
-				<li id="tab_3">Penelitian</li>
-				<li id="tab_4">Lowongan</li>
+				<li id="tab_2">Berita IT</li>
+				<li id="tab_3">Lowongan</li>
+				<li id="tab_4">Penelitian</li>
 				<li id="tab_5">Beasiswa</li>
 			</ul>
 			<span class="clear"></span>

@@ -1,24 +1,27 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Events extends CI_Controller {
-
+	private $_cpmask = 8;
+	
 	public function index() {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			$data['page_title'] = 'Event Organizer';
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$this->load->template_admin('admin/event_calendar', $data, false, "&raquo; agenda");
 		}
 	}
 	public function eventajax() {
-		if ($this->load->check_session(true)) {
+		if ($this->load->check_session($this->_cpmask, true)) {
 			$this->load->model ('web_event');
 			$_m = $this->input->post('m');
 			$_y = $this->input->post('y');
 			$_json_ = $this->web_event->get_event_json($_m, $_y);
 			$this->output->append_output($_json_);
+		} else {
+			$this->load->showForbidden();
 		}
 	}
 	public function newevent() {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			$data['page_title'] = $data['content_title'] = 'Create New Event';
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['f_d'] = htmlentities($this->input->get('d'));

@@ -17,7 +17,7 @@
 	}
 ?>
 <div>
-	<h2>Unggah Media<h2>
+	<h2>Unggah Media</h2>
 </div>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.form.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/admin_media.js'); ?>"></script>

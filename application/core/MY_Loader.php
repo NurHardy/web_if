@@ -5,6 +5,16 @@
  */
 
 class MY_Loader extends CI_Loader {
+	private $strNotLoggedIn	= "Sorry, you must logged in to continue...";
+	private $strNotAllowed	= "Sorry, you are not privileged.";
+	private $urlLogin		= "/admin/auth/authenticate";
+	private $urlForbidden	= "/admin/auth/forbidden";
+	
+	public function setStrNotLoggedIn($newStr)	{$this->strNotLoggedIn	=$newStr;}
+	public function setStrNotAllowed($newStr)	{$this->strNotAllowed	=$newStr;}
+	public function showNotLoggedIn()	{$this->append_output($this->strNotLoggedIn);}
+	public function showForbidden()		{$this->append_output($this->strNotAllowed);}
+	
 	public function append_output($text, $return = FALSE) {
 		$this->output->append_output($text);
 		if ($return) return $text;
@@ -48,10 +58,11 @@ class MY_Loader extends CI_Loader {
     {
         $content  = $this->view('admin/admin_header', $vars, $return);
 		$content .= $this->append_output("<div id='admin_content_left'>\n");
-		$content .= $this->append_output("<div id='admin_content_nav'><a href='".base_url("/admin/")."'>Dasbor</a> {$_nav}</div>");
-		$content .= $this->view($template_name, $vars, $return);
-		$content .= $this->append_output("</div>\n<div id='admin_content_right'>\n");
 		$content .= $this->view('admin/admin_sidebar', $vars, $return);
+		$content .= $this->append_output("</div>\n<div id='admin_content_right'>\n");
+		$content .= $this->append_output("<div id='admin_content_nav'>");
+		$content .= $this->append_output("<a href='".base_url("/admin/")."'><i class=\"site_icon-home\"></i> Dasbor</a> {$_nav}</div>");
+		$content .= $this->view($template_name, $vars, $return);
 		$content .= $this->append_output("</div>");
         $content .= $this->view('admin/admin_footer', $vars, $return);
 		
@@ -103,14 +114,21 @@ class MY_Loader extends CI_Loader {
             return $content;
         }
     }
-	public function check_session($_no_redir = false, $_err_msg = null) {
+	
+	// privilegeMask == -1 ==> Hanya mengecek session
+	public function check_session($privilegeMask = -1, $_no_redir = false) {
 		$ci =& get_instance();
 		
 		if (!$ci->nativesession->get('user_id_')) {
-			if ($_no_redir) {
-				$this->append_output(($_err_msg?$_err_msg:"Sorry, you must logged in to continue..."));
-			} else $ci->output->set_header('Location: '.base_url('/admin/auth/authenticate?next='.urlencode($_SERVER['REQUEST_URI'])));
+			if (!$_no_redir)
+				$ci->output->set_header('Location: '.base_url($this->urlLogin.'?next='.urlencode($_SERVER['REQUEST_URI'])));
 			return false;
+		} else if ($privilegeMask != -1) {
+			if (($ci->nativesession->get('user_role_') & $privilegeMask) == 0) {
+				if (!$_no_redir)
+					$ci->output->set_header('Location: '.base_url($this->urlForbidden.'?refer='.urlencode($_SERVER['REQUEST_URI'])));
+				return false;
+			}
 		}
 		return true;
 	}

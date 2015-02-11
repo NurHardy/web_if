@@ -1,4 +1,4 @@
-<div class='site_panel'>
+<!--<div class='site_panel'>
 		<div class='site_panel_head'>Akademik</div>
 		<div class='site_panel_body'>
 			<ol class='side_profil'>
@@ -10,6 +10,7 @@
 			  </ol>
 		</div>
 	</div>
+	-->
 	<div class='site_panel'>
 		<div class='site_panel_head'>Tautan</div>
 		<div class='site_panel_body'>

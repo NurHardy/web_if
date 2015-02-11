@@ -1,7 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Links extends CI_Controller {
+	private $_cpmask = 16;
+	
 	public function index() {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			$this->load->model ('web_link');
 			$data['page_title'] = 'Daftar Tautan';
 			$data['username_']	= $this->nativesession->get('user_name_');
@@ -12,7 +14,7 @@ class Links extends CI_Controller {
 	}
 	
 	public function newlink() {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			$data['page_title'] = $data['content_title'] = 'Tulis Posting Baru';
 			$data['form_action']= base_url('/admin/links/newlink');
 			$data['username_']	= $this->nativesession->get('user_name_');
@@ -47,6 +49,7 @@ class Links extends CI_Controller {
 		}
 	}
 	public function editlink($id_link = -1) {
+		if (!$this->load->check_session($this->_cpmask)) return;
 		if (!is_numeric($id_link)) $this->output->set_header('Location: '.base_url("/admin/links"));
 		else {
 			$data['page_title']		= $data['content_title'] = 'Edit Tautan';
@@ -88,7 +91,10 @@ class Links extends CI_Controller {
 	}
 	// AJAX
 	public function updatelinks_pub() {
-		if (!$this->load->check_session(true)) return;
+		if (!$this->load->check_session($this->_cpmask, true)) {
+			$this->load->showForbidden();
+			return;
+		}
 		$_orderdata = $this->input->post('order_');
 		$_publishdata = $this->input->post('hide_');
 		if (!$_orderdata || !is_array($_orderdata)) {
@@ -109,7 +115,10 @@ class Links extends CI_Controller {
 	}
 	// AJAX
 	public function updatelinks_unpub() {
-		if (!$this->load->check_session(true)) return;
+		if (!$this->load->check_session($this->_cpmask, true)) {
+			$this->load->showForbidden();
+			return;
+		}
 		$_orderdata = $this->input->post('order_');
 		$_publishdata = $this->input->post('show_');
 		if (!$_orderdata || !is_array($_orderdata)) {

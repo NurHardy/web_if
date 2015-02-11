@@ -9,7 +9,7 @@ function unAttachConfirm() {
 	window.onbeforeunload = null;
 }
 
-var old_plink = "<?php if (isset($f_permalink)) echo $f_permalink; ?>";
+var old_plink = "<?php if (isset($f_old_permalink)) echo $f_old_permalink; ?>";
 var isSaved = true;
 var setUnsaved = function( event ) {isSaved = false;};
 
@@ -116,7 +116,7 @@ var setUnsaved = function( event ) {isSaved = false;};
 	</div>
 	<div class='admin_form_item'>
 		<div class='admin_form_label'><label for='txt_post_permalink'>Permalink</label></div>
-		<div class='admin_form_field'><input type='text' id='txt_post_permalink' name='f_permalink' value='<?php if (isset($f_permalink)) echo $f_permalink; ?>' style='width: 200px; min-width: 200px;' onchange='cek_permalink();'/><br>
+		<div class='admin_form_field'><?php echo base_url('/pages'); ?>/<input type='text' id='txt_post_permalink' name='f_permalink' value='<?php if (isset($f_permalink)) echo $f_permalink; ?>' style='width: 200px; min-width: 200px;' onchange='cek_permalink();'/><br>
 		<small id='txt_info_permalink'>-</small></div>
 		<div class='divclear'></div>
 	</div>

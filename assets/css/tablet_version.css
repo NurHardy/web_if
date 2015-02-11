@@ -11,7 +11,7 @@
 	#site_header_logoimg{margin:10px;}
 	
 	div#site_header_logo{background:none;height: auto;}
-	.menu,div#divTrigger,div#divContent{
+	.hidden_on_mobile,.menu,div#divTrigger,div#divContent{
 		display:none;
 	}
 	
@@ -75,4 +75,6 @@
 	.ui-tabs .ui-tabs-panel{
 		padding:5px;
 	}
+	
+	div#list_staff{width:100%;max-width:none}
 }

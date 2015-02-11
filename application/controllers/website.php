@@ -22,6 +22,8 @@ class Website extends CI_Controller {
 		$this->load->model('web_posting');
 		$this->load->model('web_event');
 		$this->load->model('web_link');
+		$this->load->model('web_pengumuman');
+		$this->load->model('web_slider');
 		
 		$data['page_title'] = 'Home';
 		//$data['page_additional_head'] = "<base href='/informatika/' /><!--[if IE]></base><![endif]-->";
@@ -35,7 +37,9 @@ class Website extends CI_Controller {
 		$data['other_posts'][4] = $this->web_posting->get_newest_posts(5,5);
 		
 		$data['daftar_event'] = $this->web_event->get_nearest_event(3);
+		$data['daftar_pengumuman'] = $this->web_pengumuman->get_newst_nounce(2);
 		$data['daftar_tautan'] = $this->web_link->get_links();
+		$data['_homeslides'] = $this->web_slider->get_slides();
 		
 		$this->load->template_home('home', $data);
 	}
@@ -121,6 +125,27 @@ class Website extends CI_Controller {
 		}
 	}
 	
+	public function galeri($album = null) 
+	{ 
+		$this->load->model('web_galeri');
+		$this->load->model('web_link');
+		
+		if (empty($album)){		
+			$data['page_title'] = 'Galeri';
+			$data['album'] = 'yes';
+			$data['daftar_album'] = $this->web_galeri->get_album();
+			$data['daftar_tautan'] = $this->web_link->get_links();
+			$this->load->template_profil('galeri', $data);
+		} else {
+			$data['page_title'] = 'Album '.htmlentities($album);
+			$data['album'] = 'no';
+			$data['daftar_album'] = $this->web_galeri->get_album();
+			$data['daftar_foto'] = $this->web_galeri->get_foto_album($album);
+			$data['daftar_tautan'] = $this->web_link->get_links();
+			$this->load->template_profil('galeri', $data);
+		}
+	}
+	
 	public function struktur_organisasi() 
 	{ 
 		$this->load->model('web_staff');
@@ -131,6 +156,132 @@ class Website extends CI_Controller {
 		$data['kmhs'] = $this->web_staff->get_jabatan(3);
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		$this->load->template_profil('struktur_org', $data);
+	}
+	
+	/*---------------------Penelitian--------------------------------*/
+	public function penelitian($tahun=null) 
+	{ 
+		$this->load->model('web_penelitian');
+		$this->load->model('web_link');
+		$this->load->model('web_functions');
+		$_ipp = 15; // item per page
+		$_cur = $this->input->get('p'); // current page (zero-based)
+		$_maxpage = $this->input->get('x');
+
+		$this->web_functions->check_pagination($_ipp, $_cur, $_maxpage);
+		if ($_maxpage === false) {
+			$_n = $this->web_penelitian->count_penelitian();
+			$_maxpage = ($_n==0?0:ceil($_n/$_ipp)-1);
+		}
+		
+		
+
+		if(empty($tahun)){
+		$data['page_title'] = 'Penelitian';
+		$data['table'] = 'No';
+		$data['data_penelitian_'] = null;
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('penelitian', $data);
+		}
+		else{
+		$data['_paging']	= $this->web_functions->pagination(
+			$_maxpage,
+			$_cur,
+			2,
+			base_url("/penelitian/$tahun/"),
+			'n='.$_ipp
+		);
+		$data['count_stat'] = $_ipp * $_cur + 1;
+		$data['page_title'] = 'Penelitian';
+		$data['table'] = 'Yes';
+		$data['data_penelitian_'] = $this->web_penelitian->get_penelitian(15, $_cur+1,$tahun);
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('penelitian', $data);
+		}
+	}
+	
+	/*---------------------Pengabdian--------------------------------*/
+	public function pengabdian($tahun=null) 
+	{ 
+		$this->load->model('web_pengabdian');
+		$this->load->model('web_link');
+		$this->load->model('web_functions');
+		$_ipp = 15; // item per page
+		$_cur = $this->input->get('p'); // current page (zero-based)
+		$_maxpage = $this->input->get('x');
+
+		$this->web_functions->check_pagination($_ipp, $_cur, $_maxpage);
+		if ($_maxpage === false) {
+			$_n = $this->web_pengabdian->count_pengabdian();
+			$_maxpage = ($_n==0?0:ceil($_n/$_ipp)-1);
+		}
+		
+		
+
+		if(empty($tahun)){
+		$data['page_title'] = 'Pengabdian';
+		$data['table'] = 'No';
+		$data['data_pengabdian_'] = null;
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('pengabdian', $data);
+		}
+		else{
+		$data['_paging']	= $this->web_functions->pagination(
+			$_maxpage,
+			$_cur,
+			2,
+			base_url("/pengabdian/$tahun/"),
+			'n='.$_ipp
+		);
+		$data['count_stat'] = $_ipp * $_cur + 1;
+		$data['page_title'] = 'Pengabdian';
+		$data['table'] = 'Yes';
+		$data['data_pengabdian_'] = $this->web_pengabdian->get_pengabdian(15, $_cur+1,$tahun);
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('pengabdian', $data);
+		}
+	}
+	
+	
+	/*--------------------KEMAHASISWAAN------------------------------*/
+	
+	public function data_mahasiswa($tingkat=null) 
+	{ 
+		$this->load->model('web_mahasiswa');
+		$this->load->model('web_link');
+		$this->load->model('web_functions');
+		$_ipp = 15; // item per page
+		$_cur = $this->input->get('p'); // current page (zero-based)
+		$_maxpage = $this->input->get('x');
+
+		$this->web_functions->check_pagination($_ipp, $_cur, $_maxpage);
+		if ($_maxpage === false) {
+			$_n = $this->web_mahasiswa->count_mhs();
+			$_maxpage = ($_n==0?0:ceil($_n/$_ipp)-1);
+		}
+		
+		if(empty($tingkat)){
+		$data['page_title'] = 'Data Mahasiswa Aktif';
+		$data['table'] = 'No';
+		$data['data_mhs'] = null;
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('data_mahasiswa', $data);
+		}
+		else{
+		$data['_paging']	= $this->web_functions->pagination(
+			$_maxpage,
+			$_cur,
+			2,
+			base_url("/data_mahasiswa/$tingkat/"),
+			'n='.$_ipp
+		);
+		$data['count_stat'] = $_ipp * $_cur + 1;
+		$data['page_title'] = 'Data Mahasiswa Aktif';
+		$data['table'] = 'Yes';
+		$data['data_mhs'] = $this->web_mahasiswa->get_mahasiswa(15, $_cur+1,$tingkat);
+		$data['daftar_tautan'] = $this->web_link->get_links();
+		$this->load->template_profil('data_mahasiswa', $data);
+		}
 	}
 	
 	/*--------------------AKADEMIK------------------------------*/
@@ -187,12 +338,12 @@ class Website extends CI_Controller {
 		$data['_page'] = $this->web_page->get_page($_id);
 		if (!$data['_page']) {
 			$data['page_title'] = 'Halaman tidak ditemukan';
-			$this->load->template_posting('error/notfound', $data);
+			$this->load->template_profil('error/notfound', $data);
 			//$this->output->set_header('Location: /');
 			return;
 		}
 		$data['page_title'] = $data['_page']->f_title;
-		$this->load->template_posting('page', $data,false,false,"&raquo; ".$data['_page']->f_title);
+		$this->load->template_profil('page', $data,false,false,"&raquo; ".$data['_page']->f_title);
 	}
 	
 	public function feed() {
@@ -210,6 +361,9 @@ class Website extends CI_Controller {
 		$data['daftar_event'] = $this->web_event->get_nearest_event(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		$this->load->template_akademik('tentang_situs', $data,false,'&raquo; tentang - situs');
+	}
+	public function _e404() {
+		$this->load->view("error/error404");
 	}
 }
 

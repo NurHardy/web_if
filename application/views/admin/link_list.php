@@ -1,42 +1,76 @@
 <script>
+var is_processing = false;
 function savelinks_pub() {
+	if (is_processing) return;
+	
 	var frmdata = $("#form_link_pub").serialize();
 	$.ajax({
 		type: "POST",
 		url: "<?php echo base_url('/admin/links/updatelinks_pub'); ?>",
 		data: frmdata,
 		dateType: "string",
+		beforeSend: function( xhr ) {
+			is_processing = true;
+			$("#btnpub_save").attr('disabled',true);
+			$("#btnunpub_save").attr('disabled',true);
+			show_overlay('Menyimpan...');
+			$("#savestat_pub").html('Memproses...');
+		},
 		success: function(response){
 			var result = $.trim(response);
 			if(result === "OK") {
+				$("#savestat_pub").html('Tersimpan! Halaman akan di<i>refresh</i> beberapas saat lagi...');
 				location.reload(true);
 			} else {
+				$("#savestat_pub").html('Operasi menyimpan gagal!');
 				alert('Operasi gagal: '+result);
 			}
 		},
 		error: function(xhr){
+			$("#savestat_pub").html('-');
 			alert("Terjadi kesalahan: "+xhr.status + " " + xhr.statusText);
 		}
+	}).always(function() {
+		$("#btnpub_save").removeAttr('disabled');
+		$("#btnunpub_save").removeAttr('disabled');
+		is_processing = false;
+		hide_overlay();
 	});
 }
 function savelinks_unpub() {
+	if (is_processing) return;
 	var frmdata = $("#form_link_unpub").serialize();
 	$.ajax({
 		type: "POST",
 		url: "<?php echo base_url('/admin/links/updatelinks_unpub'); ?>",
 		data: frmdata,
 		dateType: "string",
+		beforeSend: function( xhr ) {
+			is_processing = true;
+			$("#btnpub_save").attr('disabled',true);
+			$("#btnunpub_save").attr('disabled',true);
+			$("#savestat_unpub").html('Memproses...');
+			show_overlay('Menyimpan...');
+		},
 		success: function(response){
 			var result = $.trim(response);
 			if(result === "OK") {
+				$("#savestat_unpub").html('Tersimpan! Halaman akan di<i>refresh</i> beberapas saat lagi...');
 				location.reload(true);
 			} else {
+				$("#savestat_unpub").html('Operasi menyimpan gagal!');
 				alert('Operasi gagal: '+result);
 			}
 		},
 		error: function(xhr){
+			$("#savestat_unpub").html('-');
 			alert("Terjadi kesalahan: "+xhr.status + " " + xhr.statusText);
 		}
+	}).always(function() {
+		$("#btnpub_save").removeAttr('disabled');
+		$("#btnunpub_save").removeAttr('disabled');s
+		is_processing = false;
+		hide_overlay();
 	});
 }
 </script>
@@ -64,7 +98,9 @@ foreach($_links_pub as $_link) {
 	echo "</tr>\n";
 } ?>
 <tr class='tb_head'>
-	<td colspan='4'><input type='button' class='button_admin btn_save' value='Simpan' onclick='savelinks_pub();'/></td>
+	<td colspan='4'><input type='button' class='button_admin btn_save' value='Simpan' onclick='savelinks_pub();' id='btnpub_save'/>
+		<span id='savestat_pub'>-</span>
+	</td>
 </tr>
 </table>
 </form>
@@ -83,7 +119,10 @@ foreach($_links_unpub as $_link) {
 	echo "</tr>\n";
 } ?>
 <tr class='tb_head'>
-	<td colspan='4'><input type='button' class='button_admin btn_save' value='Simpan' onclick='savelinks_unpub();'/></td>
+	<td colspan='4'><input type='button' class='button_admin btn_save' value='Simpan' onclick='savelinks_unpub();' id='btnunpub_save' />
+		<span id='savestat_unpub'>-</span>
+	</td>
+	
 </tr>
 </table>
 </form>

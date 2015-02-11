@@ -8,8 +8,8 @@
 		<style>
 		body {
 			padding:0px;margin:0px;
-			font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
-			font-size: 15px;
+			/*font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+			font-size: 15px;*/
 			line-height: 1.4;
 		}
 		a {

@@ -57,17 +57,19 @@ class web_admin extends CI_Model {
 	}
 	function save_user($_udata, $_id_creator, $_creator, $_uid = -1) {
 		$_query_data = array(
-			'f_username'	=> $_udata[0],
-			'f_password'	=> $_udata[1],
 			'f_fullname'	=> $_udata[2],
 			'f_email'		=> $_udata[3],
-			'f_role_id'		=> $_udata[4]
+			'f_prev_flags'	=> $_udata[4],
+			'f_cat_flags'	=> $_udata[5],
+			'f_def_cat'		=> $_udata[6]
 		);
 		if ($_uid > 0) {
 			$_query_data['f_date_edit'] = date('Y-m-d H:i:s');
 			$this->db->where('f_id', $_uid);
 			$this->db->update('t_users', $_query_data); 
 		} else {
+			$_query_data['f_username']	= $_udata[0];
+			$_query_data['f_password']	= $_udata[1];
 			$_query_data['f_parent']	= $_creator;
 			$_query_data['f_parent_id']	= $_id_creator;
 			$_query_data['f_date_reg'] = date('Y-m-d H:i:s'); // date registered

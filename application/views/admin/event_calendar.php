@@ -1,6 +1,7 @@
 <script type="text/javascript" src="<?php echo base_url("/assets/js/admin_date.js"); ?>"></script>
 <script>
 var _ev_form_url = "<?php echo base_url("/admin/events/eventajax"); ?>";
+var _ev_add_url  = "<?php echo base_url("/admin/events/newevent"); ?>";
 </script>
 <h2>Event Organizer</h2>
 <div id='ev_calendar_box'>
@@ -26,7 +27,7 @@ var _ev_form_url = "<?php echo base_url("/admin/events/eventajax"); ?>";
 </div>
 <hr>
 <div id='ev_date'>Date</div>
-<div style='padding: 10px; margin-top: 10px;' id='ev_eventlist'>
+<div style='padding: 5px 15px 5px 15px; margin-top: 10px;' id='ev_eventlist'>
 Informasi seputar tanggal tsb di sini...
 </div>
 <div id='btn_panel'><button onclick="createNewEvent();" class='button_admin btn_add'>Tambah</button></div>

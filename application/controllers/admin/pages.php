@@ -1,7 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Pages extends CI_Controller {
+	private $_cpmask = 4;
+	
 	public function index() {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			$this->load->model ('web_page');
 			$this->load->model ('web_functions');
 			
@@ -34,14 +36,15 @@ class Pages extends CI_Controller {
 		}
 	}
 	public function editpage($id_page = -1) {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			if (!is_numeric($id_page)) $this->output->set_header('Location: '.base_url("/admin/pages"));
 			$data['page_title']		= $data['content_title'] = 'Edit Halaman';
 			$data['form_action']	= base_url('/admin/pages/editpage/'.$id_page);
 			$data['username_']		= $this->nativesession->get('user_name_');
 			$data['f_title']		= htmlentities($this->input->post('f_title'));
 			$data['f_content']		= $this->input->post('f_content');
-			$data['f_permalink']	= htmlentities($this->input->post('f_permalink'));
+			$data['f_permalink']	= $this->input->post('f_permalink');
+			$data['f_old_permalink']= $data['f_permalink'];
 			
 			$this->load->model ('web_page');
 			$_submitter = $this->input->post('form_submit');
@@ -52,12 +55,13 @@ class Pages extends CI_Controller {
 					$_plinkchk = $this->web_page->check_permalink($data['f_permalink'], $id_page);
 					if ($_plinkchk != null) {
 						$data['errors'][] = 'Permalink: '.$_plinkchk;
+						$data['f_old_permalink'] = null;
 						goto selesai;
 					}
 					$_result = $this->web_page->save_page(
-						$this->input->post('f_title'),
-						$this->input->post('f_permalink'),
-						$this->input->post('f_content'),
+						$data['f_title'],
+						$data['f_permalink'],
+						$data['f_content'],
 						$this->nativesession->get('user_id_'),
 						$this->nativesession->get('user_name_'),
 						true, // published?
@@ -78,6 +82,7 @@ class Pages extends CI_Controller {
 				$data['f_title']	= $_dump->f_title;
 				$data['f_content']	= $_dump->f_content;
 				$data['f_permalink']= $_dump->f_permalink;
+				$data['f_old_permalink']= $data['f_permalink'];
 			}
 			selesai:
 			$this->load->template_admin('admin/page_form', $data, false, "&raquo; <a href='".base_url("/admin/pages/")."'>halaman</a> &raquo; edit halaman");
@@ -85,13 +90,14 @@ class Pages extends CI_Controller {
 	}
 	
 	public function newpage() {
-		if ($this->load->check_session()) {
+		if ($this->load->check_session($this->_cpmask)) {
 			$data['page_title'] = $data['content_title'] = 'Tulis Halaman Baru';
 			$data['form_action']= base_url('/admin/pages/newpage');
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['f_title']	= htmlentities($this->input->post('f_title'));
 			$data['f_content']	= $this->input->post('f_content');
 			$data['f_permalink']= $this->input->post('f_permalink');
+			$data['f_old_permalink']= $data['f_permalink'];
 			
 			$_submitter = $this->input->post('form_submit');
 			if ($_submitter == 'PAGE_POST_FORM') {
@@ -102,12 +108,13 @@ class Pages extends CI_Controller {
 					$_plinkchk = $this->web_page->check_permalink($data['f_permalink']);
 					if ($_plinkchk != null) {
 						$data['errors'][] = 'Permalink: '.$_plinkchk;
+						$data['f_old_permalink'] = null;
 						goto selesai;
 					}
 					$_result = $this->web_page->save_page(
-						$this->input->post('f_title'),
-						$this->input->post('f_permalink'),
-						$this->input->post('f_content'),
+						$data['f_title'],
+						$data['f_permalink'],
+						$data['f_content'],
 						$this->nativesession->get('user_id_'),
 						$this->nativesession->get('user_name_')
 					);
@@ -124,7 +131,7 @@ class Pages extends CI_Controller {
 	}
 	
 	public function checkpermalink() {
-		if ($this->load->check_session(true)) {
+		if ($this->load->check_session($this->_cpmask, true)) {
 			$_plink = $this->input->post('plink');
 			$this->load->model ('web_page');
 			$_chk_res = $this->web_page->check_permalink($_plink);
@@ -133,6 +140,8 @@ class Pages extends CI_Controller {
 			} else {
 				$this->output->append_output("<span class='info_error_mark'>".$_chk_res."</span>");
 			}
+		} else {
+			$this->load->showForbidden();
 		}
 	}
 	public function preview() {
@@ -143,7 +152,7 @@ class Pages extends CI_Controller {
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		
 		$data['_page'] = new stdclass;
-		$data['_page']->f_title = "[Preview]: ".$this->input->post('f_title');
+		$data['_page']->f_title = "[Preview]: ".htmlentities($this->input->post('f_title'));
 		$data['_page']->f_content = $this->input->post('f_content');
 		$data['_page']->f_creator = $this->nativesession->get('user_name_');
 		$data['_page']->f_date_submit = date('Y-m-d H:i:s');

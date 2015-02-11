@@ -24,8 +24,11 @@ class Auth extends CI_Controller {
 					$_user_row = $this->web_admin->user_authenticate($_login_user, $_login_pass);
 					if ($_user_row != null) {
 						$this->nativesession->set('user_id_'  , $_user_row->f_id);
-						$this->nativesession->set('user_name_', htmlentities($_user_row->f_username));
-						$this->nativesession->set('user_role_', $_user_row->f_role_id);
+						$this->nativesession->set('user_name_', ($_user_row->f_fullname));
+						$this->nativesession->set('user_uname_', ($_user_row->f_username));
+						$this->nativesession->set('user_role_', $_user_row->f_prev_flags);
+						$this->nativesession->set('user_catflags_', $_user_row->f_cat_flags);
+						$this->nativesession->set('user_defcat_', $_user_row->f_def_cat);
 						
 						if (!$redir_url) $redir_url = base_url("/admin/");
 						$this->output->set_header("Location: $redir_url");
@@ -45,8 +48,15 @@ class Auth extends CI_Controller {
 		if ($this->nativesession->get('user_id_')) {
 			$this->nativesession->delete('user_id_');
 			$this->nativesession->delete('user_name_');
+			$this->nativesession->delete('user_uname_');
 			$this->nativesession->delete('user_role_');
+			$this->nativesession->delete('user_catflags_');
+			$this->nativesession->delete('user_defcat_');
 		}
 		$this->output->set_header('Location: '.base_url("/admin"));
+	}
+	
+	public function forbidden() {
+		$this->output->append_output("Sorry, forbidden!");
 	}
 }

@@ -32,4 +32,15 @@ class web_draft extends CI_Model {
 	function delete_draft($_id) {
 		$this->db->query("DELETE FROM t_draft WHERE f_id=$_id");
 	}
+	function cancel_draft($_id) {
+		$_draftdata = $this->get_draft($_id);
+		if ($_draftdata) {
+			if ($_draftdata->f_origin>0) {
+				if ($_draftdata->f_type==1) $this->db->query("UPDATE t_posts SET f_id_draft=0 WHERE id_berita={$_draftdata->f_origin}");
+			}
+			$this->delete_draft($_id);
+			return true;
+		}
+		return false;
+	}
 }

@@ -12,7 +12,7 @@
 	<meta name="Author" content="Tim DIGIT Undip" />
 	<meta name="Robots" content="index,follow" />
 	
-    <title><?php echo $page_title; ?> - Informatics UNDIP [Beta]</title>
+    <title><?php echo $page_title; ?> - Informatics UNDIP</title>
 	<?php if (isset($page_additional_head)) echo $page_additional_head; ?>
 	
 	<link href="<?php echo base_url('/assets/css/reset.css');?>" rel="stylesheet">
@@ -69,6 +69,10 @@
 			var newurl = $(this).find("option:selected").val();
 			if (newurl != '#') window.location = newurl;
 		});
+		$(".tingkatan_mhs").change(function() {
+			var newurl = $(this).find("option:selected").val();
+			if (newurl != '#') window.location = newurl;
+		});
 		(function() {
 			var cx = '012334604403258577220:-xkdwekeoxc';
 			var gcse = document.createElement('script');
@@ -94,17 +98,19 @@
 
 </script>
 <div id='site_main_wrapper' style='width: 100%;'>
+<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 330px;'"; ?>></div>
+<div id='site_header_search'>
+	<div id='site_header_searchb'>
+		<ul class='list_link_header'>
+			<li class='first'><a href='<?php echo base_url('/page/sitemap');?>'><img class='site_header_but' src='<?php echo base_url('/assets/images/sitemap_icon.png');?>' alt='Sitemap' title='Sitemap' /></a></li>
+			<li><a href='<?php echo base_url('/feed');?>'><img class='site_header_but' src='<?php echo base_url('/assets/images/rss_icon2.png');?>' alt='RSS' title='RSS Feed' /></a></li>
+			<li><a href="javascript:void(0);" id="toggle_search"><img class='site_header_but' src='<?php echo base_url('/assets/images/search_icon.png');?>' alt='Cari' title='Cari' /></a></li>
+		</ul>
+		<div class='divclear'></div>
+	</div>
+</div>
 <div id='site_wrapper'>
-	<div id='site_bg_top' <?php if (isset($is_home)) echo "style='height: 330px;'"; ?>></div>
 	<div id='site_header'>
-		<div id='site_header_search'>
-			<ul class='list_link_header'>
-				<li class='first'><a href='<?php echo base_url('/page/sitemap');?>'><img class='site_header_but' src='<?php echo base_url('/assets/images/sitemap_icon.png');?>' alt='Sitemap' title='Sitemap' /></a></li>
-				<li><a href='<?php echo base_url('/feed');?>'><img class='site_header_but' src='<?php echo base_url('/assets/images/rss_icon2.png');?>' alt='RSS' title='RSS Feed' /></a></li>
-				<li><a href="javascript:void(0);" id="toggle_search"><img class='site_header_but' src='<?php echo base_url('/assets/images/search_icon.png');?>' alt='Cari' title='Cari' /></a></li>
-			</ul>
-			<div class='divclear'></div>
-		</div>
 		<div class='search_panel' style='display:none'>
 			<!-- <gcse:search></gcse:search> -->
 			<div class="gcse-search"  >
