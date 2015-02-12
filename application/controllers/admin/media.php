@@ -1,8 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Media extends CI_Controller {
+	private $_mediaPath = "/assets/media/";
 	private $_cpmask = 32;
 	private $_uploadMaxSize = 2097152; // 2097152 = 2 * 1024 * 1024;
-	private $_allowedExts = array("png","jpeg","jpg","gif");
+	private $_allowedGalleryExts = array("png","jpeg","jpg","gif");
+	private $_allowedDocsExts = array(
+		1 => array("doc","docx","odt"),
+		2 => array("xls","xlsx"),
+		3 => array("ppt","pptx","pptm"),
+		4 => array("pdf"),
+		5 => array("mp3"),
+		6 => array("mp4"),
+		7 => array("zip","7z","rar","gz","cab")
+	);
 	
 	public function index($idAlbum = -1) {
 		if ($this->load->check_session($this->_cpmask)) {
@@ -306,7 +316,7 @@ class Media extends CI_Controller {
 			$data['albumId'] = $albumData->id_album;
 			
 			$data['allowedMaxSize']		= $this->_uploadMaxSize;
-			$data['allowedExts']		= $this->_allowedExts;
+			$data['allowedExts']		= $this->_allowedGalleryExts;
 			$this->load->view("admin/ajax/form_upload_photo", $data);
 		} else if ($actionWord == "photo.upload") {
 			$albumId = $this->input->post("id");
@@ -325,20 +335,51 @@ class Media extends CI_Controller {
 			} else {
 				$this->output->append_output("<div class=\"site_box_warning\"><b>No file uploaded!</b></div>");
 			}
+		} else if ($actionWord == "docs.getform") {
+			$data['site_item_id'] = $this->input->post("id");
+			
+			$data['allowedMaxSize']		= $this->_uploadMaxSize;
+			$data['allowedExts']		= $this->_allowedDocsExts;
+			$this->load->view("admin/ajax/form_upload_doc", $data);
+		} else if ($actionWord == "docs.upload") {
+			$albumId = $this->input->post("id");
+			
+			$uploadResult = $this->_do_upload_docs();
+			if (!empty($uploadResult)) {
+				foreach ($uploadResult as $uploadedItem) {
+					if ($uploadedItem[0]) {
+						$this->output->append_output("<div class=\"site_box_success\"><b>Upload OK</b>: ".$uploadedItem[1]."</div>");
+					} else {
+						$this->output->append_output("<div class=\"site_box_alert\"><b>Upload error!</b>: ".$uploadedItem[1]."</div>");
+					}
+				}
+			} else {
+				$this->output->append_output("<div class=\"site_box_warning\"><b>No file uploaded!</b></div>");
+			}
 		} else {
 			$this->output->append_output('Invalid operation.');
 		}
 	}
 	
+	// Untuk membuat folder tempat upload
+	private function _prepare_path($folderPath, $privFlags = 0777) {
+		if (!file_exists(FCPATH.$folderPath)) {
+			$result = mkdir(FCPATH.$folderPath, $privFlags, true);
+			if (!$result) die("Fatal error: Cannot create directory for upload (".FCPATH.$folderPath.")!");
+		}
+	}
+	
 	private function _do_upload($albumId) {
-		$this->load->model ('web_media');
+		$this->_prepare_path($this->_mediaPath);
+		$this->_prepare_path($this->_mediaPath."thumbs/");
+		
 		$_files_ = array(); // array of array [is_success?, message, address]
 		
 		// proses UPLOAD =============================================
 		$tanggal = date("Y-m-d H:i:s");
 
 		$file_type_id = -1;
-		$validexts_image = $this->_allowedExts;
+		$validexts_image = $this->_allowedGalleryExts;
 		
 		$succs=0;
 		if (!isset($_FILES['f_files_'])) return null;
@@ -361,9 +402,9 @@ class Media extends CI_Controller {
 							$uploadFileName = substr($uploadFileName, -32);
 						
 						$folderName = date("Y-m");
-						$uploadPath = '/assets/media/'.$folderName.'/';
+						$uploadPath = $this->_mediaPath.$folderName.'/';
 						// Buat folder jika belum ada...
-						if (!file_exists(FCPATH.$uploadPath)) mkdir(FCPATH.$uploadPath, 0777, true);
+						$this->_prepare_path($uploadPath);
 						
 						//$dateChunk = date("Ymd-His");
 						$saltChunk = substr(md5(uniqid(rand(), true)), 0, 5);
@@ -377,10 +418,11 @@ class Media extends CI_Controller {
 							$uploadedfile = $uploadPath.sprintf("%s_%s.%s", $saltChunk, $uploadFileName, $ekstensi);
 							$file_c++;
 						}
-						$thumbimg    = sprintf("/assets/media/thumbs/%s_%s_%s.%s",$folderName, $saltChunk, $uploadFileName, $ekstensi);
+						
+						$thumbimg    = sprintf($this->_mediaPath."thumbs/%s_%s_%s.%s",$folderName, $saltChunk, $uploadFileName, $ekstensi);
 						if (move_uploaded_file($_FILES['f_files_']['tmp_name'][$c_], FCPATH.$uploadedfile))
 						{
-							//Generate thumbnail
+							// Generate thumbnail
 							$config['image_library'] = 'gd2';
 							$config['source_image'] = FCPATH.$uploadedfile;
 							$config['new_image'] = FCPATH.$thumbimg;
@@ -391,10 +433,8 @@ class Media extends CI_Controller {
 
 							$this->image_lib->clear();
 							$this->image_lib->initialize($config);
-
 							$this->image_lib->resize();
 							
-							//make_thumb($uploadedfile,$thumbimg,$ekstensi);
 							list($imgWidth, $imgHeight) = getimagesize(FCPATH.$uploadedfile);
 							$clientIPaddr	= $_SERVER['REMOTE_ADDR'];
 							$imgMetadata = json_encode(array(
@@ -420,19 +460,14 @@ class Media extends CI_Controller {
 							
 							$_result = true;
 							if ($_result) {
-								$data['infos'][] = 'File berhasil diunggah...';
 								$succs++;
 								$_files_[] = array(true,"File ".$_FILES['f_files_']['name'][$c_]." berhasil terunggah.",'');
 							} else {
 								$_files_[] = array(false,"[Query failed] Error mengupload ".$_FILES['f_files_']['name'][$c_].". Silakan coba lagi.",null);
-								$data['errors'][] = 'Terjadi kesalahan. Silakan periksa konten dan ulangi lagi.';
 							}
 						} else {
-							foreach ($_FILES['f_files_']['error'] as $errItem) {
-								$_files_[] = array(false,$errItem,null);
-							}
-							
-							$_files_[] = array(false,"[Move error] Error mengupload ".$_FILES['f_files_']['name'][$c_].". Silakan coba lagi.",null);
+							$_files_[] = array(false,"[move_uploaded_file error] Error mengupload ".$_FILES['f_files_']['name'][$c_].". ".
+											"Pastikan ukuran file tidak melebihi nilai konfigurasi pada PHP.ini.",null);
 						}
 					} else { // jika tidak valid / terlalu besar
 						$_files_[] = array(false,"Error mengupload ".$_FILES['f_files_']['name'][$c_].". Ukuran dan jenis file harus sesuai.",null);
@@ -441,6 +476,98 @@ class Media extends CI_Controller {
 			} // end for
 		} // end if count(files)
 		selesai:
+		return $_files_;
+	}
+	
+	private function _do_upload_docs() {
+		$this->_prepare_path($this->_mediaPath);
+		$this->_prepare_path($this->_mediaPath."docs/");
+		
+		$_files_ = array(); // array of array [is_success?, message, address]
+		
+		// proses UPLOAD =============================================
+		$tanggal = date("Y-m-d H:i:s");
+
+		$file_type_id = -1;
+		$validexts_docs = $this->_allowedDocsExts;
+		
+		$succs = 0;
+		if (!isset($_FILES['f_files_'])) return null;
+		if (count($_FILES['f_files_']['name']) > 0) {
+			$uploader_ = $_SERVER['REMOTE_ADDR'];
+			$id_g = date('dmY');
+
+			for ($c_ = 0; $c_ < count($_FILES['f_files_']['name']); $c_++) {
+				if (!empty($_FILES['f_files_']['name'][$c_])) {
+					$file_type_id = -1;
+					$filesize = $_FILES['f_files_']['size'][$c_];
+					$ekstensi = strtolower(end(explode(".", $_FILES['f_files_']['name'][$c_])));
+					
+					foreach ($validexts_docs as $idx => $allowedTypeExts) {
+						if (in_array($ekstensi, $allowedTypeExts)) {
+							$file_type_id = $idx;
+							break;
+						}
+					}
+					
+					if (($file_type_id != -1) && ($filesize <= $this->_uploadMaxSize)) {
+						//===== memastikan tidak ada nama file yang sama
+						$uploadFileName = basename(strtolower($_FILES['f_files_']['name'][$c_]), ".".$ekstensi);
+						$uploadFileName = url_title($uploadFileName, '-', TRUE);
+						if (strlen($uploadFileName) > 32)
+							$uploadFileName = substr($uploadFileName, -32);
+						
+						$uploadPath = $this->_mediaPath."docs/";
+						
+						$dateChunk = date("Ymd");
+						$saltChunk = substr(md5(uniqid(rand(), true)), 0, 5);
+						$uploadedfile = $uploadPath.sprintf("%s_%s_%s.%s", $dateChunk, $saltChunk, $uploadFileName, $ekstensi);
+						
+						// Sebenarnya tidak perlu sih...., tapi untuk memastikan sekali lagi....
+						$file_c = 1;
+						while (file_exists(FCPATH.$uploadedfile)) {
+							$saltChunk = substr(md5(uniqid(rand(), true)), 0, 5);
+							$uploadedfile = $uploadPath.sprintf("%s_%s.%s", $saltChunk, $uploadFileName, $ekstensi);
+							$file_c++;
+						}
+						
+						if (move_uploaded_file($_FILES['f_files_']['tmp_name'][$c_], FCPATH.$uploadedfile))
+						{
+							$clientIPaddr	= $_SERVER['REMOTE_ADDR'];
+							$docSlug = $uploadFileName.".".$ekstensi;
+							$this->load->model('web_document');
+							$_result = $this->web_document->save_document(
+								array(
+									$_FILES['f_files_']['name'][$c_],
+									$uploadedfile,
+									$file_type_id,
+									$ekstensi,
+									null,
+									$filesize,
+									$docSlug
+								),
+								$clientIPaddr,
+								$this->nativesession->get('user_id_'),
+								$this->nativesession->get('user_name_')
+							);
+							
+							if ($_result) {
+								$succs++;
+								$_files_[] = array(true,"File ".$_FILES['f_files_']['name'][$c_]." berhasil terunggah.",'');
+							} else {
+								$_files_[] = array(false,"[Query failed] Error mengupload ".$_FILES['f_files_']['name'][$c_].". Silakan coba lagi.",null);
+								$data['errors'][] = 'Terjadi kesalahan. Silakan periksa konten dan ulangi lagi.';
+							}
+						} else {	
+							$_files_[] = array(false,"[move_uploaded_file error] Error mengupload ".$_FILES['f_files_']['name'][$c_].". Silakan coba lagi.",null);
+						}
+					} else { // jika tidak valid / terlalu besar
+						$_files_[] = array(false,"Error mengupload ".$_FILES['f_files_']['name'][$c_].". Ukuran dan jenis file harus sesuai.",null);
+					}
+				} // end is empty f_files_[c_]
+			} // end for
+		} // end if count(files)
+		selesai_doc:
 		return $_files_;
 	}
 }

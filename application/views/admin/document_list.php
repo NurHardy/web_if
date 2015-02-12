@@ -9,7 +9,7 @@
 	<?php } ?>
 </select> -->
 
-<a href='#' class='button_admin btn_add'>Unggah baru</a>
+<a href='#' class='button_admin btn_add' onclick="return new_docs();">Unggah baru</a>
 <br><br>
 <div style='min-height: 800px;'>
 	<table class='table_list display' id='adm_docs_table'>
@@ -20,13 +20,15 @@
 			<?php
 			$itemCounter = 1;
 			foreach($listDocuments as $itemDoc) {
+				$docDirectLink = base_url($itemDoc->f_file_path);
 				echo "<tr>";
-				echo "<td>".$itemCounter."</td>";
-				echo "<td>".htmlspecialchars($itemDoc->f_name);
-				echo "\n<div class=\"tb_row_panel\"><div>";
+				echo "<td style=\"width: 48px;\"><img src=\"".base_url("/assets/images/icons/ico_pdf.png")."\" alt=\"File #".$itemCounter."\" /></td>";
+				echo "<td><a href=\"".$docDirectLink."\"><b>".htmlspecialchars($itemDoc->f_name)."</b></a>\n";
+				echo "<div class=\"tb_row_panel\">";
+				echo "Direct Link: <b>".$docDirectLink."</b> <a href=\"#\"><i class=\"site_icon-link-1\"></i> Copy</a><div>\n";
 				echo "<a href=\"#\"><i class=\"site_icon-info\"></i> Detil</a> | ";
 				echo "<a href=\"#\"><i class=\"site_icon-link-1\"></i> Lihat Link</a> | ";
-				echo "<a href=\"#\"><i class=\"site_icon-trash\"></i> Hapus</a></div></div>";
+				echo "<a href=\"#\" onclick=\"return delete_doc(".$itemDoc->f_id.");\"><i class=\"site_icon-trash\"></i> Hapus</a></div></div>";
 				echo "</td>";
 				echo "<td>".($itemDoc->f_date_submit)."</td>";
 				echo "<td>".($itemDoc->f_creator)."</td>";
@@ -46,81 +48,30 @@
 var tableHandle;
 
 var ajaxDataURL = "<?php //echo $urlAjaxRequest; ?>";
-var ajaxActURL = "<?php echo base_url('/admin/posts/post_ajax_act'); ?>";
+var ajaxActURL = "<?php echo base_url('/admin/media/ajax'); ?>";
 
-function refreshList() {
-	var newCatFilter = parseInt($("#filter_cat").val());
-	tableHandle.ajax.url(ajaxDataURL+"/"+newCatFilter).load(null, false);
+function new_docs() {
+	var formTitle = "Unggah Dokumen Baru";
+	show_form_overlay("media","docs.getform", -1, formTitle);
+	return false;
 }
-function unpub(elmt, _id) {
-	if (is_processing) return;
-	//var _conf = confirm("Unpublish post "+_id+"?");
-	//if (_conf == false) return false;
-	processed_id = _id;
-	_ajax_send(ajaxActURL,{
-		_act: 'unpub',
-		_postid: _id
+
+function delete_doc(idDoc) {
+	if (is_processing) return false;
+		
+	var _conf = confirm("Hapus item yang Anda pilih?");
+	if (_conf == false) return false;
+	processed_id = idDoc;
+	
+	var _act_ = "docs.delete";
+	_ajax_send(ajaxActURL, {
+		act: _act_,
+		id: idDoc
 	}, 'Memproses...', function() {
-		refreshList();
-	}, false);
+		location.reload();
+	}, true);
 	return false;
 }
-function post_pub(elmt, _id) {
-	if (is_processing) return;
-	//var _conf = confirm("Publish post "+_id+"?");
-	//if (_conf == false) return false;
-	processed_id = _id;
-	_ajax_send(ajaxActURL,{
-		_act: 'pub',
-		_postid: _id
-	}, 'Mempublikasikan...', function() {
-		refreshList();
-	}, false);
-	return false;
-}
-function delpost(elmt, _id) {
-	var _title = "JUDUL";
-	
-	var itemRow = $(elmt).closest('tr');
-	var itemTitle = itemRow.find('td:first');
-	itemTitle.css('border-left','solid 5px #f00');
-	
-	_title = itemRow.find('span.p_title').html();
-	var _conf = confirm("Hapus posting \""+_title+"\"?");
-	itemTitle.css('border-left','none');
-	
-	if (_conf == false) return false;
-	processed_id = _id;
-	
-	_ajax_send(ajaxActURL,{
-		_act: 'del_',
-		_postid: _id
-	}, 'Menghapus posting...', function() {
-		refreshList();
-	}, false);
-	return false;
-}
-function deldraft(elmt, _id) {
-	var _title = "JUDUL";
-	
-	var itemRow = $(elmt).closest('tr');
-	var itemTitle = itemRow.find('td:first');
-	itemTitle.css('border-left','solid 5px #f00');
-	
-	var _conf = confirm("Hapus draf "+_id+"?");
-	itemTitle.css('border-left','none');
-	
-	if (_conf == false) return false;
-	processed_id = _id;
-	_ajax_send(ajaxActURL,{
-		_act: 'canceldraft',
-		_draftid: _id
-	}, 'Menghapus draf...', function() {
-		location.reload(true);
-	}, false);
-	return false;
-}
-
 $(document).ready(function () {
     tableHandle = $('#adm_docs_table').DataTable({
 		processing: false,

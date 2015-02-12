@@ -17,11 +17,11 @@
 		</div>
 <?php
 	if (!empty($errors)) {
-		$info_ = '<div class="errormsgbox"><ol>';
+		$info_ = '<div class="site_box_alert" style="margin: 10px;">';
         foreach ($errors as $key => $values) {
-            $info_ .= '	<li>'.$values."</li>\n";
+            $info_ .= '	<div>'.$values."</div>\n";
         }
-        $info_ .= '</ol></div>';
+        $info_ .= '</div>';
 		echo $info_;
 	}
 ?>

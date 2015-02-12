@@ -149,8 +149,8 @@
 .tb_row_1 {background: #FFF;}
 .tb_row_2 {background: #E8F4FF;}
 
-.table_list .tb_row_panel {height: 24px;}
-.table_list tr .tb_row_panel div {display: none; font-size: 80%;}
+.table_list .tb_row_panel {min-height: 48px; font-size: 80%;}
+.table_list tr .tb_row_panel div {display: none;}
 .table_list tr:hover .tb_row_panel div {display: block;}
 
 .admin_form_wrapper {
@@ -405,14 +405,14 @@
 .admin_album_wrapper:hover .admin_album_panel {display: block;}
 
 /* ============== Login ========= */
-#login									{margin:65px auto; max-width: 500px; width: 100%;border-radius:0px 0px 10px 10px;-webkit-box-shadow: 0 3px 6px #000;box-shadow: 0 3px 6px #000}
+#login									{margin:65px auto; max-width: 500px; width: 100%;border-radius:0px 0px 10px 10px;-webkit-box-shadow: 0 3px 3px #000;box-shadow: 0 3px 3px #000; padding-bottom: 10px;}
 #upbox									{width:100%;height:auto;background:#2C2C2C; padding: 10px 0 10px; text-align: center; border-bottom: solid 5px #31A1FF; /*background-color:#31A1FF;*/}
 #login_box .right						{width:40%;float:right;border-radius:5px;margin:15px 15px;padding:10px;background:#2C2C2C;}
 #login_box .right label					{height:auto;height:20px;color:#F2F7FB}
-#login_box .txt_input					{width:195px;height:auto;margin:4px 0px;padding:3px;border:none;border-radius:5px;background:#DFDFDF;font-size:16px;color:#555555;font-family:"Trebuchet MS", Arial, Helvetica, sans-serif}
+#login_box .txt_input					{width:195px;height:auto;margin:4px 0px;padding:3px;border:none;border-radius:5px;background:#DFDFDF;font-size:16px;color:#555555;font-family:inherit;}
 /* #login_box .right input.submit				{width:25%;cursor:pointer;float:right;margin-top:10px;background:#31A1FF;-moz-box-shadow: 0 3px 6px #000;-webkit-box-shadow: 0 3px 6px #000;box-shadow: 0 3px 6px #000} */
 #login_box .left							{width:40%;float:left;margin-left: 16px;}
-#login_box .left h1						{font-family:Arial, sans-serif;font-size:24px;color:#2C2C2C;font-weight:bold;letter-spacing:0.1}
+#login_box .left h1						{font-family:inherit;font-size:24px;color:#2C2C2C;font-weight:bold;letter-spacing:0.1}
 #alert									{clear:both;padding:10px;color:red}
 
 /* ================ event calendar ======= */
