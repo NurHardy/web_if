@@ -1,6 +1,8 @@
 <?php
 class web_document extends CI_Model{
-	function get_documents($limitItem = -1, $limitStart = -1) {
+	function get_documents($statusFilter = -1, $limitItem = -1, $limitStart = -1) {
+		if ($statusFilter > 0) $this->db->where('f_status', $statusFilter);
+		$this->db->order_by("f_date_submit","desc");
 		if ($limitItem > 0) {
 			if ($limitStart > 0) {
 				$this->db->limit($limitItem);
@@ -8,13 +10,18 @@ class web_document extends CI_Model{
 				$this->db->limit($limitItem, $limitStart);
 			}
 		}
-		$this->db->order_by("f_date_submit","desc");
 		$query = $this->db->get("t_documents");
         return $query->result();
 	}
-	function get_document_by_id($idDocument) {
-		$query = $this->db->get_where("t_documents", array("f_id"=>$idDocument), 1);
-		return $query->row();
+	function get_document($idDocument) {
+		if (is_array($idDocument)) {
+			$this->db->where_in("f_id", $idDocument);
+			$query = $this->db->get("t_documents");
+			return $query->result();
+		} else {
+			$query = $this->db->get_where("t_documents", array("f_id"=>$idDocument), 1);
+			return $query->row();
+		}
 	}
 	function save_document($docData, $uploaderIp, $idCreator, $creator, $idDocument = -1) {
 		$queryData = array(
@@ -44,8 +51,9 @@ class web_document extends CI_Model{
 		return $queryResult;
 	}
 	
-	function delete_document($idDocument, &$warningMessage) {
-		$queryResult = $this->db->delete_where("t_documents", array("f_id" => $idDocument));
-		return $queryResult;
+	function hit_document($idDocument) {
+		$this->db->where('f_id', $idDocument);
+		$this->db->set('f_hits', 'f_hits+1', FALSE);
+		$this->db->update('t_documents');
 	}
 }

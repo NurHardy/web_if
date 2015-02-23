@@ -1,4 +1,4 @@
-<h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Posting"; ?></h2>
+<h2><i class="site_icon-list"></i> <?php if (isset($content_title)) echo $content_title; else echo "Daftar Posting"; ?></h2>
 <h3>Pending Drafts:</h3>
 <small>Pending draft adalah draft posting yang belum dipublikasikan.</small>
 
@@ -29,7 +29,7 @@
 	<?php } ?>
 </select>
 
-<a href='<?php echo base_url('/admin/posts/newpost'); ?>' class='button_admin btn_add'>Buat baru &raquo;</a>
+<a href='<?php echo base_url('/admin/posts/newpost'); ?>' class='button_admin'><i class="site_icon-plus"></i> Buat baru &raquo;</a>
 <div style='min-height: 800px;'>
 	<table class='table_list display' id='adm_posting_table'>
 		<thead>

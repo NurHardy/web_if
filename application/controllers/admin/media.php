@@ -24,8 +24,15 @@ class Media extends CI_Controller {
 		$this->load->model ('web_document');
 		$data['listDocuments']	= $this->web_document->get_documents();
 		
-		$data['page_title'] = 'Lihat Album';
+		$data['page_title'] = 'List Dokumen';
 		$data['username_']	= $this->nativesession->get('user_name_');
+		$data['docIcons']	= array(
+			1 => "ico_doc.png",
+			2 => "ico_xls.png",
+			3 => "ico_ppt.png",
+			4 => "ico_pdf.png",
+			7 => "ico_zip.png"
+		);
 		
 		$this->load->template_admin('admin/document_list', $data, false,
 			"&raquo; <a href='".base_url("/admin/media/")."'>Media</a> &raquo; Documents");
@@ -340,7 +347,36 @@ class Media extends CI_Controller {
 			
 			$data['allowedMaxSize']		= $this->_uploadMaxSize;
 			$data['allowedExts']		= $this->_allowedDocsExts;
+			
 			$this->load->view("admin/ajax/form_upload_doc", $data);
+		} else if ($actionWord == "docs.select") {
+			$data['allowedMaxSize']		= $this->_uploadMaxSize;
+			$data['allowedExts']		= $this->_allowedDocsExts;
+			$this->load->view("admin/ajax/select_document", $data);
+		} else if ($actionWord == "docs.select.getlist") {
+		
+			$this->load->model("web_document");
+			$data['listDocument'] = $this->web_document->get_documents(1);
+			$this->load->view("admin/ajax/select_document_list", $data);
+		} else if ($actionWord == "docs.select.getlink") {
+			$docIds = $this->input->post("docs_id");
+			if (is_array($docIds)) {
+				$this->load->model("web_document");
+				$docsData = $this->web_document->get_document($docIds);
+				$imgUrl = base_url("/assets/media/document.png");
+				if (count($docsData) > 0) {
+					$indentRight = (count($docsData) > 1);
+					if ($indentRight) echo "<br><div style=\"\margin-left: 40px;\">\n";
+					foreach ($docsData as $docItem) {
+						if (!$indentRight) echo "[";
+						echo "<a href=\"".base_url("/document/".$docItem->f_id."/".$docItem->f_slug)."\">";
+						echo "<img src=\"".$imgUrl."\" alt=\"-\" /> ".htmlspecialchars($docItem->f_name)."</a>";
+						if ($indentRight) echo "<br>\n";
+						else echo "]";
+					}
+					if ($indentRight) echo "</div><br>\n";
+				}
+			}
 		} else if ($actionWord == "docs.upload") {
 			$albumId = $this->input->post("id");
 			

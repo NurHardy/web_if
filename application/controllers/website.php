@@ -362,6 +362,34 @@ class Website extends CI_Controller {
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		$this->load->template_akademik('tentang_situs', $data,false,'&raquo; tentang - situs');
 	}
+	
+	public function document($idDocument, $slugDocument) {
+		$this->load->model('web_document');
+		$documentData = $this->web_document->get_document($idDocument);
+		if (!$documentData) { // tidak ditemukan
+			$data['page_title'] = 'Dokumen tidak ditemukan';
+			$this->load->template_posting('error/notfound', $data);
+			return;
+		}
+		$rightSlug = $documentData->f_slug;
+		if ((!empty($rightSlug)) && (strcmp($rightSlug, $slugDocument)!=0)) { // slug berbeda/lama
+			$this->output->set_header("Location: ".base_url("/document/{$documentData->f_id}/{$rightSlug}"));
+			return;
+		}
+		
+		$filePath = FCPATH.$documentData->f_file_path;
+		if (!file_exists($filePath)) {
+			die("Maaf, dokumen tidak ditemukan di server.");
+		}
+		
+		$this->web_document->hit_document($documentData->f_id);
+		$filename = strtolower($documentData->f_name);
+		
+		header("Content-type: application/octet-stream");
+		header('Content-Disposition: attachment; filename="'.($filename).'"');
+		readfile($filePath);
+	}
+	
 	public function _e404() {
 		$this->load->view("error/error404");
 	}

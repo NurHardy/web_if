@@ -12,8 +12,8 @@ class MY_Loader extends CI_Loader {
 	
 	public function setStrNotLoggedIn($newStr)	{$this->strNotLoggedIn	=$newStr;}
 	public function setStrNotAllowed($newStr)	{$this->strNotAllowed	=$newStr;}
-	public function showNotLoggedIn()	{$this->append_output($this->strNotLoggedIn);}
-	public function showForbidden()		{$this->append_output($this->strNotAllowed);}
+	public function showNotLoggedIn()	{$ci =& get_instance(); $ci->output->append_output($this->strNotLoggedIn);}
+	public function showForbidden()		{$ci =& get_instance(); $ci->output->append_output($this->strNotAllowed);}
 	
 	public function append_output($text, $return = FALSE) {
 		$this->output->append_output($text);

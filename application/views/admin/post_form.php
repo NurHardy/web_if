@@ -48,22 +48,26 @@
  
 })(jQuery);*/
 
-function unAttachConfirm() {
-	window.onbeforeunload = null;
-}
-var isSaved = true;
-var setUnsaved = function( event ) {isSaved = false;};
+	function unAttachConfirm() {
+		window.onbeforeunload = null;
+	}
+	var isSaved = true;
+	var setUnsaved = function( event ) {isSaved = false;};
+	var mainEditor;
 
 	$(document).ready(function() {
+		$.cleditor.buttons.image.uploadUrl = '<?php echo base_url('/admin/media/uploadonce'); ?>';
 		
-		$("#input").cleditor({
+		mainEditor = $("#input").cleditor({
 			height:		 500,
 			useCSS:       true, // use CSS to style HTML when possible (not supported in ie)
 			docCSSFile:   // CSS file used to style the document contained within the editor
 				"<?php echo base_url('/assets/css/admin.css'); ?>",
 			bodyStyle: "font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif; font-size: 14px; line-height: 1.4; color:#464242;"
-		})[0].change(setUnsaved).focus();
-		$.cleditor.buttons.image.uploadUrl = '<?php echo base_url('/admin/media/uploadonce'); ?>';
+		})[0];
+		mainEditor.change(setUnsaved);
+		mainEditor.focus();
+		
 		$("#txt_post_title").keyup(setUnsaved);
 		$("#txt_post_cat").change(setUnsaved);
 	});
@@ -134,11 +138,30 @@ var setUnsaved = function( event ) {isSaved = false;};
 		//window.open("http://localhost:8080", '');
 		//window.focus();
 	}
+	
+	function selectDocument() {
+		var formTitle = "Pilih Dokumen";
+		show_form_overlay("media","docs.select", -1, formTitle);
+		return false;
+	}
+	
+	function insertText(text) {
+		if (mainEditor) {
+			var text_to_add = text;
+			mainEditor.execCommand('inserthtml', text_to_add, false);
+		}
+	}
+	
+	function insertDocument(docName, docLink) {
+		var icoPath = "<?php echo base_url("/assets/media/document.png"); ?>";
+		insertText("<a href=\""+docLink+"\"><img src=\""+icoPath+"\" alt=\"\" style=\"vertical-align: middle;\"/> "+docName+"</a> -");
+		//insertText("<a href=\""+docLink+"\"><span class=\"site_docs_item\">"+docName+"</span></a>");
+	}
 	<?php } // end if ?>
 </script>
 
 <div class="admin_form_wrapper">
-	<h2><?php if (isset($content_title)) echo $content_title; else echo "Posting Baru"; ?></h2>
+	<h2><i class="site_icon-pencil"></i> <?php if (isset($content_title)) echo $content_title; else echo "Posting Baru"; ?></h2>
 	<div class='divclear'></div>
 	<?php
 		if (!empty($errors)) {
@@ -209,13 +232,23 @@ var setUnsaved = function( event ) {isSaved = false;};
 				} else echo "Draf ini belum tersimpan." ?></span></div>
 			<div class='divclear'></div>
 		</div>
+		<!-- Insert media -->
+		<div style="margin: 20px 0 10px;">
+			<a href="#" onclick="return selectDocument();" class="button_admin"><i class="site_icon-doc"></i>Sisipkan dokumen...</a>
+			<a href="#" onclick="return selectDocument();" class="button_admin"><i class="site_icon-picture"></i>Sisipkan Gambar...</a>
+		</div>
+		
+		<!-- Main Textarea -->
 		<textarea id="input" name="txt_post_content"><?php if (isset($f_content)) echo htmlspecialchars($f_content); ?></textarea>
 		<!-- <input type='hidden' name='f_post_id' value='<?php if (isset($$post_id_)) echo $post_id_; ?>' /> -->
 		<!-- <input type='hidden' name='form_action' value='<?php //echo $post_action; ?>' /> -->
+		
 		<input type='hidden' name='form_submit' value='POSTING_FORM' />
 		<input type='hidden' name='txt_post_id' value='<?php if (isset($f_post_id)) echo $f_post_id; else echo "-1"; ?>' />
 		<input type='hidden' name='txt_draft_id' id='txt_draft_id' value='<?php if (isset($f_draft_id)) echo $f_draft_id; else echo "-1"; ?>' />
+		
 		<div><small>Pastikan pop-up blocker dimatikan untuk melihat pratinjau.</small></div>
+		
 		<a href='<?php echo base_url('/admin/posts'); ?>' class='button_admin btn_back'>&laquo; Batal</a>
 		<input type='button' value='Pratinjau' class='button_admin btn_search' onclick='openWindow()' id='btn_preview'/>
 		<input type='button' value='Simpan Draf' class='button_admin btn_sdraft' onclick='savedraft();' id='btn_savedraft'/>

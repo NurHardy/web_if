@@ -1,13 +1,4 @@
-<h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Dokumen"; ?></h2>
-<!-- <label for='filter_cat'>Tampilkan Kategori :</label><select name='filter_cat' id='filter_cat' onchange="refreshList();">
-	<option value='0' <?php if ($_filter <= 0) echo 'selected';?>>Semua</option>
-	<?php foreach($_cats as $_cat) { ?>
-		<option <?php
-			echo "value='". $_cat->f_id ."'";
-			if (isset($_filter))
-				if ($_cat->f_id == $_filter) echo " selected"; ?>><?php echo $_cat->f_name; ?></option>
-	<?php } ?>
-</select> -->
+<h2><i class="site_icon-list"></i> <?php if (isset($content_title)) echo $content_title; else echo "Daftar Dokumen"; ?></h2>
 
 <a href='#' class='button_admin btn_add' onclick="return new_docs();">Unggah baru</a>
 <br><br>
@@ -21,8 +12,13 @@
 			$itemCounter = 1;
 			foreach($listDocuments as $itemDoc) {
 				$docDirectLink = base_url($itemDoc->f_file_path);
+				$docIcon = base_url("/assets/images/icons/ico_bin.png");
+				if (array_key_exists($itemDoc->f_file_type_id, $docIcons)) {
+					$docIcon = base_url("/assets/images/icons/".$docIcons[$itemDoc->f_file_type_id]);
+				}
+				
 				echo "<tr>";
-				echo "<td style=\"width: 48px;\"><img src=\"".base_url("/assets/images/icons/ico_pdf.png")."\" alt=\"File #".$itemCounter."\" /></td>";
+				echo "<td style=\"width: 48px;\"><img src=\"".$docIcon."\" alt=\"File #".$itemCounter."\" /></td>";
 				echo "<td><a href=\"".$docDirectLink."\"><b>".htmlspecialchars($itemDoc->f_name)."</b></a>\n";
 				echo "<div class=\"tb_row_panel\">";
 				echo "Direct Link: <b>".$docDirectLink."</b> <a href=\"#\"><i class=\"site_icon-link-1\"></i> Copy</a><div>\n";
@@ -31,7 +27,7 @@
 				echo "<a href=\"#\" onclick=\"return delete_doc(".$itemDoc->f_id.");\"><i class=\"site_icon-trash\"></i> Hapus</a></div></div>";
 				echo "</td>";
 				echo "<td>".($itemDoc->f_date_submit)."</td>";
-				echo "<td>".($itemDoc->f_creator)."</td>";
+				echo "<td>".htmlspecialchars($itemDoc->f_creator)."</td>";
 				echo "<td>".($itemDoc->f_hits)."</td>";
 				echo "</tr>\n";
 				$itemCounter++;

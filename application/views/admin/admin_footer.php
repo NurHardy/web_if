@@ -9,7 +9,11 @@
 	<div id='admin_form_overlay'>
 		<div id='admin_ov_formbox'>
 			<div id='admin_ov_formheader'>
-				<i class="site_icon-pencil"></i> <span id="admin_formwindow_title">Form</span>
+				<div id="admin_ov_formheader_l"><i class="site_icon-pencil"></i> <span id="admin_formwindow_title">Form</span></div>
+				<div id="admin_ov_formheader_r">
+					<a href="#" onclick="return hide_form_overlay();">Close <i class="site_icon-cancel"></i></a>
+				</div>
+				<div class="divclear"></div>
 			</div>
 			<div id='admin_ov_formloading'>Loading...<br>
 				<img src='<?php echo base_url('/assets/images/loader.gif'); ?>' alt='Loading...' />
@@ -17,8 +21,8 @@
 			<div id='admin_ov_formcontent'>
 			</div>
 			<div id='admin_ov_cancel'>
-				<a href="#" onclick="return hide_form_overlay();" class="dmw_a_span_red">
-					<i class="site_icon-cancel"></i> Close</a>
+				<button onclick="return hide_form_overlay();" class="button_admin">
+					<i class="site_icon-cancel"></i> Close</button>
 			</div>
 		</div>
 	</div>
@@ -67,7 +71,8 @@
 		}
 		return false;
 	}
-	function hide_form_cancel_button() {$("#admin_ov_cancel").hide();}
+	function hide_form_cancel_button() {$("#admin_ov_cancel").hide();$("#admin_ov_formheader_r > a").hide();}
+	function show_form_cancel_button() {$("#admin_ov_cancel").show();$("#admin_ov_formheader_r > a").show();}
 	</script>
 	</bodY >
 </HTml >

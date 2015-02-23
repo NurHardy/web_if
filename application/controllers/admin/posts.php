@@ -65,7 +65,7 @@ class Posts extends CI_Controller {
 			} else {
 				$data['f_draft_id']	= -1;
 			}
-			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='".base_url("/admin/posts")."'>posting</a> &raquo; posting baru");
+			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='".base_url("/admin/posts")."'>Posting</a> &raquo; posting baru");
 		}
 	}
 	
@@ -134,7 +134,7 @@ class Posts extends CI_Controller {
 					$data['f_draft_id']	= $_dump->f_id_draft;
 				} else $data['f_draft_id']	= -1; // no draft
 			}
-			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='".base_url('/admin/posts')."'>posting</a> &raquo; edit posting");
+			$this->load->template_admin('admin/post_form', $data, false, "&raquo; <a href='".base_url('/admin/posts')."'>Posting</a> &raquo; edit posting");
 		}
 	}
 	public function index() {
@@ -175,7 +175,7 @@ class Posts extends CI_Controller {
 			$data['_ipp'] = $_ipp;
 			
 			$data['urlAjaxRequest']	= base_url("/admin/posts/ajax_getposts");
-			$this->load->template_admin('admin/post_list', $data, false, "&raquo; posting");
+			$this->load->template_admin('admin/post_list', $data, false, "&raquo; Posting");
 		}
 	}
 	public function postsavedraft() {
@@ -225,7 +225,7 @@ class Posts extends CI_Controller {
 			$data['page_title'] = 'Daftar Kategori';
 			$data['username_']	= $this->nativesession->get('user_name_');
 			$data['_cats']	= $this->web_posting->get_categories();
-			$this->load->template_admin('admin/category_list', $data, false, "&raquo; <a href='".base_url("/admin/posts")."'>posting</a> &raquo; kategori");
+			$this->load->template_admin('admin/category_list', $data, false, "&raquo; <a href='".base_url("/admin/posts")."'>Posting</a> &raquo; kategori");
 		}
 	}
 	
