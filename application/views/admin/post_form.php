@@ -141,7 +141,13 @@
 	
 	function selectDocument() {
 		var formTitle = "Pilih Dokumen";
-		show_form_overlay("media","docs.select", -1, formTitle);
+		show_form_overlay("media/select","docs.select", -1, formTitle);
+		return false;
+	}
+	
+	function selectPhoto() {
+		var formTitle = "Pilih Foto";
+		show_form_overlay("media/select","photo.select", -1, formTitle);
 		return false;
 	}
 	
@@ -235,7 +241,7 @@
 		<!-- Insert media -->
 		<div style="margin: 20px 0 10px;">
 			<a href="#" onclick="return selectDocument();" class="button_admin"><i class="site_icon-doc"></i>Sisipkan dokumen...</a>
-			<a href="#" onclick="return selectDocument();" class="button_admin"><i class="site_icon-picture"></i>Sisipkan Gambar...</a>
+			<a href="#" onclick="return selectPhoto();" class="button_admin"><i class="site_icon-picture"></i>Sisipkan Gambar...</a>
 		</div>
 		
 		<!-- Main Textarea -->

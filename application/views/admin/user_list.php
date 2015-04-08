@@ -14,7 +14,8 @@
 	echo "<td>$_ctr_user</td><td><a href='".base_url('/admin/users/edituser/'.$_user->f_id.'/')."'>";
 	if (!empty($_user->f_username)) echo $_user->f_username; else echo "[Untitled]";
 	echo "</a></td><td>{$_user->f_fullname}</td><td><a href='mailto:{$_user->f_email}'>{$_user->f_email}</a></td>";
-	echo "<td>{$_user->f_date_last}</td><td><a href='".base_url("/admin/users/changeauth/{$_user->f_id}")."'>Ganti password</a> - <a href='#'>Edit</a> - <a href='#'>Hapus</a></td>";
+	echo "<td>{$_user->f_date_last}</td><td><a href='".base_url("/admin/users/changeauth/{$_user->f_id}")."'>Ganti password</a>";
+	echo "	- <a href='".base_url('/admin/users/edituser/'.$_user->f_id.'/')."'>Edit</a><!-- - <a href='#'>Hapus</a> --></td>";
 	echo "</tr>\n";
 	$_ctr_user++;
  }

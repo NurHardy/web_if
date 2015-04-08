@@ -70,7 +70,7 @@ class web_posting extends CI_Model{
 		}
 		return $last_id;
 	}
-	function get_posts($_items = 15, $_page = 1, $postCategory = -1, $postStatus = 1) {
+	function get_posts($_items = 10, $_page = 1, $postCategory = -1, $postStatus = 1) {
 		// tambahkan bitmask di sini!!
 		$_start = ($_page-1)*$_items;
 		
@@ -82,8 +82,8 @@ class web_posting extends CI_Model{
 		
 		if ($postStatus > 0)	$this->db->where('status', $postStatus);
 		
-		$this->db->order_by("tanggal", "desc");
-		if ($_items > 0) $this->db->limit($_start, $_items);
+		$this->db->order_by("tanggal DESC");
+		if ($_items > 0) $this->db->limit($_items, $_start);
 		
 		$query  = $this->db->get('t_posts');
         return $query->result();
@@ -105,7 +105,7 @@ class web_posting extends CI_Model{
 	}
 	function count_posts($category = null) {
 		$_query  = "SELECT COUNT(*) AS _count FROM t_posts";
-		if (!empty($category)) $_query .= " WHERE id_kategori = $category";
+		if (!empty($category) && ($category != -1)) $_query .= " WHERE id_kategori = $category";
 		$query = $this->db->query($_query);
 		$_res  = $query->row();
         return $_res->_count;
@@ -185,7 +185,8 @@ class web_posting extends CI_Model{
 		return true;
 	}
 	function get_name_categori($_id) {
-		$query = $this->db->query("SELECT f_name FROM  t_category_posts WHERE f_id=$_id");
+		if ($_id <= 0) return "Semua Kategori";
+		$query = $this->db->query("SELECT f_name FROM t_category_posts WHERE f_id=$_id");
 		$_result = $query->row();
 		return $_result->f_name;
 	}

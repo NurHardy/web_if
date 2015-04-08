@@ -3,6 +3,10 @@
 		<div class='site_news_metadate'>Diposting oleh <?php echo $_posting->creator; ?> pada <?php echo date('j F Y, H:i',strtotime($_posting->tanggal) ); ?></div>
 		<hr>
 		<?php echo $_posting->isi_berita; ?><br>
+		<div>
+			Kategori: <b><a href="<?php if (isset($categoryLink)) echo $categoryLink; else echo "#"; ?>">
+				<?php echo $postCategoryLabel; ?></a></b>
+		</div>
 	</div>
 	<div id='site_content_more'>
 		<ul>

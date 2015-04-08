@@ -70,7 +70,7 @@ function insertDocFormSubmit() {
 		postData += "&act=docs.select.getlink";
 		$.ajax({
 			type: "POST",
-			url: ajaxPrefix+"/media/ajax",
+			url: ajaxPrefix+"/media/select/ajax",
 			data: postData,
 			beforeSend: function( xhr ) {
 				hide_form_cancel_button();
@@ -110,7 +110,7 @@ function onFileSelected() {
 function loadDocumentList(fileTypeIdFilter) {
 	$.ajax({
 		type: "POST",
-		url: ajaxPrefix+"/media/ajax",
+		url: ajaxPrefix+"/media/select/ajax",
 		data: {
 			act: "docs.select.getlist",
 			id: fileTypeIdFilter

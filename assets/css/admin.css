@@ -19,6 +19,7 @@
 	position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;
 	z-index: 99;
 	background: rgba(0,0,0,0.5);
+	overflow-y: scroll;
 }
 #admin_ov_formbox {
 	margin: 25px auto;
@@ -38,7 +39,7 @@
 #admin_ov_formheader_l {width:570px;float:left;}
 #admin_ov_formheader_r {width:100px;float:right;text-align:right;}
 #admin_ov_formcontent {
-	max-height: 450px;
+	/*max-height: 450px;*/
 	min-height: 200px;
 	overflow-y: auto;
 	padding-top: 10px;
@@ -160,7 +161,7 @@
 .table_list tr:hover .tb_row_panel div {display: block;}
 
 .admin_form_wrapper {
-	width: 800px;
+	width: 650px;
 }
 
 .site_table_form {
@@ -372,7 +373,7 @@
 	border: solid 1px #82C4FF;
 	padding: 2px;
 }
-#admin_content {min-height: 500px;}
+#admin_content {min-height: 550px;}
 #admin_content_left {
 	/*float: left;*/
 	position: absolute;
@@ -387,7 +388,7 @@
 	margin-left: 251px;
 	background-color: #fff;
 	box-shadow: 1px 0px 3px rgba(0,0,0,0.5);
-	min-height: 500px;
+	min-height: 550px;
 	border-radius: 5px 0 0 0;
 }
 
@@ -410,6 +411,16 @@
 .admin_album_panel {display: none;font-size: 0.8em;}
 .admin_album_wrapper:hover .admin_album_panel {display: block;}
 
+#admin_album_sel_container {
+	height: 300px;
+	overflow-y: scroll;
+}
+.admin_album_wrapper_small {
+	float: left; width: 150px; height: 200px; margin: 5px;
+	padding: 5px; border: solid 1px #eee; border-radius: 3px;
+	transition: all 0.25s;
+}
+.admin_album_wrapper_small .admin_album_thumbnail {width: 150px; height: 150px; text-align: center; overflow: hidden;}
 /* ============== Login ========= */
 #login									{margin:65px auto; max-width: 500px; width: 100%;border-radius:0px 0px 10px 10px;-webkit-box-shadow: 0 3px 3px #000;box-shadow: 0 3px 3px #000; padding-bottom: 10px;}
 #upbox									{width:100%;height:auto;background:#2C2C2C; padding: 10px 0 10px; text-align: center; border-bottom: solid 5px #31A1FF; /*background-color:#31A1FF;*/}
@@ -509,7 +520,7 @@
 }
 .admin_form_field {
 	float: right;
-	width: 620px;
+	width: 520px;
 }
 .info_error_mark {background: #FFB2B2;}
 .info_fine_mark {background: #D6FFBC;}

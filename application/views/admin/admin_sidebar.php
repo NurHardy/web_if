@@ -26,9 +26,11 @@
 	//	echo "<!-- <li><a href=\"/admin/menu\">Manage Menu</a></li> -->\n";
 	if ($__uprev & 1)	echo "<li><a href=\"".base_url('/admin/users')."\"><i class=\"site_icon-user\"></i> Daftar User</a></li>\n";
 
+	echo "<li><a href=\"".base_url('/admin/auth/logout')."\"><i class=\"site_icon-power\"></i> Logout</a></li>\n";
+	
 ?></ul>
 <div class='divclear'></div>
 <div style="padding: 10px; border: solid 1px #ccc; text-align: center; margin: 10px; background-color:#FFFFFF;">
 	<strong>IF UNDIP CMS v.1.10.1</strong><br>
-	<small>Date 7 Februari 2015 [<a href='<?php echo base_url('/admin/system/changelog'); ?>'>Changelog</a>]</small>
+	<small>Date 4 April 2015 [<a href='<?php echo base_url('/admin/system/changelog'); ?>'>Changelog</a>]</small>
 </div>

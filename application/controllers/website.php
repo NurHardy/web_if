@@ -44,20 +44,23 @@ class Website extends CI_Controller {
 		$this->load->template_home('home', $data);
 	}
 	
-	public function news($_id = 0, $_slug = null) {
+	public function news($_id = null, $_slug = null) {
 		$this->load->model('web_posting');
 		$this->load->model('web_link');
 		
 		$data['other_posts'] = $this->web_posting->get_newest_posts(5);
 		$data['daftar_tautan'] = $this->web_link->get_links();
 		
-		if (is_numeric($_id)) {
+		//if (($_id == null) && ($_slug == null)) {
 			if ($_id <= 0) { // list news
 				$this->load->model ('web_functions');
 				$_ipp = $this->input->get('n'); // item per page
 				$_cur = $this->input->get('p'); // current page (zero-based)
 				$_maxpage = $this->input->get('x');
-				$_filter = intval($this->input->get('cat'));
+				$_filter = -1;
+				if ($this->input->get('cat'))
+					$_filter = intval($this->input->get('cat'));
+				if ($_ipp == false) $_ipp = 10;
 
 				$this->web_functions->check_pagination($_ipp, $_cur, $_maxpage);
 				if ($_maxpage === false) {
@@ -73,8 +76,8 @@ class Website extends CI_Controller {
 					base_url('/news/'),
 					'cat='.$_filter.'&amp;n='.$_ipp
 				);
-				$nav_path = "&raquo; <a href='".base_url('/news')."'>news</a>";
-				$data['cat_name'] = "semua berita";
+				$nav_path = "&raquo; <a href='".base_url('/news')."'>News</a>";
+				$data['cat_name'] = "Semua berita";
 				if ($_filter != 0) {
 					$data['cat_name'] = $this->web_posting->get_name_categori($_filter);
 					$nav_path .= " &raquo; ".$data['cat_name'];
@@ -99,11 +102,14 @@ class Website extends CI_Controller {
 				}
 				$this->web_posting->hit_post($data['_posting']->id_berita);
 				$data['page_title'] = $data['_posting']->judul;
-				$this->load->template_posting('posting', $data,false,false,"&raquo; news");
+				$data['categoryLink'] = base_url("/news?cat=".$data['_posting']->id_kategori);
+				$data['postCategoryLabel'] = $this->web_posting->get_name_categori($data['_posting']->id_kategori);
+				$this->load->template_posting('posting', $data,false,false,
+					"&raquo; <a href='".base_url('/news')."'>News</a> &raquo; News #".$data['_posting']->id_berita);
 			}
-		} else {
-			$this->output->set_header('Location: '.base_url('/news'));
-		}
+		//} else {
+		//	$this->output->set_header('Location: '.base_url('/news'));
+		//}
 	}
 	
 	public function staff($detail=null) 

@@ -32,6 +32,8 @@
 	function show_form_overlay(controller, argAct, argId, formTitle) {
 		if (is_processing) return;
 		refreshOnClose = false;
+		$("body").css("overflow-y","hidden");
+		$("#admin_form_overlay").css("overflow-y","scroll");
 		$("#admin_formwindow_title").html(formTitle);
 		$.ajax({
 			type: "POST",
@@ -67,7 +69,9 @@
 		if (refreshOnClose) {
 			refreshPage("Refreshing page...");
 		} else {
-			$("#admin_form_overlay").fadeOut(250);
+			$("#admin_form_overlay").fadeOut(250, function(){
+				$("body").css("overflow-y","scroll");
+			});
 		}
 		return false;
 	}

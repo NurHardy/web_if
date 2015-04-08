@@ -21,9 +21,9 @@
 				echo "<td style=\"width: 48px;\"><img src=\"".$docIcon."\" alt=\"File #".$itemCounter."\" /></td>";
 				echo "<td><a href=\"".$docDirectLink."\"><b>".htmlspecialchars($itemDoc->f_name)."</b></a>\n";
 				echo "<div class=\"tb_row_panel\">";
-				echo "Direct Link: <b>".$docDirectLink."</b> <a href=\"#\"><i class=\"site_icon-link-1\"></i> Copy</a><div>\n";
-				echo "<a href=\"#\"><i class=\"site_icon-info\"></i> Detil</a> | ";
-				echo "<a href=\"#\"><i class=\"site_icon-link-1\"></i> Lihat Link</a> | ";
+				echo "Direct Link: <b>".$docDirectLink."</b> <!-- <a href=\"#\"><i class=\"site_icon-link-1\"></i> Copy</a> --><div>\n";
+				echo "<!-- <a href=\"#\"><i class=\"site_icon-info\"></i> Detil</a> | ";
+				echo "<a href=\"#\"><i class=\"site_icon-link-1\"></i> Lihat Link</a> | -->";
 				echo "<a href=\"#\" onclick=\"return delete_doc(".$itemDoc->f_id.");\"><i class=\"site_icon-trash\"></i> Hapus</a></div></div>";
 				echo "</td>";
 				echo "<td>".($itemDoc->f_date_submit)."</td>";

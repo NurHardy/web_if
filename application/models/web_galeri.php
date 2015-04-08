@@ -13,10 +13,15 @@ class web_galeri extends CI_Model {
 		$query = $this->db->get_where('t_album', array('id_album'=>$idAlbum), 1);
         return $query->row();
 	}
-	function get_photo($idPhoto) 
-	{
-		$query = $this->db->get_where('t_galeri', array('id_foto'=>$idPhoto), 1);
-        return $query->row();
+	function get_photo($idPhoto) {
+		if (is_array($idPhoto)) {
+			$this->db->where_in('id_foto', $idPhoto);
+			$query = $this->db->get('t_galeri');
+			return $query->result();
+		} else {
+			$query = $this->db->get_where('t_galeri', array('id_foto'=>$idPhoto), 1);
+			return $query->row();
+		}
 	}
 	function get_album_photos($idAlbum, $statusFilter = 1) 
 	{

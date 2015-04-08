@@ -232,6 +232,69 @@ class Media extends CI_Controller {
 		}
 	}
 	
+	// Function selector, hampir sama dengan function ajax, tetapi pada fungsi ini tidak dilakukan
+	// pengecekan privilege
+	public function select($unused) {
+		$actionWord = $this->input->post("act");
+		if ($actionWord == "docs.select") {
+			$data['allowedMaxSize']		= $this->_uploadMaxSize;
+			$data['allowedExts']		= $this->_allowedDocsExts;
+			$this->load->view("admin/ajax/select_document", $data);
+		} else if ($actionWord == "docs.select.getlist") {
+			$this->load->model("web_document");
+			$data['listDocument'] = $this->web_document->get_documents(1);
+			$this->load->view("admin/ajax/select_document_list", $data);
+		} else if ($actionWord == "docs.select.getlink") {
+			$docIds = $this->input->post("docs_id");
+			if (is_array($docIds)) {
+				$this->load->model("web_document");
+				$docsData = $this->web_document->get_document($docIds);
+				$imgUrl = base_url("/assets/media/document.png");
+				if (count($docsData) > 0) {
+					$indentRight = (count($docsData) > 1);
+					if ($indentRight) echo "<br><div style=\"\margin-left: 40px;\">\n";
+					foreach ($docsData as $docItem) {
+						if (!$indentRight) echo "[";
+						echo "<a href=\"".base_url("/document/".$docItem->f_id."/".$docItem->f_slug)."\">";
+						echo "<img src=\"".$imgUrl."\" alt=\"-\" /> ".htmlspecialchars($docItem->f_name)."</a>";
+						if ($indentRight) echo "<br>\n";
+						else echo "]";
+					}
+					if ($indentRight) echo "</div><br>\n";
+				}
+			}
+		} else if ($actionWord == "photo.select") {
+			$data = array();
+			$this->load->view("admin/ajax/select_photo", $data);
+		} else if ($actionWord == "photo.select.getalbum") {
+			$this->load->model ('web_galeri');
+			
+			$data['listAlbum']	= $this->web_galeri->get_album(-1);
+			$data['listCategory']	= $this->web_galeri->get_array_album_categories();
+			$this->load->view("admin/ajax/select_photo_albums", $data);
+		} else if ($actionWord == "photo.select.getphoto") {
+			$this->load->model ('web_galeri');
+			$idAlbum = $this->input->post("id");
+			$data['listPhoto']	= $this->web_galeri->get_album_photos($idAlbum);
+			$this->load->view("admin/ajax/select_photo_list", $data);
+		} else if ($actionWord == "photo.select.getlink") {
+			$photoIds = $this->input->post("photos_id");
+			if (is_array($photoIds)) {
+				$this->load->model("web_galeri");
+				$photosData = $this->web_galeri->get_photo($photoIds);
+				if (count($photosData) > 0) {
+					echo "<div style=\"text-align: center;\">\n";
+					foreach ($photosData as $photoItem) {
+						$imgUrl = base_url($photoItem->url_foto);
+						echo "<img src=\"".$imgUrl."\" width=\"90%\" alt=\"".htmlspecialchars($photoItem->filename)."\" /><br>\n";
+					}
+					echo "</div>\n";
+				}
+			}
+		} else {
+			$this->output->append_output('Invalid operation.');
+		}
+	}
 	public function ajax() {
 		if (!$this->load->check_session($this->_cpmask, true)) {
 			$this->load->showForbidden();
@@ -349,34 +412,6 @@ class Media extends CI_Controller {
 			$data['allowedExts']		= $this->_allowedDocsExts;
 			
 			$this->load->view("admin/ajax/form_upload_doc", $data);
-		} else if ($actionWord == "docs.select") {
-			$data['allowedMaxSize']		= $this->_uploadMaxSize;
-			$data['allowedExts']		= $this->_allowedDocsExts;
-			$this->load->view("admin/ajax/select_document", $data);
-		} else if ($actionWord == "docs.select.getlist") {
-		
-			$this->load->model("web_document");
-			$data['listDocument'] = $this->web_document->get_documents(1);
-			$this->load->view("admin/ajax/select_document_list", $data);
-		} else if ($actionWord == "docs.select.getlink") {
-			$docIds = $this->input->post("docs_id");
-			if (is_array($docIds)) {
-				$this->load->model("web_document");
-				$docsData = $this->web_document->get_document($docIds);
-				$imgUrl = base_url("/assets/media/document.png");
-				if (count($docsData) > 0) {
-					$indentRight = (count($docsData) > 1);
-					if ($indentRight) echo "<br><div style=\"\margin-left: 40px;\">\n";
-					foreach ($docsData as $docItem) {
-						if (!$indentRight) echo "[";
-						echo "<a href=\"".base_url("/document/".$docItem->f_id."/".$docItem->f_slug)."\">";
-						echo "<img src=\"".$imgUrl."\" alt=\"-\" /> ".htmlspecialchars($docItem->f_name)."</a>";
-						if ($indentRight) echo "<br>\n";
-						else echo "]";
-					}
-					if ($indentRight) echo "</div><br>\n";
-				}
-			}
 		} else if ($actionWord == "docs.upload") {
 			$albumId = $this->input->post("id");
 			

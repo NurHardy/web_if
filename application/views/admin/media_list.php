@@ -1,4 +1,4 @@
-<h2><?php if (isset($content_title)) echo $content_title; else echo "Daftar Media"; ?></h2>
+<h2><i class="site_icon-list"></i> <?php if (isset($content_title)) echo $content_title; else echo "Daftar Media"; ?></h2>
 <div>
 	<h3>Media Teunggah</h3>
 </div>
